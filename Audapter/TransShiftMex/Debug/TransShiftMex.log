@@ -1,0 +1,66 @@
+﻿Build started 4/7/2015 6:50:28 PM.
+     1>Project "C:\speechres\Audapter\TransShiftMex\TransShiftMex.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\speechres\Audapter\\audioIO /IC:\speechres\Audapter\\SibShift /I"C:\Program Files\MATLAB\R2015a\extern\include" /I"C:\Program Files\MATLAB\R2015a\extern\include\win32" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D MATLAB_MEX_FILE /D MATLAB_MEX_FILE /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Audapter.cpp DSPF.cpp filter.cpp lpc_formant.cpp mexLibrary.cpp ost.cpp pcf.cpp phase_vocoder.cpp utils.cpp
+         utils.cpp
+     1>c:\speechres\audapter\transshiftmex\ost.h(93): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+         phase_vocoder.cpp
+     1>c:\speechres\audapter\transshiftmex\phase_vocoder.cpp(109): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
+     1>c:\speechres\audapter\transshiftmex\phase_vocoder.cpp(147): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
+         pcf.cpp
+     1>c:\speechres\audapter\transshiftmex\pcf.h(87): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(94): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(97): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.cpp(267): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.cpp(287): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.cpp(307): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+         ost.cpp
+     1>c:\speechres\audapter\transshiftmex\ost.h(93): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\ost.cpp(102): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+         mexLibrary.cpp
+     1>c:\speechres\audapter\transshiftmex\filter.h(18): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+                 c:\speechres\audapter\transshiftmex\filter.h(78) : see reference to class template instantiation 'IIR_Filter<D_TYPE>' being compiled
+     1>c:\speechres\audapter\transshiftmex\filter.h(31): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\ost.h(93): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(87): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(94): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(97): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\mexlibrary.cpp(75): warning C4101: 'algobuf_ptr' : unreferenced local variable
+         lpc_formant.cpp
+         filter.cpp
+         DSPF.cpp
+         Audapter.cpp
+     1>c:\speechres\audapter\transshiftmex\filter.h(18): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+                 c:\speechres\audapter\transshiftmex\filter.h(78) : see reference to class template instantiation 'IIR_Filter<D_TYPE>' being compiled
+     1>c:\speechres\audapter\transshiftmex\filter.h(31): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\ost.h(93): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(87): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(94): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\pcf.h(97): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+     1>c:\speechres\audapter\transshiftmex\audapter.cpp(98): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\speechres\audapter\transshiftmex\audapter.cpp(104): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\speechres\audapter\transshiftmex\audapter.cpp(386): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>c:\speechres\audapter\transshiftmex\audapter.cpp(1180): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>c:\speechres\audapter\transshiftmex\audapter.cpp(2776): warning C4101: 'err' : unreferenced local variable
+         Generating Code...
+     1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1193,5): warning MSB8012: TargetPath(C:\speechres\Audapter\\BIN\Debug\Audapter.dll) does not match the Linker's OutputFile property value (C:\speechres\Audapter\BIN\Debug\Audapter.mexw32). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(1194,5): warning MSB8012: TargetExt(.dll) does not match the Linker's OutputFile property value (.mexw32). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+       Link:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\speechres\Audapter\\BIN\Debug\Audapter.mexw32" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files\MATLAB\R2015a\extern\lib\win32\microsoft" libmx.lib libmex.lib libmat.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\speechres\Audapter\\BIN\Debug\Audapter.pdb" /MAP /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\speechres\Audapter\\BIN\Debug\Audapter.lib" /MACHINE:X86 /SAFESEH /export:mexFunction /DLL Debug\Audapter.obj
+         Debug\DSPF.obj
+         Debug\filter.obj
+         Debug\lpc_formant.obj
+         Debug\mexLibrary.obj
+         Debug\ost.obj
+         Debug\pcf.obj
+         Debug\phase_vocoder.obj
+         Debug\utils.obj
+         C:\speechres\Audapter\LIB\Debug\audioIO.lib
+     1>Audapter.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+            Creating library C:\speechres\Audapter\\BIN\Debug\Audapter.lib and object C:\speechres\Audapter\\BIN\Debug\Audapter.exp
+         TransShiftMex.vcxproj -> C:\speechres\Audapter\\BIN\Debug\Audapter.dll
+     1>Done Building Project "C:\speechres\Audapter\TransShiftMex\TransShiftMex.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.89

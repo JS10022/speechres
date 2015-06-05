@@ -70,10 +70,10 @@ switch(action)
         end
 
 %% SC-Mod(2008/04/04) Perturbatoin field related 
-        if (isfield(p, 'F2Min'))								% Mel
+        if (isfield(p, 'F2Min'))									% Mel
             Audapter(3, 'f2min', p.F2Min, toPrompt);
         end
-        if (isfield(p, 'F2Max'))								% Mel
+        if (isfield(p, 'F2Max'))									% Mel
             Audapter(3, 'f2max', p.F2Max, toPrompt);
         end
         if (isfield(p, 'F1Min'))
@@ -254,8 +254,8 @@ switch(action)
 %                 data.ai             = dataMat(:,offS:offS+p.nLPC);
 %}
 				data.signalIn       = signalMat(:, 1);
-                data.signalOut      = signalMat(:, 1);			% JS Changed from signalMat(:,2) to correct error: 
-																%	 "index out of bounds because numel(signalMat)=1"
+                data.signalOut      = signalMat(:, 1);		% JS Changed from signalMat(:,2) to correct error: 
+															%	 "index out of bounds because numel(signalMat)=1"
 
                 data.intervals      = dataMat(:, 1);
                 data.rms            = dataMat(:, 2 : 4);
@@ -267,6 +267,7 @@ switch(action)
                 data.sfmts          = dataMat(:, offS + 2 * p.nTracks + 2: offS + 2 * p.nTracks + 3);
 
                 offS				= offS + 2 * p.nTracks + 4;
+%                 data.ai             = dataMat(:,offS:offS+p.nLPC);
                 
                 offS				= offS + p.nLPC + 1;
                 data.rms_slope      = dataMat(:, offS);

@@ -1,7 +1,7 @@
 %=== Subject information ===%
 SUBJECT_ID		TS_FMT_20140113_FMT02
-SUBJECT_GENDER	male			% {female | male}
-SUBJECT_DOB		1-JAN-1983      % Follow the format: DAY-MON-YEAR (e.g., 2-FEB-1990)
+SUBJECT_GENDER	male										% {female | male}
+SUBJECT_DOB		1-JAN-1983      							% Follow the format: DAY-MON-YEAR (e.g., 2-FEB-1990)
 SUBJECT_GROUP	AWS
 
 
@@ -14,15 +14,15 @@ DEVICE_NAME		AudioBox
 
 
 %=== Feedback timing mode ===%
-ALWAYS_ON		0			% 0 - no; 1 - yes
+ALWAYS_ON		0											% 0 - no; 1 - yes
 
 
 %=== Experiment design ===%
-N_RAND_RUNS				0	% Number of rand runs
-N_BLOCKS_PER_RAND_RUN	1	% Number of block (a.k.a., repetitions) in each rand run
-TRIALS_PER_BLOCK		5	% Number of trials in each block
+N_RAND_RUNS				0									% Number of rand runs
+N_BLOCKS_PER_RAND_RUN	1									% Number of block (a.k.a., repetitions) in each rand run
+TRIALS_PER_BLOCK		5									% Number of trials in each block
 TRIAL_TYPES_IN_BLOCK	{3-ctrl, 1-up, 1-down}
-MIN_DIST_BETW_SHIFTS	1	% Minimum number of ctrl trials between two shift trials
+MIN_DIST_BETW_SHIFTS	1									% Minimum number of ctrl trials between two shift trials
 
 
 %--- Custom trial schedule ---%
@@ -66,23 +66,21 @@ SUST_START_REPS	2
 SUST_RAMP_REPS	2
 SUST_STAY_REPS	2
 SUST_END_REPS	2
+SUST_CAT_REPS	1				% Caterpillar reps ???		% JS Added for Caterpillar script	
 
 
 
 
 
 
+% === Stimulus utterance === %
 
-%=== Stimulus utterance ===%
-STIM_UTTER		Do you like amusement parks?  Well, I sure do.  To amuse myself, I went twice last spring.  My most MEMORABLE moment was riding on the Caterpillar, which is a gigantic rollercoaster high above the ground.  When I saw how high the Caterpillar rose into the bright blue sky I knew it was for me.  After waiting in line for thirty minutes, I made it to the front where the man measured my height to see if I was tall enough.  I gave the man my coins, asked for change, and jumped on the cart.  Tick, tick, tick, the Caterpillar climbed slowly up the tracks.  It went SO high I could see the parking lot.  Boy was I SCARED!  I thought again to myself, “There’s no turning back now.”  People were so scared they screamed as we swiftly zoomed fast, fast, and faster along the tracks.  As quickly as it started, the Caterpillar came to a stop.  Unfortunately, it was time to pack the car and drive home.  That night I dreamt of the wild ride on the Caterpillar.  Taking a trip to the amusement park and riding on the Caterpillar was my MOST memorable moment ever!
-SUST_STIM_UTTER	Do you like amusement parks?  Well, I sure do.  To amuse myself, I went twice last spring.  My most MEMORABLE moment was riding on the Caterpillar, which is a gigantic rollercoaster high above the ground.  When I saw how high the Caterpillar rose into the bright blue sky I knew it was for me.  After waiting in line for thirty minutes, I made it to the front where the man measured my height to see if I was tall enough.  I gave the man my coins, asked for change, and jumped on the cart.  Tick, tick, tick, the Caterpillar climbed slowly up the tracks.  It went SO high I could see the parking lot.  Boy was I SCARED!  I thought again to myself, “There’s no turning back now.”  People were so scared they screamed as we swiftly zoomed fast, fast, and faster along the tracks.  As quickly as it started, the Caterpillar came to a stop.  Unfortunately, it was time to pack the car and drive home.  That night I dreamt of the wild ride on the Caterpillar.  Taking a trip to the amusement park and riding on the Caterpillar was my MOST memorable moment ever!
+STIM_UTTER		
+SUST_STIM_UTTER
+CATERPILLAR						% JS Added for Caterpillar script	
 
-% UH OH EH UU IH OO AY AH AE		
-
-caterpillar = cell(1,2);
-
-caterpillar{1}	= 'Do you like amusement parks?  ';
-caterpillar{2}	= 'Well, I sure do.  ';
+% STIM_UTTER		UH OH EH UU IH OO AY AH AE		
+% SUST_STIM_UTTER	UH OH EH UU IH OO AY AH AE
 
 
 
@@ -93,57 +91,60 @@ caterpillar{2}	= 'Well, I sure do.  ';
 
 
 %=== Intensity threshold ===%
-INTENSITY_THRESH 0.01       % Use 0.01 for behavioral and fMRI 
+INTENSITY_THRESH 0.01       	% Use 0.01 for behavioral and fMRI 
 
 
 %=== Intensity target ===%
-MOUTH_MIC_DIST	10			% Unit: cm
-SPL_TARGET		74			% Unit: dB A SPL. Lowered from the adult target of 76
-SPL_RANGE		8			% Unit: dB A SPL: single-sided width
+MOUTH_MIC_DIST	10				% Unit: cm
+SPL_TARGET		74				% Unit: dB A SPL. Lowered from the adult target of 76
+SPL_RANGE		8				% Unit: dB A SPL: single-sided width
 
 
 %=== Duration target ===%
-VOWEL_LEN_TARG	0.50		% sec
-VOWEL_LEN_RANGE 0.10		% sec: single-sided width
+VOWEL_LEN_TARG	0.50			% sec
+VOWEL_LEN_RANGE 0.10			% sec: single-sided width
 
 
-%=== Number of practice trials ===%
-PRE_REPS		2			% pre: initial familiarization
-PRACT1_REPS		2			% pract1: Intensity practice
-PRACT2_REPS		2			% pract2: Intensity and duration practice
+% === Number of practice trials === %
+PRE_REPS		2				% pre:		Initial familiarization
+PRACT1_REPS		2				% pract1:	Intensity practice
+PRACT2_REPS		2				% pract2:	Intensity and duration practice
+CATER_REPS 		1				% cater:	Caterpillar script			% JS Added for Caterpillar script	
 
 
-%=== MRI experiment options ===%
-TRIGGER_BY_MRI_SCANNER	0	% 0 (no) or 1 (yes)
-MRI_TRIGGER_KEY		equal	% Examples: equal | add (the commonest ones for Siemens scanners)
-FMRI_TA				2.5		% Unit: s. Time of acquisition (TA) of the fMRI sequence. In the case of sparse sampling, TA < TR.
-TRIAL_LEN			3.0		% Unit: s
+% === MRI experiment options === %
+TRIGGER_BY_MRI_SCANNER	0		% 0 (no) or 1 (yes)
+MRI_TRIGGER_KEY		equal		% Examples: equal | add (the commonest ones for Siemens scanners)
+FMRI_TA				2.5			% Unit: s. Time of acquisition (TA) of the fMRI sequence. In the case of sparse sampling, TA < TR.
+TRIAL_LEN			3.0			% Unit: s
 
 
-%=== Children experiment-related options ===%
-SHOW_KIDS_ANIM		0		% 0 (no) or 1 (yes)
+% === Children experiment-related options === %
+SHOW_KIDS_ANIM		0			% 0 (no) or 1 (yes)
 
-% PERT_MODE			PITCH	% Alternatives: PITCH / FMT (any other values will lead to error)
+% PERT_MODE			PITCH		% Alternatives: PITCH / FMT (any other values will lead to error)
 
 
 % Online sentence tracking (ost) and perturbation configuration (pcf)
-OST_FN ../pert/ost			% ost file name
-OST_MAX_STATE		4		% Must match the ost file
-PERT_STATES			[1, 2]	% Must be an array (e.g., [1] or [1, 2])
+OST_FN ../pert/ost				% ost file name
+OST_MAX_STATE		4			% Must match the ost file
+PERT_STATES			[1, 2]		% Must be an array (e.g., [1] or [1, 2])
 
 
-% PRE_REPS			2		% Natural production of the VID words
-% PRACT1_REPS		4		% Volume (loudness) practice
-% PRACT2_REPS		4		% Speed practice
+% PRE_REPS			2			% Natural production of the VID words
+% PRACT1_REPS		4			% Volume (loudness) practice
+% PRACT2_REPS		4			% Speed practice
 
 
-NOISE_REPS_RATIO 0.5
+NOISE_REPS_RATIO 	0.5
 % The ratio of noise reps to regular reps. For example, if the value is 0.5,
 % there will be 1 noise rep for every two regular reps.
 % Set the value to zero if no noise rep is needed.
 % Noise reps will only be inserted into the start, ramp, stay and end phases.
 
 TRIAL_LEN_MAX		8			% Unit: sec
+CATER_TRIAL_LEN		80			% Unit: sec		% JS Added for Caterpillar script	
+CATER_LEN_MAX		180			% Unit: sec		% JS Added for Caterpillar script	
 
 SAMPLING_RATE		48000
 FRAME_SIZE			96

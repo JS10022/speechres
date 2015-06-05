@@ -2,8 +2,8 @@ function gen_multi_pert_pcf(ost_fn, pcf_fn, rmsThresh, ...
                             pShift_cent, intShift_dB, F1Shift_ratio, F2Shift_ratio, ...
                             shift_onset, shift_dur)
 %% Constants
-rmsHold = 0.05; % Unit: s
-autoCycleCnt = 10;   % Auto-cycling iteration count: for dealing with repeated words and supra-threshold noise
+rmsHold			= 0.05; % Unit: s
+autoCycleCnt	= 10;   % Auto-cycling iteration count: for dealing with repeated words and supra-threshold noise
 
 %% Sanity check
 % assert(length(pShift_cent) >= 1);
@@ -24,8 +24,8 @@ ns = length(pShift_cent);
 ost = fopen(ost_fn, 'wt');
 fprintf(ost, 'rmsSlopeWin = 0.030000\n\n');
 
-pertStates = [];
-lines = {};
+pertStates	= [];
+lines		= {};
 
 if length(shift_dur) == 1 && isinf(shift_dur)
     t_state = 0;

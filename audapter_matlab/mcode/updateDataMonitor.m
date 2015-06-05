@@ -5,7 +5,7 @@ t0=1/data.params.sr;
 taxis=0:t0:t0*(length(data.signalIn)-1);
 
 % -- Input waveform --
-set(gcf,'CurrentAxes',handles.figIdDat(2));
+set(gcf,'CurrentAxes',handles.figIdDat(2));			
 cla;
 plot(taxis,data.signalIn);      hold on;
 set(gca,'XLim',[taxis(1);taxis(end)]);

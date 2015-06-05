@@ -1,24 +1,28 @@
 function continuous_pitch_shift
-bOffline = 1;
-bUltraLite = 0;
+
+bOffline		= 1;
+bUltraLite		= 0;
+% bAudioBox		= 1;
 
 if bUltraLite
-    sRate = 12000;
-    downFact = 4;
-    frameLen = 64;
+    sRate		= 12000;
+    downFact	= 4;
+    frameLen	= 64;
     scaleFactor = 5.0;
 else
-    sRate = 16000;
-    downFact = 3;
-    frameLen = 32;
+    sRate		= 16000;
+    downFact	= 3;
+    frameLen	= 32;
     scaleFactor = 0.05;
 end
 
+%{
 %%
 % Audapter('ost', '../pert/ost_states1-2');
 % Audapter('pcf', '../pert/pert_zero.pcf');
 % Audapter('ost', '../pert/ost_states1-4');
 % Audapter('pcf', '../pert/pert_zero_states13.pcf');
+%}
 
 Audapter('ost', 'E:\DATA\APE\NWU_TS_20130806_3\rand\rep2\trial-4-down.ost');
 Audapter('pcf', 'E:\DATA\APE\NWU_TS_20130806_3\rand\rep2\trial-4-down.pcf');
@@ -31,12 +35,12 @@ AudapterIO('reset');
 %%
 load 'E:\DATA\APE\TS_20130802_10\rand\rep2\trial-9-1.mat' %%% GO %%%
 
-fs = data.params.sr;
+fs		= data.params.sr;
 
-sigIn = data.signalIn;
+sigIn	= data.signalIn;
 
-data.params.pvocFrameLen = 512;
-data.params.pvocHop = 128;
+data.params.pvocFrameLen	= 512;
+data.params.pvocHop			= 128;
 AudapterIO('init', data.params);
 
 Audapter(3, 'scale', scaleFactor);
@@ -60,14 +64,14 @@ end
 % Audapter playTone;
 
 %% Replace sigIn with sine wave
-tAxis = 0 : 1 / fs : 1 / fs * (length(sigIn) - 1);
-amp = 0.1;
-frq = 1e3;
-sigIn = amp * sin(2 * pi * frq * tAxis);
+tAxis	= 0 : 1 / fs : 1 / fs * (length(sigIn) - 1);
+amp		= 0.1;
+frq		= 1e3;
+sigIn	= amp * sin(2 * pi * frq * tAxis);
 
 %%
-sigIn = resample(sigIn, sRate * downFact, fs);
-sigInCell = makecell(sigIn, frameLen * downFact);
+sigIn		= resample(sigIn, sRate * downFact, fs);
+sigInCell	= makecell(sigIn, frameLen * downFact);
 
 Audapter(6);
 %%

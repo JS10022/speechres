@@ -28,11 +28,11 @@ function varargout = UIRecorder(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton	= 1;
 gui_State	= struct('gui_Name',      mfilename, ...
-					 'gui_Singleton',  gui_Singleton, ...
-					 'gui_OpeningFcn', @UIRecorder_OpeningFcn, ...
-					 'gui_OutputFcn',  @UIRecorder_OutputFcn, ...
-					 'gui_LayoutFcn',  [] , ...
-					 'gui_Callback',   []);
+					'gui_Singleton',  gui_Singleton, ...
+					'gui_OpeningFcn', @UIRecorder_OpeningFcn, ...
+					'gui_OutputFcn',  @UIRecorder_OutputFcn, ...
+					'gui_LayoutFcn',  [] , ...
+					'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -258,7 +258,7 @@ skin.speaker_soft_1		= double(imread(fullfile(pwd, 'images', 'cartoon-speaker_so
 handles.skin			= skin;
 
 % Create subplot slots for images and animations						% ======= JS Creates the participant window =======
-hkf						= figure('Position', [1760, 390, 760, 600], 'Color', 'w', ...		
+hkf						= figure('Position', [50, 100, 1000, 600], 'Color', 'w', ...		
 								 'Name', 'Participant window', 'NumberTitle', 'off', ...
 								 'Toolbar', 'none', 'Menubar', 'none');
 handles.hkf				= hkf;
@@ -267,13 +267,13 @@ handles.msgTxt			= uicontrol('Parent', handles.hkf, 'Style', 'text', ...
 								    'Unit', 'normalized', ...
 								    'Position', [0.05, 0.45, 0.9, 0.5], ...
 							        'String', {'Hello', 'world'}, ...
-								    'FontName', 'Helvetica', 'FontSize', 30, 'FontWeight', 'normal', 'ForegroundColor', [0, 0, 1], ...
+								    'FontName', 'Helvetica', 'FontSize', 20, 'FontWeight', 'normal', 'ForegroundColor', [0, 0, 1], ...
 									'HorizontalAlignment', 'left', ...
 									'visible', 'off');
 
 nMainPanels				= 3;
 leftMargin				= 0.05;
-panelSpacing			= 0.075;								% JS 0.075 -> 0.025
+panelSpacing			= 0.025;
 
 %{
  						  (1 - 2 * 0.075	  - (3			 - 1) * 0.025		) / 3
@@ -287,9 +287,9 @@ panelHeight				= 0.525;
 hsp						= nan(1, nMainPanels);
 
 for i1 = 1 : nMainPanels
-% 	hsp(i1)	= subplot('Position', [leftMargin, 0.375, panelWidth, panelHeight]);
+	hsp(i1)	= subplot('Position', [leftMargin, 0.375, panelWidth, panelHeight]);
 % 								  [0.075	  + (i1 - 1) * (panelWidth + 0.025		 )
-    hsp(i1)	= subplot('Position', [leftMargin + (i1 - 1) * (panelWidth + panelSpacing), 0.375, panelWidth, panelHeight]);
+%     hsp(i1)	= subplot('Position', [leftMargin + (i1 - 1) * (panelWidth + panelSpacing), 0.375, panelWidth, panelHeight]);
     set(gca, 'XTick', [], 'YTick', []);
     set(gca, 'XColor', 'w', 'YColor', 'w');
 end
@@ -412,7 +412,7 @@ set(handles.play, 'Value', get(handles.play, 'Min'));
 % axis(handles.progress_axes, 'xy');
 %}
 
-handles.figIdDat		= figIdDat;								% ======= JS Creates the Data Monitor ? =======
+handles.figIdDat		= figIdDat;
 
 handles.dataOut			= [];
 handles.bRmsRepeat		= 0;
@@ -490,7 +490,7 @@ else																% currently in play mode
     if handles.bAlwaysOn == 1
 %         Audapter(3, 'scale', 0);
     else
-        Audapter(2)													% SC stop Audapter
+        Audapter(2)													%%SC stop Audapter
     end
     set(handles.msgh, 'string', 'Press play to continue...');
 end
@@ -510,7 +510,6 @@ end
 
 return
 
-%{
 % %% --- Executes on button press in prev.
 % function prev_Callback(hObject, eventdata, handles)
 % % hObject    handle to prev (see GCBO)
@@ -518,15 +517,12 @@ return
 % % handles    structure with handles and user data (see GUIDATA)
 % 
 % singleTrial(handles.prev,[],handles);
-%}
 
-%{
 %% --- Executes on button press in next.
 % function next_Callback(hObject, eventdata, handles)
 % hObject    handle to next (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%}
 
 %% --- Single trial callback function.
 function singleTrial(hObject, eventdata, handles, varargin)
@@ -703,7 +699,7 @@ instr1	= '';  instr2 = '';
 if (rmsval < 70 && rmsval > 30)
 	rmsRes = 0;
 else
-	if (rmsval >= 70)									% SC (2008/01/05)
+	if (rmsval >= 70)									% SC(2008/01/05)
         rmsRes	= 1;
 		msg1	= 'Softer';
 		instr2	= 'Loud';
@@ -785,7 +781,7 @@ dataOut.vowelLevel = 100 + 20 * log10((rmsTrans / micRMS_100dBA));
 
 
 % --- SCai: update the data monitor window ---
-updateDataMonitor(dataOut, handles);						
+updateDataMonitor(dataOut, handles);
 % --- ~SCai: update the data monitor window ---
 % --------------------------------------------------------------------------
 
@@ -880,9 +876,9 @@ switch(action)
 end
 
 %% --------------------------------------------------------------------------
-function dataOut = getData
+function dataOut= getData
 % gets the data
-dataOut = AudapterIO('getData');
+dataOut=AudapterIO('getData');
 
 %% --- Executes on button press in auto_btn.
 %{
@@ -1324,7 +1320,7 @@ if (handles.debug == 0)
                 durErr_anim(handles, 'long');
             end
         end
-        if ~isempty(strfind(uiConfig.promptMode, 'a'))		% Auditory prompt
+        if ~isempty(strfind(uiConfig.promptMode, 'a')) % Auditory prompt
             if durRes ~= 0
                 if durRes == 2
                     msg = 'longer';
@@ -1571,7 +1567,7 @@ im_ruler = handles.skin.ruler;
 
 hold on;											% JS - Moved from 10 lines above 
 
-basePos = get(gca, 'Position');						% [0.3, 0.05, 0.15, 0.25]
+basePos = get(gca, 'Position');         % [0.3, 0.05, 0.15, 0.25]
 
 % hsp_vol = subplot('Position', [basePos(1), 0.10, basePos(3), basePos(4) * 0.4]);
 basePos = [0.6, 0.05, 0.15, 0.25];

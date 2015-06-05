@@ -1,5 +1,6 @@
-function [k1,k2]=detectVowel(f1,f2,i1,i2,varargin)
+function [k1,k2] = detectVowel(f1, f2, i1, i2, varargin)
      
+%{
 % fitlen=35;
 
 % f11=[300,1600];
@@ -47,13 +48,14 @@ function [k1,k2]=detectVowel(f1,f2,i1,i2,varargin)
 % [jnk,idxmax]=max(lens);
 % k1=idx1(idxmax);
 % k2=idx2(idxmax);
+%}
 
 if (isempty(i1) | isempty(i2) | isnan(i1) | isnan(i2))
-	k1=0;
-	k2=0;
+	k1 = 0;
+	k2 = 0;
 	return
 end
 
-k1=i1;
-k2=i2;
+k1 = i1;
+k2 = i2;
 return

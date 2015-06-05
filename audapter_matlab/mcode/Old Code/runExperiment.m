@@ -47,11 +47,10 @@ subject.mouthMicDist    = expt_config.MOUTH_MIC_DIST;		% cm
 subject.closedLoopGain  = 14 - 20 * log10(10 / subject.mouthMicDist);
 
 subject.dBRange1        = expt_config.SPL_RANGE / 0.4;		% is the one-sided dBRange1 * 0.4
+% subject.dBRange2      = 12;								% Tightened level range after the initial pract1 training. 
 
 subject.trialLen        = expt_config.TRIAL_LEN;
 subject.trialLenMax     = expt_config.TRIAL_LEN_MAX;
-subject.caterTrialLen	= expt_config.CATER_TRIAL_LEN;		% **** Added for Caterpillar script ****
-subject.caterLenMax     = expt_config.CATER_LEN_MAX;		% **** Added for Caterpillar script ****
 
 subject.hostName        = deblank(hostName);
 
@@ -61,7 +60,7 @@ subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;
 subject.TA				= expt_config.FMRI_TA;
 subject.ITI				= 6;
 
-subject.vumeterMode		= 2;								% 1: 10 ticks; 2: 3 ticks;
+subject.vumeterMode		= 2;							% 1: 10 ticks; 2: 3 ticks;
 
 if subject.trigByScanner == 1
 	subject.showProgress	= 1;
@@ -73,7 +72,7 @@ end
 
 subject.designNum			= 2;
 
-subject.lvNoise	= 75;										% dBA SPL. The level of noise for completely masking speech (mode trialType = 2 or 3).
+subject.lvNoise	= 75;									% dBA SPL. The level of noise for completely masking speech (mode trialType = 2 or 3).
 
 bAlwaysOn		= expt_config.ALWAYS_ON;
 
@@ -97,7 +96,7 @@ end
 subject.pcrKnob	= 0;
 
 %%
-bNew			= true;											% ======== Creates new experiment ========
+bNew			= true;
 
 dirname			= fullfile(subject.dataDir, num2str(subject.name));
 
@@ -141,53 +140,47 @@ if bNew															% set up new experiment
     mkdir(dirname)
     copyfile(exptConfigFN, fullfile(dirname, 'expt_config.txt'));
     
-	expt.subject	= subject;
+	expt.subject = subject;
     
-    expt.allPhases	= {'pre', 'pract1', 'pract2', 'cater'};		% ======== Phases ========
-    expt.recPhases	= {'pre', 'pract1', 'pract2', 'cater'};		% SC The phases during which the data are recorded
+    expt.allPhases = {'pre', 'pract1', 'pract2'};
+    expt.recPhases = {'pre', 'pract1', 'pract2'};				% SC The phases during which the data are recorded
 
-    for i1 = 1 : expt_config.N_RAND_RUNS						% ======== Random ========
+    for i1 = 1 : expt_config.N_RAND_RUNS
         expt.allPhases{end + 1} = sprintf('rand%d', i1);
         expt.recPhases{end + 1} = sprintf('rand%d', i1);
     end
     
-    expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];	% ======== ??? Something to do with phases ??? ========
-    expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];
+    expt.allPhases = [expt.allPhases, {'start', 'ramp', 'stay', 'end'}];
+    expt.recPhases = [expt.recPhases, {'start', 'ramp', 'stay', 'end'}];
     
-    expt.stimUtter	= expt_config.STIM_UTTER;					% ======== Stim_utter ========
-	expt.cater		= expt_config.CATERPILLAR;					% **** Added for Caterpillar script ****
+    expt.stimUtter = expt_config.STIM_UTTER;
     
     expt.trialTypes			 = [1];
     expt.trialOrderRandReps  = 1;								% How many reps are randomized together
     expt.script.pre.nReps	 = expt_config.PRE_REPS;			% SC Numbers of repetitions in the stages    % !!1!!	
     expt.script.pract1.nReps = expt_config.PRACT1_REPS;
     expt.script.pract2.nReps = expt_config.PRACT2_REPS;
-	expt.script.cater.nReps	 = expt_config.CATER_REPS;			% **** Added for Caterpillar script ****
-	
-    expt.sustWords			 = expt_config.STIM_UTTER;			% ======== Get stimulus words ========
+    
+    expt.sustWords			 = expt_config.STIM_UTTER;
     expt.script.start.nReps  = expt_config.SUST_START_REPS;
     expt.script.ramp.nReps	 = expt_config.SUST_RAMP_REPS;
     expt.script.stay.nReps	 = expt_config.SUST_STAY_REPS;
     expt.script.end.nReps	 = expt_config.SUST_END_REPS;
-	expt.script.cat.nReps	 = expt_config.SUST_CAT_REPS;		% **** Added for Caterpillar script ****
 
-	expt.trialTypeDesc	  = cell(1,6);
+	expt.trialTypeDesc	  = cell(1,5);
 	expt.trialTypeDesc{1} = 'Speech with auditory feedback';
 	expt.trialTypeDesc{2} = 'Speech with masking noise';
 	expt.trialTypeDesc{3} = 'Listen to masking noise, no speech';
 	expt.trialTypeDesc{4} = 'Rest (no speech) in silence';
 	expt.trialTypeDesc{5} = 'Non-speech bracket task in silence';
-	expt.trialTypeDesc{6} = 'Caterpillar script';				% **** Added for Caterpillar script ****
 	
-    fprintf(1, 'Generating script for the practice phases...\n');	% ======== Creates practice scripts ========
+    fprintf(1, 'Generating script for the practice phases...\n');
     expt.script.pre    = genPhaseScript('pre',    ...
                                         expt.script.pre.nReps, expt.stimUtter);
     expt.script.pract1 = genPhaseScript('pract1', ...
                                         expt.script.pract1.nReps, expt.stimUtter);
     expt.script.pract2 = genPhaseScript('pract2', ...
                                         expt.script.pract2.nReps, expt.stimUtter);
-	expt.script.cat	   = genPhaseScript('cat', ...				% **** Added for Caterpillar script ****
-                                        expt.script.cat.nReps, expt.stimUtter);
     
     for i1 = 1 : expt_config.N_RAND_RUNS
         phs = sprintf('rand%d', i1);
@@ -207,7 +200,7 @@ if bNew															% set up new experiment
     t_phases = {'start', 'ramp', 'stay', 'end'};
     for k1 = 1 : length(t_phases)
         t_phase = t_phases{k1};
-        expt.script.(t_phase).noiseRepsRatio = expt_config.NOISE_REPS_RATIO;		% SC TO DO
+        expt.script.(t_phase).noiseRepsRatio = expt_config.NOISE_REPS_RATIO;		% TO DO
         
 %{
 %         expt.script.(t_phase)  = ...
@@ -294,7 +287,7 @@ if bNew															% set up new experiment
         error('Unrecognized DEVICE_NAME: %s', expt_config.DEVICE_NAME);
     end
     
-	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% Current setting
+	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')
         p.stereoMode = 1;
     elseif isequal(expt_config.STEREO_MODE, 'L_AUDIO')
         p.stereoMode = 0;
@@ -379,12 +372,12 @@ recPhases = expt.recPhases;
 % nWords = length(wordList);
 
 hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);
-set(hgui.UIRecorder, 'Position', [1300, 290, 440, 700]);				% JS Position of "Control" window
+set(hgui.UIRecorder, 'Position', [900, 60, 440, 700]);					% JS Position of "Control" window
 % winontop(hgui.UIRecorder, 1);
 
 
 if ~isempty(fsic(varargin, 'twoScreens'))
-    subjFigPos		= get(hgui.hkf, 'Position');						% JS Added semi-colon at end of line
+    subjFigPos		= get(hgui.hkf, 'Position');						% == JS Added semi-colon at end of line
     set(hgui.hkf, 'Position', [1800, 100, subjFigPos(3), subjFigPos(4)]);
 end
 
@@ -525,7 +518,7 @@ for n = startPhase : length(allPhases)
     subdirname	= fullfile(dirname, thisphase);
     mkdir(subdirname);
     
-    hgui.phase	= thisphase;
+    hgui.phase = thisphase;
     
     disp(['--- Coming up: ', thisphase, '. nReps = ', num2str(expt.script.(thisphase).nReps),...
           '; nTrials = ', num2str(expt.script.(thisphase).nTrials), ' ---']);
@@ -613,10 +606,10 @@ for n = startPhase : length(allPhases)
     if isequal(thisphase, 'pre')
             set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
 
-            hgui.showRmsPrompt	= 0;
-            hgui.showSpeedPrompt= 0;
-            hgui.bRmsRepeat		= 0;
-            hgui.bSpeedRepeat	= 0;
+            hgui.showRmsPrompt	 = 0;
+            hgui.showSpeedPrompt = 0;
+            hgui.bRmsRepeat		 = 0;
+            hgui.bSpeedRepeat	 = 0;
             
             p.bDetect			= 0;
             p.bShift			= 0;						% SC No shift in the practice-1 phase           
@@ -633,8 +626,8 @@ for n = startPhase : length(allPhases)
 %             % mask(1:50,:,:) = 1;				% SC-Commented(12/11/2007)
 %             set(hgui.rms_imgh,'Cdata',vumeter.*mask);
 %}
-            p.bDetect			= 0;
-            p.bShift			= 0;						% SC No shift in the practice-1 phase
+            p.bDetect	= 0;
+            p.bShift	= 0;								% SC No shift in the practice-1 phase
             
             hgui.showRmsPrompt	= 1;
             hgui.showSpeedPrompt= 0;
@@ -648,7 +641,7 @@ for n = startPhase : length(allPhases)
 
             hgui.showTextCue	= 1;
             
-            subjProdLevel		= [];
+            subjProdLevel		= [];         
             
      elseif isequal(thisphase, 'pract2')
             if exist('subjProdLevel')
@@ -722,7 +715,7 @@ for n = startPhase : length(allPhases)
                 hgui.showRmsPrompt	= 1;
                 hgui.showSpeedPrompt= 1;
             end
-            hgui.bRmsRepeat			= 0;						% 1
+            hgui.bRmsRepeat			= 0;						%1
             hgui.bSpeedRepeat		= 0; 
 
             p.bDetect				= 1;
@@ -733,7 +726,7 @@ for n = startPhase : length(allPhases)
                  isequal(thisphase, 'end'))
                 set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
             end
-            hgui.showTextCue		= 1;
+            hgui.showTextCue = 1;
             
             % -- Prepare pitch shift log file -- %
             dfns = dir(fullfile(dirname, 'pitch_shift.*.log'));
@@ -741,7 +734,6 @@ for n = startPhase : length(allPhases)
             pitchShiftLogF	= fopen(pitchShiftLogFN, 'at');
             fprintf(pitchShiftLogF, 'trialFileName, voiceOnset(ms), pitchShiftOnset(ms), pitchShiftEnd(ms), pitchShift(cent)\n');
 	end
-	
 %{
 %     elseif isequal(thisphase, 'start')
 %             hgui.showRmsPrompt = 1;
@@ -806,7 +798,6 @@ for n = startPhase : length(allPhases)
     xs = get(gca, 'XLim');
     ys = get(gca, 'YLim');
     set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));		% ===== JS - Displays messages =====
-% 	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
 	
 	%{
 %     htxt = text(xs(1) + 0.05 * range(xs), ys(1) + 0.95 * range(ys), getMsgStr(thisphase), ...
@@ -849,7 +840,7 @@ for n = startPhase : length(allPhases)
                             i * subject.expt_config.SHIFT_RATIO_SUST_F2);
         end
 %}
-        pcf_fn			= fullfile(subsubdirname, 'fmt.pcf');
+        pcf_fn = fullfile(subsubdirname, 'fmt.pcf');
            
         if ~bIsPertPhase
             p.bShift			= 0;
@@ -997,7 +988,7 @@ for n = startPhase : length(allPhases)
 %}
 			
             UIRecorder('singleTrial', hgui.play, 1, hgui);
-            data = get(hgui.UIRecorder, 'UserData');				% SC Retrieve the data
+            data = get(hgui.UIRecorder, 'UserData');           %SC Retrieve the data
             
             % -- Write pitch shift log -- 
             if bIsPertPhase
@@ -1038,7 +1029,7 @@ for n = startPhase : length(allPhases)
                 end
                 
                 if ~isempty(data.rms)
-                    switch (thisphase)								% SC Record the RMS peaks in the bout
+                    switch (thisphase)				% SC Record the RMS peaks in the bout
                         case 'pre'
                             rmsPeaks = [rmsPeaks ; max(data.rms(:, 1))];
                         case 'pract1',

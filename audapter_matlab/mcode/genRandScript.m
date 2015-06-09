@@ -519,8 +519,7 @@ return
 
 function str1 = strip_brackets(str0, errMsg)
 str1 = strrep(deblank(str0), ' ', '');
-if length(str1) <= 3 || ...
-   ~isequal(str1(1), '{') || ~isequal(str1(end), '}')
+if length(str1) <= 3 || ~isequal(str1(1), '{') || ~isequal(str1(end), '}')
     error(errMsg);
 end
 str1 = str1(2 : end - 1);

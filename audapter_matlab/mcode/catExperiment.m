@@ -17,14 +17,15 @@ expt_config		= read_parse_expt_config(exptConfigFN);
 % end
 %}
 
+%% ---- For use with MRI machine (NOT BEING USED) ----
 if expt_config.TRIGGER_BY_MRI_SCANNER && expt_config.SHOW_KIDS_ANIM
 	error('TRIGGER_BY_MRI_SCANNER == 1 and SHOW_KIDS_ANIM == 1 are not compatible');
 end
 
 %% Optional: full schedule file for experiment design 
-if length(expt_config.FULL_SCHEDULE_FILE) < 2 || ...
-   ~isequal(expt_config.FULL_SCHEDULE_FILE(1), '"') || ...
-   ~isequal(expt_config.FULL_SCHEDULE_FILE(end), '"')
+if length(expt_config.FULL_SCHEDULE_FILE) < 2 ...
+	|| ~isequal(expt_config.FULL_SCHEDULE_FILE(1), '"') ...
+	|| ~isequal(expt_config.FULL_SCHEDULE_FILE(end), '"')
 	error('Unrecognized format in FULL_SCHEDULE_FILE: %s', expt_config.FULL_SCHEDULE_FILE);
 end
 
@@ -39,19 +40,19 @@ end
 %% ---- Subject and experiment information ----
 subject.expt_config		= expt_config;
 subject.name			= expt_config.SUBJECT_ID;
-subject.sex				= expt_config.SUBJECT_GENDER;		% male / female
+subject.sex				= expt_config.SUBJECT_GENDER;				% male / female
 subject.age				= expt_config.SUBJECT_AGE;
 subject.group			= expt_config.SUBJECT_GROUP;
 
-subject.mouthMicDist	= expt_config.MOUTH_MIC_DIST;		% cm
+subject.mouthMicDist	= expt_config.MOUTH_MIC_DIST;				% cm
 subject.closedLoopGain  = 14 - 20 * log10(10 / subject.mouthMicDist);
 
-subject.dBRange1		= expt_config.SPL_RANGE / 0.4;		% is the one-sided dBRange1 * 0.4
+subject.dBRange1		= expt_config.SPL_RANGE / 0.4;				% is the one-sided dBRange1 * 0.4
 
 % subject.trialLen		= expt_config.TRIAL_LEN;
 % subject.trialLenMax		= expt_config.TRIAL_LEN_MAX;
-% subject.caterTrialLen	= expt_config.CATER_TRIAL_LEN;		% **** Added for Caterpillar script ****
-% subject.caterLenMax		= expt_config.CATER_LEN_MAX;		% **** Added for Caterpillar script ****
+% subject.caterTrialLen	= expt_config.CATER_TRIAL_LEN;				% **** Added for Caterpillar script ****
+% subject.caterLenMax		= expt_config.CATER_LEN_MAX;				% **** Added for Caterpillar script ****
 subject.trialLen		= expt_config.CATER_TRIAL_LEN;
 subject.trialLenMax		= expt_config.CATER_LEN_MAX;
 
@@ -61,11 +62,11 @@ subject.hostName		= deblank(hostName);
 
 subject.dataDir			= expt_config.DATA_DIR;
 
-subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;
-subject.TA				= expt_config.FMRI_TA;
+subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;		% +++ MRI (not used) +++
+subject.TA				= expt_config.FMRI_TA;						% +++ MRI (not used) +++
 subject.ITI				= 6;
 
-subject.vumeterMode		= 2;								% 1: 10 ticks; 2: 3 ticks;
+subject.vumeterMode		= 2;										% 1: 10 ticks; 2: 3 ticks;
 
 if subject.trigByScanner == 1
 	subject.showProgress	= 1;
@@ -77,7 +78,8 @@ end
 
 subject.designNum			= 2;
 
-subject.lvNoise	= 75;										% dBA SPL. The level of noise for completely masking speech (mode trialType = 2 or 3).
+subject.lvNoise	= 75;												% dBA SPL. The level of noise for completely ...
+																	%   masking speech (mode trialType = 2 or 3).
 
 bAlwaysOn		= expt_config.ALWAYS_ON;
 
@@ -101,9 +103,10 @@ end
 subject.pcrKnob	= 0;
 
 %%
-bNew			= true;											% ======== Creates new experiment ========
+bNew			= true;												% === Creates new experiment ===
 
 dirname			= fullfile(subject.dataDir, num2str(subject.name));
+
 
 if (~isempty(findStringInCell(varargin, 'dirname')))
 	clear('dirname');
@@ -121,7 +124,8 @@ if isdir(dirname)
 		button1 = questdlg(messg, 'DIRECTORY NOT EMPTY', 'Continue', 'Overwrite', 'Cancel', 'Continue');
 		switch button1
 			case 'Overwrite'
-				button2 = questdlg({sprintf('Are you sure you want to overwrite data in %s?', dirname)}, 'OVERWRITE EXPERIMENT ?');
+				button2 = questdlg({sprintf('Are you sure you want to overwrite data in %s?', dirname)}, ...
+									'OVERWRITE EXPERIMENT ?');
 				switch button2
 					case 'Yes',
 						rmdir(dirname, 's')
@@ -138,7 +142,7 @@ if isdir(dirname)
 	end
 end
 
-if bNew															% set up new experiment
+if bNew																% set up new experiment
 	if isdir(dirname)
 		rmdir(dirname, 's');
 	end
@@ -147,42 +151,55 @@ if bNew															% set up new experiment
 
 	expt.subject	= subject;
 	
-%	expt.allPhases	= {'pre', 'pract1', 'pract2', 'cater'};		% ======== Phases ========
-%	expt.recPhases	= {'pre', 'pract1', 'pract2', 'cater'};		% SC The phases during which the data are recorded
+% 	expt.allPhases	= {'pre', 'pract1', 'pract2', 'cater'};			% === Phases ===
+% 	expt.recPhases	= {'pre', 'pract1', 'pract2', 'cater'};			% SC The phases during which the data are recorded
 
-	expt.allPhases	= {'pre', 'pract1', 'pract2'};				% ======== Phases ========
-	expt.recPhases	= {'pre', 'pract1', 'pract2'};				% SC The phases during which the data are recorded
+	
+	expt.allPhases	= {'cater'};									% === Phases ===
+	expt.recPhases	= {'cater'};									% SC The phases during which the data are recorded
+
+
+% 	expt.allPhases	= {'pre', 'pract1', 'pract2'};					% === Phases ===
+% 	expt.recPhases	= {'pre', 'pract1', 'pract2'};					% SC The phases during which the data are recorded
 
 
 
-	for i1 = 1 : expt_config.N_RAND_RUNS						% ======== Random ========
+	for i1 = 1 : expt_config.N_RAND_RUNS							% === Random ===
 		expt.allPhases{end + 1} = sprintf('rand%d', i1);
 		expt.recPhases{end + 1} = sprintf('rand%d', i1);
 	end
 
-	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end'}];	% ======== ??? Something to do with phases ??? ========
-	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end'}];
+% 	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end'}];	% === ??? Something to do with phases ??? ===
+% 	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end'}];
 
-%	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];	% ======== ??? Something to do with phases ??? ========
-%	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];
+% 	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];	% === Something to do with phases ??? ===
+% 	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];
 
-	expt.stimUtter	= expt_config.CATERPILLAR;					% ======== Stim_utter ========
-% 	expt.stimUtter	= expt_config.STIM_UTTER;					% ======== Stim_utter ========
-% 	expt.cater		= expt_config.CATERPILLAR;					% **** Added for Caterpillar script ****
+
+	expt.allPhases	= [expt.allPhases, {'cat'}];					% === ??? Something to do with phases ??? ===
+	expt.recPhases	= [expt.recPhases, {'cat'}];
+	
+	
+	expt.stimUtter	= expt_config.CATERPILLAR;						% === Stim_utter ===
+% 	expt.stimUtter	= expt_config.STIM_UTTER;						% === Stim_utter ===
+% 	expt.cater		= expt_config.CATERPILLAR;						% *** Added for Caterpillar script ***
+
+% 	expt.stimUtter
+	
 
 	expt.trialTypes			= [1];
-	expt.trialOrderRandReps = 1;								% How many reps are randomized together
-	expt.script.pre.nReps	= expt_config.PRE_REPS;				% SC Numbers of repetitions in the stages	% !!1!!	
+	expt.trialOrderRandReps = 1;									% How many reps are randomized together
+	expt.script.pre.nReps	= expt_config.PRE_REPS;					% SC Numbers of repetitions in the stages	% !!1!!	
 	expt.script.pract1.nReps= expt_config.PRACT1_REPS;
 	expt.script.pract2.nReps= expt_config.PRACT2_REPS;
-% 	expt.script.cater.nReps	= expt_config.CATER_REPS;			% **** Added for Caterpillar script ****
+	expt.script.cater.nReps	= expt_config.CATER_REPS;				% *** Added for Caterpillar script ***
 
-	expt.sustWords			= expt_config.STIM_UTTER;			% ======== Get stimulus words ========
+	expt.sustWords			= expt_config.STIM_UTTER;				% === Get stimulus words ===
 	expt.script.start.nReps = expt_config.SUST_START_REPS;
 	expt.script.ramp.nReps	= expt_config.SUST_RAMP_REPS;
 	expt.script.stay.nReps	= expt_config.SUST_STAY_REPS;
 	expt.script.end.nReps	= expt_config.SUST_END_REPS;
-% 	expt.script.cat.nReps	= expt_config.SUST_CAT_REPS;		% **** Added for Caterpillar script ****
+	expt.script.cat.nReps	= expt_config.SUST_CAT_REPS;			% *** Added for Caterpillar script ***
 
 	expt.trialTypeDesc		= cell(1,5);
 	expt.trialTypeDesc{1}	= 'Speech with auditory feedback';
@@ -190,35 +207,49 @@ if bNew															% set up new experiment
 	expt.trialTypeDesc{3}	= 'Listen to masking noise, no speech';
 	expt.trialTypeDesc{4}	= 'Rest (no speech) in silence';
 	expt.trialTypeDesc{5}	= 'Non-speech bracket task in silence';
-% 	expt.trialTypeDesc{6}	= 'Caterpillar script';				% **** Added for Caterpillar script ****
+% 	expt.trialTypeDesc{6}	= 'Caterpillar script';					% *** Added for Caterpillar script ***
 
-	fprintf(1, 'Generating script for the practice phases...\n');	% ======== Creates practice scripts ========
-	expt.script.pre		= genPhaseScript('pre',	...
-										expt.script.pre.nReps, expt.stimUtter);
-	expt.script.pract1	= genPhaseScript('pract1', ...
-										expt.script.pract1.nReps, expt.stimUtter);
-	expt.script.pract2	= genPhaseScript('pract2', ...
-										expt.script.pract2.nReps, expt.stimUtter);
-% 	expt.script.cat		= genPhaseScript('cat', ...				% **** Added for Caterpillar script ****
-% 										expt.script.cat.nReps, expt.stimUtter);
+	fprintf(1, 'Generating script for the practice phases...\n');	% === Creates practice scripts ===
+	
+%{
+	expt.script.pre		= genPhaseScript('pre',	expt.script.pre.nReps, expt.stimUtter);
+	expt.script.pract1	= genPhaseScript('pract1', expt.script.pract1.nReps, expt.stimUtter);
+	expt.script.pract2	= genPhaseScript('pract2', expt.script.pract2.nReps, expt.stimUtter);
+%}
+	
+	
+	
+	expt.script.cater	= genCaterScript('cater', ...				% *** Added for Caterpillar script ***
+										expt.script.cater.nReps, expt.stimUtter);
 
-	for i1 = 1 : expt_config.N_RAND_RUNS
+									
+	for i1 = 1 : expt_config.N_RAND_RUNS							% === N_RAND_RUNS = 0, so this doesn't run ===
 		phs = sprintf('rand%d', i1);
 		fprintf(1, 'Generating script for the random-perturbation phase %s...\n', phs);
 		[expt.script.(phs), expt.pertDes] = ...
-			genRandScript(phs, ...
-						  expt_config.N_BLOCKS_PER_RAND_RUN, expt_config.TRIALS_PER_BLOCK, ...
-						  expt_config.TRIAL_TYPES_IN_BLOCK, expt_config.MIN_DIST_BETW_SHIFTS, ...
-						  expt_config.ONSET_DELAY_MS, expt_config.NUM_SHIFTS, ...
-						  expt_config.INTER_SHIFT_DELAYS_MS, expt_config.PITCH_SHIFTS_CENT, ...
-						  expt_config.INT_SHIFTS_DB, ...
-						  expt_config.F1_SHIFTS_RATIO, expt_config.F2_SHIFTS_RATIO, ...
-						  expt_config.SHIFT_DURS_MS, expt_config.STIM_UTTER, expt_config.FULL_SCHEDULE_FILE);
+			genCatRandScript(phs, ...
+							expt_config.N_BLOCKS_PER_RAND_RUN,	...
+							expt_config.TRIALS_PER_BLOCK,		...
+							expt_config.TRIAL_TYPES_IN_BLOCK,	...
+							expt_config.MIN_DIST_BETW_SHIFTS,	...
+							expt_config.ONSET_DELAY_MS,			...
+							expt_config.NUM_SHIFTS,				...
+							expt_config.INTER_SHIFT_DELAYS_MS,	...
+							expt_config.PITCH_SHIFTS_CENT,		...
+							expt_config.INT_SHIFTS_DB,			...
+							expt_config.F1_SHIFTS_RATIO,		...
+							expt_config.F2_SHIFTS_RATIO,		...
+							expt_config.SHIFT_DURS_MS,			...
+							expt_config.STIM_UTTER,				...
+							expt_config.FULL_SCHEDULE_FILE);
 	end
 	fprintf('Done.\n');
 	
-	t_phases = {'start', 'ramp', 'stay', 'end'};
+% 	t_phases = {'start', 'ramp', 'stay', 'end'};
 % 	t_phases = {'start', 'ramp', 'stay', 'end', 'cat'};
+
+	t_phases = {'cat'};
+
 	for k1 = 1 : length(t_phases)
 		t_phase = t_phases{k1};
 		expt.script.(t_phase).noiseRepsRatio = expt_config.NOISE_REPS_RATIO;		% SC TO DO
@@ -233,14 +264,21 @@ if bNew															% set up new experiment
 		if expt.script.(t_phase).nReps > 0
 			fprintf(1, 'Generating script for the random-perturbation phase %s...\n', t_phase);
 			[expt.script.(t_phase), expt.pertDes] = ...
-				genRandScript(t_phase, ...
-							  expt.script.(t_phase).nReps, expt_config.SUST_TRIALS_PER_BLOCK, ...
-							  {}, {}, ...
-							  expt_config.SUST_ONSET_DELAY_MS, expt_config.SUST_NUM_SHIFTS, ...
-							  expt_config.SUST_INTER_SHIFT_DELAYS_MS, expt_config.SUST_PITCH_SHIFTS_CENT, ...
-							  expt_config.SUST_INT_SHIFTS_DB, ...
-							  expt_config.SUST_F1_SHIFTS_RATIO, expt_config.SUST_F2_SHIFTS_RATIO, ...
-							  expt_config.SUST_SHIFT_DURS_MS, expt_config.SUST_STIM_UTTER, '');
+				genCatRandScript(t_phase, ...									
+								expt.script.(t_phase).nReps,			...
+								expt_config.SUST_TRIALS_PER_BLOCK,		...		% === trialsPerBlock ===
+								{},										...
+								{},										...
+								expt_config.SUST_ONSET_DELAY_MS,		...
+								expt_config.SUST_NUM_SHIFTS,			...
+								expt_config.SUST_INTER_SHIFT_DELAYS_MS,	...
+								expt_config.SUST_PITCH_SHIFTS_CENT,		...
+								expt_config.SUST_INT_SHIFTS_DB,			...
+								expt_config.SUST_F1_SHIFTS_RATIO,		...
+								expt_config.SUST_F2_SHIFTS_RATIO,		...
+								expt_config.SUST_SHIFT_DURS_MS,			...
+								expt_config.SUST_STIM_UTTER,			...
+								'');											% === fullSchedFn ===
 		else
 			info_log(sprintf('Sust phase %s will not be included due to nReps == 0', t_phase));
 			idxKeep			= setxor(1 : length(expt.allPhases), fsic(expt.allPhases, t_phase));
@@ -250,14 +288,14 @@ if bNew															% set up new experiment
 	end
 	fprintf('Done.\n');
 
-	
-	p = getAudapterDefaultParams(subject.sex,...
+
+	p = getAudapterDefaultParams(subject.sex,			...
 		'closedLoopGain',	expt.subject.closedLoopGain,...
-		'trialLen',			expt.subject.trialLen,...
-		'trialLenMax',		expt.subject.trialLenMax, ...
-		'mouthMicDist',		expt.subject.mouthMicDist, ...
+		'trialLen',			expt.subject.trialLen,		...
+		'trialLenMax',		expt.subject.trialLenMax,	...
+		'mouthMicDist',		expt.subject.mouthMicDist,	...
 		'sr',				expt_config.SAMPLING_RATE / expt_config.DOWNSAMP_FACT,...
-		'downFact',			expt_config.DOWNSAMP_FACT,...
+		'downFact',			expt_config.DOWNSAMP_FACT,	...
 		'frameLen',			expt_config.FRAME_SIZE / expt_config.DOWNSAMP_FACT, ...
 		'pvocFrameLen',		expt_config.PVOC_FRAME_LEN, ...
 		'pvocHop',			expt_config.PVOC_HOP);
@@ -282,7 +320,7 @@ if bNew															% set up new experiment
 		fprintf(1, '\n');
 	elseif isequal(expt_config.DEVICE_NAME, 'MicroBook')
 		Audapter('deviceName', 'MOTU MicroBook');
-	elseif isequal(expt_config.DEVICE_NAME, 'AudioBox')				% ======== AudioBox ========
+	elseif isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
 				%--- Settings for AudioBox---%
 		cfgUltraLite.downFact	= 4;
 		cfgUltraLite.sr			= 12000;
@@ -308,7 +346,7 @@ if bNew															% set up new experiment
 		error('Unrecognized DEVICE_NAME: %s', expt_config.DEVICE_NAME);
 	end
 	
-	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% Current setting
+	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% === Current setting ===
 		p.stereoMode = 1;
 	elseif isequal(expt_config.STEREO_MODE, 'L_AUDIO')
 		p.stereoMode = 0;
@@ -347,19 +385,22 @@ else														% load expt
 end
 
 %% Initialize Algorithm
-AudapterIO('init', p);										% SC Set the initial (default) parameters
+AudapterIO('init', p);												% SC Set the initial (default) parameters
 
 if ((p.frameShift - round(p.frameShift) ~= 0) || (p.frameShift > p.frameLen))
-	uiwait(errordlg(['Frameshift = ' num2str(p.frameShift) ' is a bad value. Set nWin and frameLen appropriately. Frameshift must be an integer & Frameshift <= Framelen'], '!! Error !!'))
+	uiwait(errordlg(['Frameshift = ' num2str(p.frameShift) ... 
+		' is a bad value. Set nWin and frameLen appropriately. Frameshift must be an integer & Frameshift <= Framelen'], ...
+		'!! Error !!'))
 	return
 else
 
 	fprintf('\n  \n')
-	Audapter(0);													% SC Gives input/output device info, and serves as an initialization.
+	Audapter(0);													% SC Gives input/output device info, 
+																	% and serves as an initialization.
 
 	fprintf('\nSettings : \n')
-	fprintf('DMA Buffer	= %i samples \n', p.frameLen)			% SC Buffer length after downsampling
-	fprintf('Samplerate	= %4.2f kHz  \n', p.sr / 1000)			% SC sampling rate after downsampling
+	fprintf('DMA Buffer	= %i samples \n', p.frameLen)				% SC Buffer length after downsampling
+	fprintf('Samplerate	= %4.2f kHz  \n', p.sr / 1000)				% SC sampling rate after downsampling
 	fprintf('Analysis win  = %4.2f msec \n', p.bufLen / p.sr * 1000)
 	fprintf('LPC  window   = %4.2f msec \n', p.anaLen / p.sr * 1000)
 
@@ -392,15 +433,18 @@ allPhases	= expt.allPhases;
 recPhases	= expt.recPhases;
 % nWords		= length(wordList);
 
-hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);
-set(hgui.UIRecorder, 'Position', [1300, 290, 440, 700]);				% JS Position of "Control" window
-% winontop(hgui.UIRecorder, 1);
+hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);		% === Creates the UIRecorder ("Control") window ===
+% set(hgui.UIRecorder, 'Position', [1300, 290, 440, 700]);			% === Position of UIRecorder window ===
+% set(hgui.UIRecorder, 'Position', [900, 290, 440, 700]);
+
 
 
 if ~isempty(fsic(varargin, 'twoScreens'))
-	subjFigPos		= get(hgui.hkf, 'Position');						% JS Added semi-colon at end of line
+	subjFigPos		= get(hgui.hkf, 'Position');					% === Added semi-colon at end of line ===
 	set(hgui.hkf, 'Position', [1800, 100, subjFigPos(3), subjFigPos(4)]);
 end
+
+
 
 %{
 % if (expt.subject.designNum==2)
@@ -409,7 +453,7 @@ end
 % end
 %}
 
-hgui.showKidsAnim	= expt.subject.expt_config.SHOW_KIDS_ANIM;
+hgui.showKidsAnim	= expt.subject.expt_config.SHOW_KIDS_ANIM; 		% +++ Kids (not used) +++
 
 hgui.bSim			= bSim;
 hgui.simDataDir		= simDataDir;
@@ -417,8 +461,8 @@ hgui.dirname		= dirname;
 
 hgui.pcrKnob		= subject.pcrKnob;
 hgui.ITI			= expt.subject.ITI;
-hgui.trigByScanner	= expt.subject.trigByScanner;
-hgui.trigKey		= expt_config.MRI_TRIGGER_KEY;
+hgui.trigByScanner	= expt.subject.trigByScanner;					% +++ MRI (not used) +++
+hgui.trigKey		= expt_config.MRI_TRIGGER_KEY;					% +++ MRI (not used) +++
 hgui.TA				= expt.subject.TA;
 hgui.dBRange		= expt.subject.dBRange1;
 hgui.trialLen		= expt.subject.trialLen;
@@ -431,13 +475,14 @@ hgui.dScale			= p.dScale;
 
 hgui.vumeterMode	= expt.subject.vumeterMode;
 
-hgui.rmsTransTarg_spl	= getSPLTarg(expt_config.SPL_TARGET, expt.subject.mouthMicDist);
-load('micRMS_100dBA.mat');					% Gives micRMS_100dBA: the rms the microphone should read when the sound is at 100 dBA SPL
-hgui.rmsTransTarg		= micRMS_100dBA / (10^((100 - hgui.rmsTransTarg_spl) / 20));
+hgui.rmsTransTarg_spl= getSPLTarg(expt_config.SPL_TARGET, expt.subject.mouthMicDist);
+load('micRMS_100dBA.mat');					% Gives micRMS_100dBA: the rms the microphone should 
+											% read when the sound is at 100 dBA SPL
+hgui.rmsTransTarg	= micRMS_100dBA / (10^((100 - hgui.rmsTransTarg_spl) / 20));
 
-hgui.fb3Gain			= dBSPL2WaveAmp(expt_config.BLEND_NOISE_DB);
+hgui.fb3Gain		= dBSPL2WaveAmp(expt_config.BLEND_NOISE_DB);
 
-hgui.pertStates			= expt_config.PERT_STATES;
+hgui.pertStates		= expt_config.PERT_STATES;
 
 hgui.debug_pitchShiftLogF = 0;
 
@@ -448,7 +493,8 @@ disp(['hgui.rmsTransTarg_spl = ',		num2str(hgui.rmsTransTarg_spl),		' dBA SPL'])
 fprintf('\n');
 
 hgui.vocaLen	= round(expt_config.VOWEL_LEN_TARG * p.sr / (p.frameLen));			% 300 ms, 225 frames
-hgui.lenRange	= 2.5 * round(expt_config.VOWEL_LEN_RANGE * p.sr / (p.frameLen));	% single-sided tolerance range: 0.4*250 = 100 ms
+hgui.lenRange	= 2.5 * round(expt_config.VOWEL_LEN_RANGE * p.sr / (p.frameLen));	% single-sided tolerance range: 
+																					% 0.4*250 = 100 ms
 disp(['Vowel duration range: [' , num2str(300 - 0.4 * 250), ',', num2str(300 + 0.4 * 250), '] ms.']);
 
 hgui.debug		= DEBUG;
@@ -463,7 +509,8 @@ hgui.smnOffRamp = expt_config.SMN_OFF_RAMP;
 
 
 
-if (isempty(findStringInCell(varargin, 'twoScreens')))
+%{
+% if (isempty(findStringInCell(varargin, 'twoScreens')))
 
 %{
 % 	set(hgui.UIRecorder,...
@@ -471,12 +518,13 @@ if (isempty(findStringInCell(varargin, 'twoScreens')))
 % 		'toolbar','none');  %SC Set the position of the expt window, partially for the use of multiple monitors.
 %}
 
-else
+% else
 
 %{
 % 	if (expt.subject.trigByScanner==1)
 % 		ms=get(0,'MonitorPosition');
-% 		set(hgui.UIRecorder,'Position',[ms(2,1),ms(1,4)-ms(2,4),ms(2,3)-ms(2,1)+1,ms(2,4)+20],'toolbar','none','doublebuffer','on','renderer','painters');
+% 		set(hgui.UIRecorder,'Position',[ms(2,1),ms(1,4)-ms(2,4),ms(2,3)- ... 
+%			ms(2,1)+1,ms(2,4)+20],'toolbar','none','doublebuffer','on','renderer','painters');
 % 		pos_win=get(hgui.UIRecorder,'Position');
 % 		pos_strh=get(hgui.strh,'Position');
 % 		pos_axes_pic=get(hgui.axes_pic,'Position');
@@ -489,15 +537,22 @@ else
 % 		pos_speed_too_slow=get(hgui.speed_too_slow,'Position');
 % 		pos_speed_too_fast=get(hgui.speed_too_fast,'Position');
 % 		set(hgui.strh,'Position',[(pos_win(3)-pos_strh(3))/2+5,(pos_win(4)-pos_strh(4))/2-15,pos_strh(3),pos_strh(4)*0.9]);
-% 		set(hgui.axes_pic,'Position',[(pos_win(3)-pos_axes_pic(3))/2,(pos_win(4)-pos_axes_pic(4))/2,pos_axes_pic(3),pos_axes_pic(4)]);
+% 		set(hgui.axes_pic,'Position',[(pos_win(3)-pos_axes_pic(3))/2,(pos_win(4)- ... 
+% 			pos_axes_pic(4))/2,pos_axes_pic(3),pos_axes_pic(4)]);
 % 		set(hgui.rms_axes,'Position',[(pos_win(3)-pos_rms_axes(3))/2,pos_rms_axes(2),pos_rms_axes(3),pos_rms_axes(4)]);
 % 		set(hgui.rms_label,'Position',[(pos_win(3)-pos_rms_label(3))/2,pos_rms_label(2),pos_rms_label(3),pos_rms_label(4)]);
-% 		set(hgui.rms_too_soft,'Position',[(pos_win(3)-pos_rms_axes(3))/2,pos_rms_too_soft(2),pos_rms_too_soft(3),pos_rms_too_soft(4)]);
-% 		set(hgui.rms_too_loud,'Position',[(pos_win(3)-pos_rms_axes(3))/2+pos_rms_axes(3)-pos_rms_too_loud(3),pos_rms_too_loud(2),pos_rms_too_loud(3),pos_rms_too_loud(4)]);
-% 		set(hgui.speed_axes,'Position',[(pos_win(3)-pos_speed_axes(3))/2,pos_speed_axes(2),pos_speed_axes(3),pos_speed_axes(4)]);		
-% 		set(hgui.speed_label,'Position',[(pos_win(3)-pos_speed_label(3))/2,pos_speed_label(2),pos_speed_label(3),pos_speed_label(4)]);
-% 		set(hgui.speed_too_slow,'Position',[(pos_win(3)-pos_speed_axes(3))/2,pos_speed_too_slow(2),pos_speed_too_slow(3),pos_speed_too_slow(4)]);
-% 		set(hgui.speed_too_fast,'Position',[(pos_win(3)-pos_speed_axes(3))/2+pos_speed_axes(3)-pos_speed_too_fast(3),pos_speed_too_fast(2),pos_speed_too_fast(3),pos_speed_too_fast(4)]);
+% 		set(hgui.rms_too_soft,'Position',[(pos_win(3)-pos_rms_axes(3))/2, ...
+% 			pos_rms_too_soft(2),pos_rms_too_soft(3),pos_rms_too_soft(4)]);
+% 		set(hgui.rms_too_loud,'Position',[(pos_win(3)-pos_rms_axes(3))/2+ ... 
+% 			pos_rms_axes(3)-pos_rms_too_loud(3),pos_rms_too_loud(2),pos_rms_too_loud(3),pos_rms_too_loud(4)]);
+% 		set(hgui.speed_axes,'Position',[(pos_win(3)-pos_speed_axes(3))/2, ...
+% 			pos_speed_axes(2),pos_speed_axes(3),pos_speed_axes(4)]);
+% 		set(hgui.speed_label,'Position',[(pos_win(3)-pos_speed_label(3))/2, ... 
+% 			pos_speed_label(2),pos_speed_label(3),pos_speed_label(4)]);
+% 		set(hgui.speed_too_slow,'Position',[(pos_win(3)-pos_speed_axes(3))/2, ... 
+% 			pos_speed_too_slow(2),pos_speed_too_slow(3),pos_speed_too_slow(4)]);
+% 		set(hgui.speed_too_fast,'Position',[(pos_win(3)-pos_speed_axes(3))/2+ ...
+% 			pos_speed_axes(3)-pos_speed_too_fast(3),pos_speed_too_fast(2),pos_speed_too_fast(3),pos_speed_too_fast(4)]);
 %		 set(hgui.msgh,'FontSize',17);
 % 	else
 % 		set(hgui.UIRecorder,'Position',[-1400,180,1254,857],'toolbar','none');
@@ -505,8 +560,8 @@ else
 % 
 %}
 
-end
-
+% end
+%}
 
 
 if (subject.showProgress)
@@ -530,8 +585,8 @@ if bAlwaysOn
 end
 
 rProgress		= 0;
-startPhase		= state.phase;						% SC For the purpose of resumed experiments
-startRep		= state.rep;						% SC For the purpose of resumed experiments
+startPhase		= state.phase;										% SC For the purpose of resumed experiments
+startRep		= state.rep;										% SC For the purpose of resumed experiments
 for n = startPhase : length(allPhases)
 	state.phase = n;
 	state.rep	= 1;
@@ -633,9 +688,9 @@ for n = startPhase : length(allPhases)
 			hgui.bSpeedRepeat	= 0;
 			
 			p.bDetect			= 0;
-			p.bShift			= 0;						% SC No shift in the practice-1 phase		   
+			p.bShift			= 0;								% SC No shift in the practice - 1 phase		   
 			
-	elseif isequal(thisphase, 'pract1')		 
+	elseif isequal(thisphase, 'pract1')
 			set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
 %{
 %			 if (hgui.vumeterMode==1)
@@ -648,7 +703,7 @@ for n = startPhase : length(allPhases)
 %			 set(hgui.rms_imgh,'Cdata',vumeter.*mask);
 %}
 			p.bDetect			= 0;
-			p.bShift			= 0;						% SC No shift in the practice-1 phase
+			p.bShift			= 0;								% SC No shift in the practice - 1 phase
 			
 			hgui.showRmsPrompt	= 1;
 			hgui.showSpeedPrompt= 0;
@@ -657,7 +712,7 @@ for n = startPhase : length(allPhases)
    
 			if exist('rmsPeaks') && ~isempty(rmsPeaks)
 				p.rmsMeanPeak	= mean(rmsPeaks);
-%				 p.rmsThresh = p.rmsMeanPeak / 4;			% SC !! Adaptive RMS threshold setting. Always updating 
+% 				p.rmsThresh		= p.rmsMeanPeak / 4;				% SC !! Adaptive RMS threshold setting. Always updating 
 			end
 
 			hgui.showTextCue	= 1;
@@ -670,7 +725,8 @@ for n = startPhase : length(allPhases)
 
 				if (~isempty(subjProdLevel))
 					hgui.rmsTransTarg_spl = mean(subjProdLevel);
-					load('micRMS_100dBA.mat');				% Gives micRMS_100dBA: the rms the microphone should read when the sound is at 100 dBA SPL
+					load('micRMS_100dBA.mat');				% Gives micRMS_100dBA: the rms the microphone should
+															% read when the sound is at 100 dBA SPL
 					hgui.rmsTransTarg = micRMS_100dBA / (10^((100 - hgui.rmsTransTarg_spl) / 20));
 				end
 			end
@@ -685,12 +741,12 @@ for n = startPhase : length(allPhases)
 			
 			hgui.showRmsPrompt	= 1;
 			hgui.showSpeedPrompt= 1;
-			hgui.bRmsRepeat		= 1;							% 1 
-			hgui.bSpeedRepeat	= 1;							% SC Make the speed monitor visible %1
+			hgui.bRmsRepeat		= 1;								% 1 
+			hgui.bSpeedRepeat	= 1;								% SC Make the speed monitor visible %1
 			
 			if exist('rmsPeaks') && ~isempty(rmsPeaks)
 				p.rmsMeanPeak	= mean(rmsPeaks);
-%				 p.rmsThresh = p.rmsMeanPeak/4;				% SC !! Adaptive RMS threshold setting. Always updating 
+% 				p.rmsThresh		= p.rmsMeanPeak / 4;				% SC !! Adaptive RMS threshold setting. Always updating 
 			end 
 
 			hgui.showTextCue	= 1;
@@ -728,15 +784,15 @@ for n = startPhase : length(allPhases)
 			if exist('rmsPeaks')
 				p.rmsMeanPeak		= mean(rmsPeaks);
 			end
-			
-			if expt_config.TRIGGER_BY_MRI_SCANNER
+				
+			if expt_config.TRIGGER_BY_MRI_SCANNER					% +++ MRI (not used) +++
 				hgui.showRmsPrompt	= 0;
 				hgui.showSpeedPrompt= 0;
 			else
 				hgui.showRmsPrompt	= 1;
 				hgui.showSpeedPrompt= 1;
 			end
-			hgui.bRmsRepeat			= 0;						% 1
+			hgui.bRmsRepeat			= 0;								% 1
 			hgui.bSpeedRepeat		= 0; 
 
 			p.bDetect				= 1;
@@ -753,7 +809,8 @@ for n = startPhase : length(allPhases)
 			dfns = dir(fullfile(dirname, 'pitch_shift.*.log'));
 			pitchShiftLogFN	= fullfile(dirname, sprintf('pitch_shift.%.2d.log', length(dfns) + 1));
 			pitchShiftLogF	= fopen(pitchShiftLogFN, 'at');
-			fprintf(pitchShiftLogF, 'trialFileName, voiceOnset(ms), pitchShiftOnset(ms), pitchShiftEnd(ms), pitchShift(cent)\n');
+			fprintf(pitchShiftLogF, ...
+				'trialFileName, voiceOnset(ms), pitchShiftOnset(ms), pitchShiftEnd(ms), pitchShift(cent)\n');
 	end
 	
 %{
@@ -766,7 +823,7 @@ for n = startPhase : length(allPhases)
 %			 set(hgui.play,'cdata',hgui.skin.play,'userdata',0);
 %			 hgui.showTextCue=1;
 %			 
-%	 elseif isequal(thisphase,'ramp')	  %SC !! Notice that adaptive RMS threshold updating is no longer done here.		   			
+%	 elseif isequal(thisphase,'ramp')	  %SC !! Notice that adaptive RMS threshold updating is no longer done here.
 %			 hgui.showRmsPrompt = 1;
 %			 hgui.showSpeedPrompt = 1;
 %			 hgui.bRmsRepeat = 0;  %1 
@@ -819,9 +876,11 @@ for n = startPhase : length(allPhases)
 	set(0, 'CurrentFigure', hgui.UIRecorder);
 	xs = get(gca, 'XLim');
 	ys = get(gca, 'YLim');
-	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));		% ===== JS - Displays messages =====
-% 	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
+% 	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));	% === JS - Displays messages ===
+	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
 	
+% 	thisphase
+
 	%{
 %	 htxt = text(xs(1) + 0.05 * range(xs), ys(1) + 0.95 * range(ys), getMsgStr(thisphase), ...
 %				 'FontName', 'Helvetica', 'FontSize', 20, 'FontWeight', 'normal', 'Color', 'b');
@@ -830,9 +889,11 @@ for n = startPhase : length(allPhases)
 	%}
 	
 	if isfile(fullfile(dirname, 'p.mat'))
-		 load(fullfile(dirname, 'p.mat'))						% gives p;			
+		 load(fullfile(dirname, 'p.mat'))							% gives p;			
 	end
-	AudapterIO('init', p);										% SC Inject p to Audapter
+	AudapterIO('init', p);											% SC Inject p to Audapter
+	
+	
 	
 %{	
 %	 else
@@ -842,7 +903,7 @@ for n = startPhase : length(allPhases)
 %	 end
 %}
 	
-	for i0 = startRep : nReps									% SC Loop for the reps in the phase
+	for i0 = startRep : nReps										% SC Loop for the reps in the phase
 		repString		= ['rep', num2str(i0)];
 		state.rep		= i0;
 		state.params	= p;
@@ -855,6 +916,7 @@ for n = startPhase : length(allPhases)
 		
 		% --- Perturbation field ---
 		p.pertF2		= linspace(p.F2Min, p.F2Max, p.pertFieldN);
+
 %{
 		if isequal(subject.expt_config.PERT_MODE, 'FMT')
 			t_amp = norm([subject.expt_config.SHIFT_RATIO_SUST_F1, ...
@@ -863,6 +925,7 @@ for n = startPhase : length(allPhases)
 							i * subject.expt_config.SHIFT_RATIO_SUST_F2);
 		end
 %}
+
 		pcf_fn			= fullfile(subsubdirname, 'fmt.pcf');
 		   
 		if ~bIsPertPhase
@@ -891,9 +954,12 @@ for n = startPhase : length(allPhases)
 
 		% --- ~Perturbation field ---
 
-		for k = 1 : nTrials
-			thisTrial = expt.script.(thisphase).(repString).trialOrder(k);	% 0: silent; 1: no noise; 2: noise only; 			
-			thisWord  = expt.script.(thisphase).(repString).word{k};		% SC Retrieve the word from the randomly shuffled list
+		for k = 1 : 0		% nTrials
+			thisTrial = expt.script.(thisphase).(repString).trialOrder(k);	% 0: silent; 1: no noise; 2: noise only;
+% 			thisWord  = expt.script.(thisphase).(repString).word{k};		% SC Get word from the randomly shuffled list
+			
+			thisWord  = expt.script.(thisphase).(repString).word{k};		% SC Get word from the randomly shuffled list
+
 
 			if iscell(thisTrial)
 				thisTrial = thisTrial{1};
@@ -912,15 +978,17 @@ for n = startPhase : length(allPhases)
 				fprintf(1, 'Pert type = [%s]\n', thisTrial);
 				
 				if ~(isequal(thisTrial, 'ctrl') || isequal(thisTrial, 'baseline'))
-					p.pertAmp = abs(expt.script.(thisphase).(repString).F1Shifts_ratio{k}(1) + 1i * expt.script.(thisphase).(repString).F2Shifts_ratio{k}(1)) * ones(1, p.pertFieldN);
-					p.pertPhi = angle(expt.script.(thisphase).(repString).F1Shifts_ratio{k}(1) + 1i * expt.script.(thisphase).(repString).F2Shifts_ratio{k}(1)) * ones(1, p.pertFieldN);
+					p.pertAmp = abs(expt.script.(thisphase).(repString).F1Shifts_ratio{k}(1) + ...
+						1i * expt.script.(thisphase).(repString).F2Shifts_ratio{k}(1)) * ones(1, p.pertFieldN);
+					p.pertPhi = angle(expt.script.(thisphase).(repString).F1Shifts_ratio{k}(1) + ...
+						1i * expt.script.(thisphase).(repString).F2Shifts_ratio{k}(1)) * ones(1, p.pertFieldN);
 					
 					gen_multi_pert_pcf(ost, pcf, expt_config.INTENSITY_THRESH, ...
 									   expt.script.(thisphase).(repString).pitchShifts_cent{k}, ...
-									   expt.script.(thisphase).(repString).intShifts_dB{k}, ...
-									   expt.script.(thisphase).(repString).F1Shifts_ratio{k}, ...
-									   expt.script.(thisphase).(repString).F2Shifts_ratio{k}, ...
-									   expt.script.(thisphase).(repString).shifts_onset{k}, ...									   
+									   expt.script.(thisphase).(repString).intShifts_dB{k},		...
+									   expt.script.(thisphase).(repString).F1Shifts_ratio{k},	...
+									   expt.script.(thisphase).(repString).F2Shifts_ratio{k},	...
+									   expt.script.(thisphase).(repString).shifts_onset{k},		...
 									   expt.script.(thisphase).(repString).shiftDurs_ms{k});
 				else											% No perturbation
 					p.pertAmp = zeros(1, p.pertFieldN);
@@ -960,34 +1028,44 @@ for n = startPhase : length(allPhases)
 			hgui.trialNum	= k;
 
 %{
-%			 if (hgui.trialType==2 || hgui.trialType==3)	% Speech with masking noise or passively listening to masking noise
+%			 if (hgui.trialType==2 || hgui.trialType==3)	% Speech with masking noise or ...
+% 															% passively listening to masking noise
 %				 Audapter(3,'datapb',gainMTB_fb*x_mtb{3-mod(k,3)},0);
 % 			end
 %}
 			
 			disp('');
 			if (ischar(thisWord))
-				disp([thisphase, ' - ', repString, ', k = ', num2str(k), ': trialType = ', num2str(hgui.trialType), ' - ',thisWord]);
+				disp([thisphase, ' - ', repString, ', k = ', num2str(k), ': trialType = ', ...
+					num2str(hgui.trialType), ' - ',thisWord]);
 			else
-				disp([thisphase, ' - ', repString, ', k = ', num2str(k), ': trialType = ', num2str(hgui.trialType), ' - Pseudoword-', num2str(thisWord)]);
+				disp([thisphase, ' - ', repString, ', k = ', num2str(k), ': trialType = ', ...
+					num2str(hgui.trialType), ' - Pseudoword-', num2str(thisWord)]);
 			end
 			
 			% Count down	
-			if ~(isequal(thisphase, 'start') || isequal(thisphase,'ramp') || isequal(thisphase, 'stay') || isequal(thisphase,'end'))
-				disp(['Left: ', num2str(expt.script.(thisphase).nTrials - phaseTrialCnt + 1), '/', num2str(expt.script.(thisphase).nTrials)]);
+			if ~(isequal(thisphase, 'start') ...
+					|| isequal(thisphase,'ramp') ...
+					|| isequal(thisphase, 'stay') ...
+					|| isequal(thisphase,'end'))
+				disp(['Left: ', num2str(expt.script.(thisphase).nTrials - phaseTrialCnt + 1), ...
+					'/', num2str(expt.script.(thisphase).nTrials)]);
 			else
 				if ~(isequal(thisphase,'ramp') || isequal(thisphase,'stay'))
-					disp(['Left: ', num2str(expt.script.(thisphase).nTrials - phaseTrialCnt + 1), '/', num2str(expt.script.(thisphase).nTrials),...
+					disp(['Left: ', num2str(expt.script.(thisphase).nTrials - phaseTrialCnt + 1), ...
+						'/', num2str(expt.script.(thisphase).nTrials),...
 						', ', num2str((expt.script.(thisphase).nTrials - phaseTrialCnt + 1) * hgui.ITI),' sec']);
 				else
-					disp(['Left: ', num2str(expt.script.ramp.nTrials + expt.script.stay.nTrials - phaseTrialCnt+1), '/',...
+					disp(['Left: ', num2str(expt.script.ramp.nTrials + expt.script.stay.nTrials - phaseTrialCnt+1), ...
+						'/',...
 						num2str(expt.script.ramp.nTrials + expt.script.stay.nTrials),...
-						', ', num2str((expt.script.ramp.nTrials + expt.script.stay.nTrials - phaseTrialCnt + 1) * hgui.ITI), ' sec']);
+						', ', num2str((expt.script.ramp.nTrials + expt.script.stay.nTrials - phaseTrialCnt + 1) ...
+						* hgui.ITI), ' sec']);
 				end
 			end
 			% ~Count down
 			
-			if (isnumeric(hgui.trialType) && hgui.trialType >= 2)   % SC The distinction between train and test words							 
+			if (isnumeric(hgui.trialType) && hgui.trialType >= 2)		% SC The distinction between train and test words
 				Audapter(3, 'bdetect', 0, 1);
 				Audapter(3, 'bshift', 0, 1);
 			else
@@ -1011,7 +1089,7 @@ for n = startPhase : length(allPhases)
 %}
 			
 			UIRecorder('singleTrial', hgui.play, 1, hgui);
-			data = get(hgui.UIRecorder, 'UserData');				% SC Retrieve the data
+			data = get(hgui.UIRecorder, 'UserData');					% SC Retrieve the data
 			
 			% -- Write pitch shift log -- 
 			if bIsPertPhase
@@ -1052,7 +1130,7 @@ for n = startPhase : length(allPhases)
 				end
 
 				if ~isempty(data.rms)
-					switch (thisphase)								% SC Record the RMS peaks in the bout
+					switch (thisphase)									% SC Record the RMS peaks in the bout
 						case 'pre'
 							rmsPeaks = [rmsPeaks ; max(data.rms(:, 1))];
 						case 'pract1',
@@ -1066,7 +1144,10 @@ for n = startPhase : length(allPhases)
 
 			if (isequal(thisphase, 'pract1'))
 				if (thisTrial == 1 || thisTrial == 2)
-					if (isfield(data, 'vowelLevel') && ~isempty(data.vowelLevel) && ~isnan(data.vowelLevel) && ~isinf(data.vowelLevel))
+					if (isfield(data, 'vowelLevel') ...
+						&& ~isempty(data.vowelLevel)...
+						&& ~isnan(data.vowelLevel)	...
+						&& ~isinf(data.vowelLevel))
 						subjProdLevel = [subjProdLevel, data.vowelLevel];
 					end
 				end
@@ -1121,7 +1202,8 @@ for n = startPhase : length(allPhases)
 							end
 %{						  
 %							 data=reprocAPSTVData(data,'iF2LB',p.iF2LB,'uF2UB',p.uF2UB,'rmsThresh',p.rmsThresh);
-%							 taxis1=0 : (data.params.frameLen/data.params.sr) : (data.params.frameLen/data.params.sr)*(length(data.sentStat)-1);
+%							 taxis1=0 : (data.params.frameLen/data.params.sr) : ...
+% 									(data.params.frameLen/data.params.sr)*(length(data.sentStat)-1);
 %							 plot(taxis1,data.sentStat*250,'w','LineWidth',2); hold on;
 %							 set(gca,'XLim',xs);
 %							 save(fullfile(subsubdirname,['trial-',num2str(k),'-',num2str(thisTrial)]),'data');
@@ -1141,7 +1223,7 @@ for n = startPhase : length(allPhases)
 	startRep = 1;
 end
 
-fclose(pitchShiftLogF);
+% fclose(pitchShiftLogF);			% JS temp
 
 set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
 set(hgui.msgh, 'string',...
@@ -1173,14 +1255,7 @@ save(fullfile(dirname, 'state.mat'), 'state');
 
 save(fullfile(dirname, 'expt.mat'), 'expt');
 
-%{
-% eh_discrim([expt.subject.name,'_updown1'],'eh',expt.subject.percDir,6,expt.percTokenInfo,expt.percTokenInfo.x0,'twoScreens');
-% eh_discrim([expt.subject.name,'_updown2'],'eh',expt.subject.percDir,6,expt.percTokenInfo,expt.percTokenInfo.x0,'twoScreens');
-% eh_discrim([expt.subject.name,'_updown3'],'eh',expt.subject.percDir,6,percTokenInfo,x0,'twoScreens');
-% eh_discrim([expt.subject.name,'_updown4'],'eh',expt.subject.percDir,6,percTokenInfo,x0,'twoScreens');
-% eh_discrim([expt.subject.name,'_updown5'],'eh',expt.subject.percDir,6,percTokenInfo,x0,'twoScreens');
-% eh_discrim([expt.subject.name,'_updown6'],'eh',expt.subject.percDir,6,percTokenInfo,x0,'twoScreens');
-%}
+
 
 return
 

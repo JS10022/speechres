@@ -12,10 +12,14 @@ elseif ~isempty(strfind(msg, 'longer'))
     keyword = 'longer';
 elseif ~isempty(strfind(msg, 'shorter'))
     keyword = 'shorter';
+elseif ~isempty(strfind(msg, 'JS_test_1'))
+    keyword = 'JS_test_1';
 else
     fprintf('play_prompt: WARNING: unrecognized msg\n');
     return
 end
+
+
 
 if (~isempty(strfind(msg, 'louder')) || ~isempty(strfind(msg, 'softer')) || ...
    ~isempty(strfind(msg, 'longer')) || ~isempty(strfind(msg, 'shorter')))

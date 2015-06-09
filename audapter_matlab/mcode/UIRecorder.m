@@ -1,4 +1,5 @@
 function varargout = UIRecorder(varargin)
+%{
 % UIRECORDER M-file for uirecorder.fig
 %      UIRECORDER, by itself, creates a new UIRECORDER or raises the existing
 %      singleton*.
@@ -23,9 +24,9 @@ function varargout = UIRecorder(varargin)
 % Edit the above text to modify the response to help uirecorder
 
 % Last Modified by GUIDE v2.5 05-Aug-2013 16:36:07
+%}
 
-%%
-% Begin initialization code - DO NOT EDIT
+%% Begin initialization code - DO NOT EDIT
 gui_Singleton	= 1;
 gui_State	= struct('gui_Name',      mfilename, ...
 					 'gui_Singleton',  gui_Singleton, ...
@@ -64,19 +65,19 @@ function UIRecorder_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
 %            command line (see VARARGIN)
 if (length(varargin) >= 2)
-    figIdDat = varargin{2};
+    figIdDat	= varargin{2};
 else
-    figIdDat = [];
+    figIdDat	= [];
 end
 
 if (~isempty(findStringInCell(varargin, 'trad')))
-	isTrad	= 1;
+	isTrad		= 1;
 else 
-	isTrad	= 0;
+	isTrad		= 0;
 end
 
 if ~isempty(fsic(varargin, 'dirname'))
-    dirname = varargin{fsic(varargin, 'dirname') + 1};
+    dirname		= varargin{fsic(varargin, 'dirname') + 1};
 end
 
 handles.trigByScanner	= 0;
@@ -257,15 +258,17 @@ skin.speaker_soft_1		= double(imread(fullfile(pwd, 'images', 'cartoon-speaker_so
 
 handles.skin			= skin;
 
-% Create subplot slots for images and animations						% ======= JS Creates the participant window =======
-hkf						= figure('Position', [1760, 390, 760, 600], 'Color', 'w', ...		
+% Create subplot slots for images and animations						% === JS Creates the participant window === [1280, 0, 1280, 1024]
+
+% hkf						= figure('Position', [1760, 390, 760, 600], 'Color', 'w', ...
+hkf						= figure('Position', [1280, 0, 1280, 1024], 'Color', 'w', ...
 								 'Name', 'Participant window', 'NumberTitle', 'off', ...
 								 'Toolbar', 'none', 'Menubar', 'none');
 handles.hkf				= hkf;
 
 handles.msgTxt			= uicontrol('Parent', handles.hkf, 'Style', 'text', ...
 								    'Unit', 'normalized', ...
-								    'Position', [0.05, 0.45, 0.9, 0.5], ...
+								    'Position', [0.05, 0.05, 0.9, 0.9], ...
 							        'String', {'Hello', 'world'}, ...
 								    'FontName', 'Helvetica', 'FontSize', 30, 'FontWeight', 'normal', 'ForegroundColor', [0, 0, 1], ...
 									'HorizontalAlignment', 'left', ...
@@ -273,8 +276,7 @@ handles.msgTxt			= uicontrol('Parent', handles.hkf, 'Style', 'text', ...
 
 nMainPanels				= 3;
 leftMargin				= 0.05;
-panelSpacing			= 0.075;								% JS 0.075 -> 0.025
-
+panelSpacing			= 0.075;								% 
 %{
  						  (1 - 2 * 0.075	  - (3			 - 1) * 0.025		) / 3
 	nMainPanels = 1 -> panelWidth = 0.85
@@ -412,13 +414,13 @@ set(handles.play, 'Value', get(handles.play, 'Min'));
 % axis(handles.progress_axes, 'xy');
 %}
 
-handles.figIdDat		= figIdDat;								% ======= JS Creates the Data Monitor ? =======
+handles.figIdDat		= figIdDat;								% ======= JS Gets the data from the Data Monitor =======
 
 handles.dataOut			= [];
 handles.bRmsRepeat		= 0;
 handles.bSpeedRepeat	= 0;
 handles.vocaLen			= NaN;									% SC Mod(2008/01/05) Old value: 300 
-handles.lenRange		= NaN;   								% SC(2008/01/05)
+handles.lenRange		= NaN;   								% SC (2008/01/05)
 
 handles.ITI				= 6;									% SC (2009/02/05) Inter-trial interval
 

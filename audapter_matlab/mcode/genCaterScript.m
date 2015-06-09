@@ -25,32 +25,32 @@ caterScript.nTrials 	= 0;
 
 for n = 1 : nReps
 %{
-%     bt=[zeros(1,length(trainWords)),ones(1,round(length(trainWords)/2))];
-%     if isequal(stage,'natural')
-%         wordsUsed=varargin{1};
-%         bt=[zeros(1,length(preWords))];
-%     if isequal(stage,'pre')
-%         wordsUsed=preWords(randperm(length(preWords)));
-%         bt=[zeros(1,length(preWords))];
-%     elseif isequal(stage,'test1') || isequal(stage,'test2')
-%         wordsUsed=testWords(randperm(length(testWords)));
-%         bt=[zeros(1,length(testWords))];
-%     else
-%         wordsUsed=trainWords(randperm(length(trainWords)));
-%         bt=[zeros(1,length(trainWords))];
-%     end
+%	 bt=[zeros(1,length(trainWords)),ones(1,round(length(trainWords)/2))];
+%	 if isequal(stage,'natural')
+%		 wordsUsed=varargin{1};
+%		 bt=[zeros(1,length(preWords))];
+%	 if isequal(stage,'pre')
+%		 wordsUsed=preWords(randperm(length(preWords)));
+%		 bt=[zeros(1,length(preWords))];
+%	 elseif isequal(stage,'test1') || isequal(stage,'test2')
+%		 wordsUsed=testWords(randperm(length(testWords)));
+%		 bt=[zeros(1,length(testWords))];
+%	 else
+%		 wordsUsed=trainWords(randperm(length(trainWords)));
+%		 bt=[zeros(1,length(trainWords))];
+%	 end
 %}
 % 	wordsUsed			= words(randperm(length(words)));
  	wordsUsed			= words;
 	bt					= zeros(1, length(words));
 
 %{
-%     pseudoWordsUsed=pseudoWords(randperm(length(pseudoWords)));
-%             testWordsUsed2=testWords(randperm(length(testWords)));            
+%	 pseudoWordsUsed=pseudoWords(randperm(length(pseudoWords)));
+%			 testWordsUsed2=testWords(randperm(length(testWords)));			
 %}
 
 	twCnt				= 1;
-	bt					= bt(randperm(length(bt)));
+% 	bt					= bt(randperm(length(bt)));
 	oneRep				= struct;
 	oneRep.trialOrder	= [];
 	oneRep.word			= cell(1, 0);
@@ -63,7 +63,9 @@ for n = 1 : nReps
 				oneRep.trialOrder = [oneRep.trialOrder, 2];
 			end
 
-			oneRep.word{length(oneRep.word) + 1} = wordsUsed{twCnt};
+% 			oneRep.word{length(oneRep.word) + 1} = wordsUsed{twCnt};
+% 			oneRep.word
+			
 			twCnt								 = twCnt + 1;
 
 		elseif (bt(m) == 1)
@@ -72,7 +74,7 @@ for n = 1 : nReps
 			oneRep.word{length(oneRep.word) + 1} = pseudoWordsUsed(cntTW);
 			oneRep.word{length(oneRep.word) + 1} = pseudoWordsUsed(cntTW + 1);
 			cntTW								 = cntTW + 2;
-        end
+		end
 	end
 
 	if (isequal(stage, 'pract1') || isequal(stage, 'pract2'))
@@ -82,10 +84,10 @@ for n = 1 : nReps
 	end
 
 %{
-%     if n==nReps
-%         oneRep.trialOrder=[oneRep.trialOrder,4];    % Dummy trial at the end
-%         oneRep.word{length(oneRep.word)+1}=pseudoWordsUsed(1);
-%     end
+%	 if n==nReps
+%		 oneRep.trialOrder=[oneRep.trialOrder,4];	% Dummy trial at the end
+%		 oneRep.word{length(oneRep.word)+1}=pseudoWordsUsed(1);
+%	 end
 %}
 
 	caterScript.(['rep', num2str(n)])	= oneRep;

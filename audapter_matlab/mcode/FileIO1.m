@@ -1,3 +1,4 @@
+%% ---- Old Code Scraps ---- %%
 %{
  A = importdata('Caterpillar.txt');
 % fid = fopen('Caterpillar.m');
@@ -51,32 +52,56 @@ msgTxt
 
 %}
 
-exptConfigFN = 'expt_config_fmt.vowels.txt';
+%% ---- Runs "Caterpillar" Stimulus ---- %%
+fclose			all;
+close			all force;												% Closes all previous instances
 
-check_file(exptConfigFN);
-expt_config		= read_parse_expt_config(exptConfigFN);
 
-% expt_config.SUST_CAT_REPS
-% expt_config.CATERPILLAR
-
-% expt_config.CATER_TRIAL_LEN
-% expt_config.CATER_LEN_MAX
-% expt_config.CATER_REPS
-% expt_config.PRE_REPS
+exptConfigFN = 'expt_config_fmt.vowels.txt';							% 
+check_file(exptConfigFN);												% Retrieves experimental peramaters from config file
+expt_config		= read_parse_expt_config(exptConfigFN);					% 
 
 expt.stimUtter	= expt_config.STIM_UTTER;
 
 expt.script.pre.nReps	= expt_config.PRE_REPS;
-expt.script.pract1.nReps= expt_config.PRACT1_REPS;
+expt.script.pract1.nReps= expt_config.PRACT1_REPS;						
 expt.script.pract2.nReps= expt_config.PRACT2_REPS;
 
-expt.script.pre		= genPhaseScript('pre',	...
-									expt.script.pre.nReps, expt.stimUtter);
-expt.script.pract1	= genPhaseScript('pract1', ...
-									expt.script.pract1.nReps, expt.stimUtter);
-expt.script.pract2	= genPhaseScript('pract2', ...
-									expt.script.pract2.nReps, expt.stimUtter);
+expt.script.pre		= genPhaseScript('pre', expt.script.pre.nReps, expt.stimUtter);
+expt.script.pract1	= genPhaseScript('pract1', expt.script.pract1.nReps, expt.stimUtter);
+expt.script.pract2	= genPhaseScript('pract2', expt.script.pract2.nReps, expt.stimUtter);
 
-expt.script.pre
 
+hkf					= figure('Position', [1760, 390, 760, 600], 'Color', 'w', ...		
+							 'Name', 'Participant window', 'NumberTitle', 'off', ...
+							 'Toolbar', 'none', 'Menubar', 'none');
+
+
+%{
+uiConfigFN = fullfile(dirname, 'uiConfig.mat');
+
+    load(uiConfigFN);									% gives uiConfig
+    showWordHint		= uiConfig.showWordHint;
+    showWarningHint		= uiConfig.showWarningHint;
+    showInfoOnlyErr		= uiConfig.showInfoOnlyErr;
+    showCorrCount		= uiConfig.showCorrCount;
+    bShowCorrAnim		= uiConfig.bShowCorrAnim;
+    trialStartWithAnim	= uiConfig.trialStartWithAnim;
+    trialPresetDur		= uiConfig.trialPresetDur;
+    promptMode			= uiConfig.promptMode;
+    promptVol			= uiConfig.promptVol;								 
+%}
+
+dirname = 'C:\DATA\APE\TS_FMT_20140113_FMT02';
+% figIdDat = makeFigDataMon;
+
+								 
+% hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);			% ==== Creates the UIRecorder ("Control") window ====
+% set(hgui.UIRecorder, 'Position', [1300, 290, 440, 700]);				% JS Position of "Control" window
+
+
+
+msg = 'JS_test_1';
+
+% play_prompt(msg, 'audio', 10^(uiConfig.promptVol / 20));
 

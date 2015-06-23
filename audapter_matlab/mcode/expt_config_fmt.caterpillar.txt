@@ -1,23 +1,23 @@
-%=== Subject information ===%
+% === Subject information === %
 SUBJECT_ID		TS_FMT_20140113_FMT02
 SUBJECT_GENDER	male										% {female | male}
 SUBJECT_DOB		1-JAN-1983      							% Follow the format: DAY-MON-YEAR (e.g., 2-FEB-1990)
 SUBJECT_GROUP	AWS
 
 
-%=== Data location ===%
+% === Data location === %
 DATA_DIR		C:\DATA\APE
 
 
-%=== Device name ===%
+% === Device name === %
 DEVICE_NAME		AudioBox
 
 
-%=== Feedback timing mode ===%
+% === Feedback timing mode === %
 ALWAYS_ON		0											% 0 - no; 1 - yes
 
 
-%=== Experiment design ===%
+% === Experiment design === %
 N_RAND_RUNS				0									% Number of rand runs
 N_BLOCKS_PER_RAND_RUN	1									% Number of block (a.k.a., repetitions) in each rand run
 TRIALS_PER_BLOCK		5									% Number of trials in each block
@@ -32,7 +32,7 @@ FULL_SCHEDULE_FILE ""
 % FULL_SCHEDULE_FILE "fMRI_sched_example.txt"
 
 
-%=== Randomized perturbation: Single-trial design ===%
+% === Randomized perturbation: Single-trial design === %
 ONSET_DELAY_MS			{up-[0], down-[0]}					% Unit: ms
 NUM_SHIFTS				{up-1, down-1}
 INTER_SHIFT_DELAYS_MS	{up-[150-200], down-[150-200]}		% Unit: ms
@@ -40,15 +40,15 @@ INTER_SHIFT_DELAYS_MS	{up-[150-200], down-[150-200]}		% Unit: ms
 PITCH_SHIFTS_CENT		{up-[0], down-[0]}					% Unit: cent	Zero for pitch perturb. experiment, nonzero for formant
 INT_SHIFTS_DB			{up-[0], down-[0]}					% Unit: dB		Zero for pitch perturb. experiment, nonzero for formant
 
-F1_SHIFTS_RATIO			{up-[0], down-[0]}				% Unit: ratio	Zero for formant perturb. experiment, nonzero for pitch
-F2_SHIFTS_RATIO			{up-[0], down-[0]}				% Unit: ratio	Zero for formant perturb. experiment, nonzero for pitch
+F1_SHIFTS_RATIO			{up-[0], down-[0]}					% Unit: ratio	Zero for formant perturb. experiment, nonzero for pitch
+F2_SHIFTS_RATIO			{up-[0], down-[0]}					% Unit: ratio	Zero for formant perturb. experiment, nonzero for pitch
 
 SHIFT_DURS_MS			{up-[Inf], down-[Inf]}              % Unit: ms.		To impose perturbation on the entire duration of the vowel, 
 															%				use Inf (only one allowed).
 
 
-%=== Sustained perturbation: configurations ===%
-%== The name of the perturbation must be "sust" (otherwise error will be reported) ==%
+% === Sustained perturbation: configurations === %
+% == The name of the perturbation must be "sust" (otherwise error will be reported) == %
 SUST_ONSET_DELAY_MS			{sust-[0]}						% Unit: ms
 SUST_NUM_SHIFTS				{sust-[1]}
 SUST_INTER_SHIFT_DELAYS_MS	{sust-[150-200]}				% Unit: ms
@@ -77,7 +77,7 @@ SUST_CAT_REPS	1				% Caterpillar reps ???		% JS Added for Caterpillar script
 
 STIM_UTTER		
 SUST_STIM_UTTER
-CATERPILLAR						% JS Added for Caterpillar script	
+CATERPILLAR							% JS Added for Caterpillar script	
 
 % STIM_UTTER		UH OH EH UU IH OO AY AH AE		
 % SUST_STIM_UTTER	UH OH EH UU IH OO AY AH AE
@@ -90,50 +90,50 @@ CATERPILLAR						% JS Added for Caterpillar script
 
 
 
-%=== Intensity threshold ===%
-INTENSITY_THRESH 0.01       	% Use 0.01 for behavioral and fMRI 
+% === Intensity threshold === %
+INTENSITY_THRESH 0.01       		% Use 0.01 for behavioral and fMRI 
 
 
-%=== Intensity target ===%
-MOUTH_MIC_DIST	10				% Unit: cm
-SPL_TARGET		74				% Unit: dB A SPL. Lowered from the adult target of 76
-SPL_RANGE		8				% Unit: dB A SPL: single-sided width
+% === Intensity target === %
+MOUTH_MIC_DIST	10					% Unit: cm
+SPL_TARGET		74					% Unit: dB A SPL. Lowered from the adult target of 76
+SPL_RANGE		8					% Unit: dB A SPL: single-sided width
 
 
-%=== Duration target ===%
-VOWEL_LEN_TARG	0.50			% sec
-VOWEL_LEN_RANGE 0.10			% sec: single-sided width
+% === Duration target === %
+VOWEL_LEN_TARG	0.50				% sec
+VOWEL_LEN_RANGE 0.10				% sec: single-sided width
 
 
 % === Number of practice trials === %
-PRE_REPS		1				% pre:		Initial familiarization
-PRACT1_REPS		1				% pract1:	Intensity practice
-PRACT2_REPS		1				% pract2:	Intensity and duration practice
-CATER_REPS 		1				% cater:	Caterpillar script			% JS Added for Caterpillar script	
+PRE_REPS		1					% pre:		Initial familiarization
+PRACT1_REPS		1					% pract1:	Intensity practice
+PRACT2_REPS		1					% pract2:	Intensity and duration practice
+CATER_REPS 		1					% cater:	Caterpillar script			% JS Added for Caterpillar script	
 
 
 % === MRI experiment options === %
-TRIGGER_BY_MRI_SCANNER	0		% 0 (no) or 1 (yes)
-MRI_TRIGGER_KEY		equal		% Examples: equal | add (the commonest ones for Siemens scanners)
-FMRI_TA				2.5			% Unit: s. Time of acquisition (TA) of the fMRI sequence. In the case of sparse sampling, TA < TR.
-TRIAL_LEN			3.0			% Unit: s
+TRIGGER_BY_MRI_SCANNER	0			% 0 (no) or 1 (yes)
+MRI_TRIGGER_KEY		equal			% Examples: equal | add (the commonest ones for Siemens scanners)
+FMRI_TA				2.5				% Unit: sec. Time of acquisition (TA) of the fMRI sequence. In the case of sparse sampling, TA < TR.
+TRIAL_LEN			30				% Unit: sec
 
 
 % === Children experiment-related options === %
-SHOW_KIDS_ANIM		0			% 0 (no) or 1 (yes)
+SHOW_KIDS_ANIM		0				% 0 (no) or 1 (yes)
 
-% PERT_MODE			PITCH		% Alternatives: PITCH / FMT (any other values will lead to error)
+% PERT_MODE			PITCH			% Alternatives: PITCH / FMT (any other values will lead to error)
 
 
 % Online sentence tracking (ost) and perturbation configuration (pcf)
-OST_FN ../pert/ost				% ost file name
-OST_MAX_STATE		4			% Must match the ost file
-PERT_STATES			[1, 2]		% Must be an array (e.g., [1] or [1, 2])
+OST_FN ../pert/ost					% ost file name
+OST_MAX_STATE		4				% Must match the ost file
+PERT_STATES			[1, 2]			% Must be an array (e.g., [1] or [1, 2])
 
 
-% PRE_REPS			2			% Natural production of the VID words
-% PRACT1_REPS		4			% Volume (loudness) practice
-% PRACT2_REPS		4			% Speed practice
+% PRE_REPS			2				% Natural production of the VID words
+% PRACT1_REPS		4				% Volume (loudness) practice
+% PRACT2_REPS		4				% Speed practice
 
 
 NOISE_REPS_RATIO 	0.5
@@ -142,9 +142,9 @@ NOISE_REPS_RATIO 	0.5
 % Set the value to zero if no noise rep is needed.
 % Noise reps will only be inserted into the start, ramp, stay and end phases.
 
-TRIAL_LEN_MAX		8			% Unit: sec
-CATER_TRIAL_LEN		80			% Unit: sec		% JS Added for Caterpillar script	
-CATER_LEN_MAX		180			% Unit: sec		% JS Added for Caterpillar script	
+TRIAL_LEN_MAX		80				% Unit: sec
+CATER_TRIAL_LEN		80				% Unit: sec		% JS Added for Caterpillar script	
+CATER_LEN_MAX		180				% Unit: sec		% JS Added for Caterpillar script	
 
 SAMPLING_RATE		48000
 FRAME_SIZE			96
@@ -157,18 +157,18 @@ PVOC_HOP			128
 
 
 % -- STEREO MODE -- % 
-STEREO_MODE			LR_AUDIO	% {LR_AUDIO, L_AUDIO, L_AUDIO_R_SIM_TTL}
+STEREO_MODE			LR_AUDIO		% {LR_AUDIO, L_AUDIO, L_AUDIO_R_SIM_TTL}
 
 
 % -- Blended noise -- %
-BLEND_NOISE_DB		-Inf		% Unit: dB. To disable blended noise, use -Inf (negative infinity, i.e., not zero!!)
+BLEND_NOISE_DB		-Inf			% Unit: dB. To disable blended noise, use -Inf (negative infinity, i.e., not zero!!)
 
 
 % -- Speech-modulated noise (SMN) -- %
-SMN_GAIN			10			% Unit: dB
-SMN_FF_0			0.8			% Initial forgetting factor (must be < 1.0)
-SMN_FF_1			0.99		% Steady-state forgetting factor (must be < 1.0)
-SMN_ON_RAMP			0.1			% Unit: s
-SMN_OFF_RAMP		0.1			% Unit: s
+SMN_GAIN			10				% Unit: dB
+SMN_FF_0			0.8				% Initial forgetting factor (must be < 1.0)
+SMN_FF_1			0.99			% Steady-state forgetting factor (must be < 1.0)
+SMN_ON_RAMP			0.1				% Unit: s
+SMN_OFF_RAMP		0.1				% Unit: s
 
 

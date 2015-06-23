@@ -57,7 +57,8 @@ fclose			all;
 close			all force;												% Closes all previous instances
 
 
-exptConfigFN = 'expt_config_fmt.vowels.txt';							% 
+% exptConfigFN = 'expt_config_fmt.vowels.txt';							% 
+exptConfigFN = 'expt_config_fmt.caterpillar.txt';						% 
 check_file(exptConfigFN);												% Retrieves experimental peramaters from config file
 expt_config		= read_parse_expt_config(exptConfigFN);					% 
 

@@ -150,42 +150,44 @@ if bNew																% set up new experiment
 	copyfile(exptConfigFN, fullfile(dirname, 'expt_config.txt'));
 
 	expt.subject	= subject;
-	
-% 	expt.allPhases	= {'pre', 'pract1', 'pract2', 'cater'};			% === Phases ===
-% 	expt.recPhases	= {'pre', 'pract1', 'pract2', 'cater'};			% SC The phases during which the data are recorded
 
 	
 	expt.allPhases	= {'cater'};									% === Phases ===
 	expt.recPhases	= {'cater'};									% SC The phases during which the data are recorded
-
+	
+%{
+% 	expt.allPhases	= {'pre', 'pract1', 'pract2', 'cater'};			% === Phases ===
+% 	expt.recPhases	= {'pre', 'pract1', 'pract2', 'cater'};			% SC The phases during which the data are recorded
 
 % 	expt.allPhases	= {'pre', 'pract1', 'pract2'};					% === Phases ===
 % 	expt.recPhases	= {'pre', 'pract1', 'pract2'};					% SC The phases during which the data are recorded
-
-
+%}
 
 	for i1 = 1 : expt_config.N_RAND_RUNS							% === Random ===
 		expt.allPhases{end + 1} = sprintf('rand%d', i1);
 		expt.recPhases{end + 1} = sprintf('rand%d', i1);
 	end
-
+	
+%{
 % 	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end'}];	% === ??? Something to do with phases ??? ===
 % 	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end'}];
 
 % 	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];	% === Something to do with phases ??? ===
 % 	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end', 'cat'}];
-
+%}
 
 	expt.allPhases	= [expt.allPhases, {'cat'}];					% === ??? Something to do with phases ??? ===
 	expt.recPhases	= [expt.recPhases, {'cat'}];
 	
 	
 	expt.stimUtter	= expt_config.CATERPILLAR;						% === Stim_utter ===
+
+%{
 % 	expt.stimUtter	= expt_config.STIM_UTTER;						% === Stim_utter ===
 % 	expt.cater		= expt_config.CATERPILLAR;						% *** Added for Caterpillar script ***
 
 % 	expt.stimUtter
-	
+%}	
 
 	expt.trialTypes			= [1];
 	expt.trialOrderRandReps = 1;									% How many reps are randomized together
@@ -245,9 +247,11 @@ if bNew																% set up new experiment
 	end
 	fprintf('Done.\n');
 	
+%{
 % 	t_phases = {'start', 'ramp', 'stay', 'end'};
 % 	t_phases = {'start', 'ramp', 'stay', 'end', 'cat'};
-
+%}
+	
 	t_phases = {'cat'};
 
 	for k1 = 1 : length(t_phases)
@@ -369,7 +373,7 @@ if bNew																% set up new experiment
 	
 	save(fullfile(dirname, 'expt.mat'), 'expt');
 	save(fullfile(dirname, 'state.mat'), 'state');
-else														% load expt
+else																% load expt
 	load(fullfile(dirname, 'state.mat'));
 	load(fullfile(dirname, 'expt.mat'));			
 	p = state.params;
@@ -439,7 +443,7 @@ hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);		% === Creates the 
 
 
 
-if ~isempty(fsic(varargin, 'twoScreens'))
+if ~isempty(fsic(varargin, 'twoScreens'))							% === Window position ===
 	subjFigPos		= get(hgui.hkf, 'Position');					% === Added semi-colon at end of line ===
 	set(hgui.hkf, 'Position', [1800, 100, subjFigPos(3), subjFigPos(4)]);
 end
@@ -564,7 +568,7 @@ hgui.smnOffRamp = expt_config.SMN_OFF_RAMP;
 %}
 
 
-if (subject.showProgress)
+if (subject.showProgress)											% === Displays progress meter ===
 	set(hgui.progress_axes, 'visible', 'on');
 	set(hgui.progress_imgh, 'visible', 'on');
 	progress_meter	= 0.5 * ones(1, 100, 3);
@@ -657,7 +661,7 @@ for n = startPhase : length(allPhases)
 	% Adjust the number of reps
 %}
 	
-	nReps = expt.script.(thisphase).nReps;
+	nReps = expt.script.(thisphase).nReps;							% === Gets the number of repetitions desired ===
 %	 if ~isequal(thisphase,'stay')
 		phaseTrialCnt	= 1;
 %	 end
@@ -673,13 +677,15 @@ for n = startPhase : length(allPhases)
 		set(hgui.play, 'visible', 'off');
 	end		
 
-	bIsPertPhase = (length(thisphase) >= 4 && isequal(thisphase(1 : 4), 'rand')) ...
-			|| isequal(thisphase, 'start') ...
-			|| isequal(thisphase, 'ramp') ...
-			|| (length(thisphase) >= 4 && isequal(thisphase(1 : 4), 'stay')) ...
-			|| isequal(thisphase, 'end');
+	bIsPertPhase = (length(thisphase)	>= 4	...
+			&& isequal(thisphase(1:4),	'rand'))...
+			|| isequal(thisphase,		'start')...
+			|| isequal(thisphase,		'ramp') ...
+			|| (length(thisphase)		>= 4	...
+			&& isequal(thisphase(1:4),	'stay'))...
+			|| isequal(thisphase,		'end');
 	
-	if isequal(thisphase, 'pre')
+	if isequal(thisphase, 'pre')									% === Settings for preperation ===
 			set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
 
 			hgui.showRmsPrompt	= 0;
@@ -690,8 +696,8 @@ for n = startPhase : length(allPhases)
 			p.bDetect			= 0;
 			p.bShift			= 0;								% SC No shift in the practice - 1 phase		   
 			
-	elseif isequal(thisphase, 'pract1')
-			set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
+	elseif isequal(thisphase, 'pract1')								% === Settings for first practice round ===
+			set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);	
 %{
 %			 if (hgui.vumeterMode==1)
 %				 vumeter=hgui.skin.vumeter;
@@ -719,7 +725,7 @@ for n = startPhase : length(allPhases)
 			
 			subjProdLevel		= [];
 			
-	 elseif isequal(thisphase, 'pract2')
+	 elseif isequal(thisphase, 'pract2')							% === Settings for second practice ===
 			if exist('subjProdLevel')
 				subjProdLevel	= subjProdLevel(find(~isnan(subjProdLevel)));
 
@@ -751,7 +757,7 @@ for n = startPhase : length(allPhases)
 
 			hgui.showTextCue	= 1;
 
-	elseif bIsPertPhase
+	elseif bIsPertPhase												% === Settings for perturbation phase ===
 			if bAlwaysOn
 				Audapter(2);
 			end
@@ -792,21 +798,22 @@ for n = startPhase : length(allPhases)
 				hgui.showRmsPrompt	= 1;
 				hgui.showSpeedPrompt= 1;
 			end
-			hgui.bRmsRepeat			= 0;								% 1
+			hgui.bRmsRepeat			= 0;							% 1
 			hgui.bSpeedRepeat		= 0; 
 
 			p.bDetect				= 1;
 			p.bShift				= 0;
 			
-			if ~(isequal(thisphase, 'ramp') || ...
-				 (length(thisphase) >= 4 && isequal(thisphase(1 : 4), 'stay')) || ...
-				 isequal(thisphase, 'end'))
+			if ~(isequal(thisphase,				'ramp') ... 
+					|| (length(thisphase)		>= 4	...
+					&& isequal(thisphase(1:4),	'stay'))...
+					|| isequal(thisphase,		'end'))
 				set(hgui.play, 'cdata', hgui.skin.play, 'userdata', 0);
 			end
 			hgui.showTextCue		= 1;
 			
 			% -- Prepare pitch shift log file -- %
-			dfns = dir(fullfile(dirname, 'pitch_shift.*.log'));
+			dfns			= dir(fullfile(dirname, 'pitch_shift.*.log'));
 			pitchShiftLogFN	= fullfile(dirname, sprintf('pitch_shift.%.2d.log', length(dfns) + 1));
 			pitchShiftLogF	= fopen(pitchShiftLogFN, 'at');
 			fprintf(pitchShiftLogF, ...
@@ -876,7 +883,7 @@ for n = startPhase : length(allPhases)
 	set(0, 'CurrentFigure', hgui.UIRecorder);
 	xs = get(gca, 'XLim');
 	ys = get(gca, 'YLim');
-% 	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));	% === JS - Displays messages ===
+% 	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));	% === JS - Displays "instruction" messages ===
 	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
 	
 % 	thisphase
@@ -1044,9 +1051,9 @@ for n = startPhase : length(allPhases)
 			end
 			
 			% Count down	
-			if ~(isequal(thisphase, 'start') ...
-					|| isequal(thisphase,'ramp') ...
-					|| isequal(thisphase, 'stay') ...
+			if ~(isequal(thisphase, 'start')		...
+					|| isequal(thisphase,'ramp')	...
+					|| isequal(thisphase, 'stay')	...
 					|| isequal(thisphase,'end'))
 				disp(['Left: ', num2str(expt.script.(thisphase).nTrials - phaseTrialCnt + 1), ...
 					'/', num2str(expt.script.(thisphase).nTrials)]);
@@ -1057,7 +1064,7 @@ for n = startPhase : length(allPhases)
 						', ', num2str((expt.script.(thisphase).nTrials - phaseTrialCnt + 1) * hgui.ITI),' sec']);
 				else
 					disp(['Left: ', num2str(expt.script.ramp.nTrials + expt.script.stay.nTrials - phaseTrialCnt+1), ...
-						'/',...
+						'/', ...
 						num2str(expt.script.ramp.nTrials + expt.script.stay.nTrials),...
 						', ', num2str((expt.script.ramp.nTrials + expt.script.stay.nTrials - phaseTrialCnt + 1) ...
 						* hgui.ITI), ' sec']);
@@ -1065,7 +1072,7 @@ for n = startPhase : length(allPhases)
 			end
 			% ~Count down
 			
-			if (isnumeric(hgui.trialType) && hgui.trialType >= 2)		% SC The distinction between train and test words
+			if (isnumeric(hgui.trialType) && hgui.trialType >= 2)	% SC The distinction between train and test words
 				Audapter(3, 'bdetect', 0, 1);
 				Audapter(3, 'bshift', 0, 1);
 			else
@@ -1130,7 +1137,7 @@ for n = startPhase : length(allPhases)
 				end
 
 				if ~isempty(data.rms)
-					switch (thisphase)									% SC Record the RMS peaks in the bout
+					switch (thisphase)								% SC Record the RMS peaks in the bout
 						case 'pre'
 							rmsPeaks = [rmsPeaks ; max(data.rms(:, 1))];
 						case 'pract1',

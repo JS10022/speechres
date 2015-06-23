@@ -1,4 +1,4 @@
-
+function msg = Caterpillar(num)
 caterpillar = cell(1,16);
 
 caterpillar{1}	= 'Do you like amusement parks?  ';
@@ -17,3 +17,7 @@ caterpillar{13} = 'As quickly as it started, the Caterpillar came to a stop.  ';
 caterpillar{14} = 'Unfortunately, it was time to pack the car and drive home.  ';
 caterpillar{15} = 'That night I dreamt of the wild ride on the Caterpillar.  ';
 caterpillar{16} = 'Taking a trip to the amusement park and riding on the Caterpillar was my MOST memorable moment ever!';
+
+msg = caterpillar(num);
+
+end

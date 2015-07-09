@@ -46,8 +46,8 @@ F2_SHIFTS_RATIO			{up-[-0.1], down-[0.1]}				% Unit: ratio	Zero for formant pert
 SHIFT_DURS_MS			{up-[Inf], down-[Inf]}              % Unit: ms.		To impose perturbation on the entire duration of the vowel, 
 															%				use Inf (only one allowed).
 
-
-%=== Sustained perturbation: configurations ===%
+															
+% === Sustained perturbation: configurations ===%
 %== The name of the perturbation must be "sust" (otherwise error will be reported) ==%
 SUST_ONSET_DELAY_MS			{sust-[0]}						% Unit: ms
 SUST_NUM_SHIFTS				{sust-[1]}

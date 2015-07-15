@@ -51,15 +51,15 @@ const unsigned int RtApi::SAMPLE_RATES[] = {
 };
 
 #if defined(__WINDOWS_DS__) || defined(__WINDOWS_ASIO__)
-  #define MUTEX_INITIALIZE(A) InitializeCriticalSection(A)
-  #define MUTEX_DESTROY(A)    DeleteCriticalSection(A);
-  #define MUTEX_LOCK(A)      EnterCriticalSection(A)
-  #define MUTEX_UNLOCK(A)     LeaveCriticalSection(A)
+  #define MUTEX_INITIALIZE(A)	InitializeCriticalSection(A)
+  #define MUTEX_DESTROY(A)		DeleteCriticalSection(A);
+  #define MUTEX_LOCK(A)			EnterCriticalSection(A)
+  #define MUTEX_UNLOCK(A)		LeaveCriticalSection(A)
 #else // pthread API
-  #define MUTEX_INITIALIZE(A) pthread_mutex_init(A, NULL)
-  #define MUTEX_DESTROY(A)    pthread_mutex_destroy(A);
-  #define MUTEX_LOCK(A)       pthread_mutex_lock(A)
-  #define MUTEX_UNLOCK(A)     pthread_mutex_unlock(A)
+  #define MUTEX_INITIALIZE(A)	pthread_mutex_init(A, NULL)
+  #define MUTEX_DESTROY(A)		pthread_mutex_destroy(A);
+  #define MUTEX_LOCK(A)			pthread_mutex_lock(A)
+  #define MUTEX_UNLOCK(A)		pthread_mutex_unlock(A)
 #endif
 
 // *************************************************** //

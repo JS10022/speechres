@@ -1,0 +1,41 @@
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 2).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+
+beepTest
+Found speechres dir under c:
+Set deviceName to: AudioBox
+Set parameter srate to: 12000
+Set parameter downfact to: 4
+Set parameter framelen to: 256
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.12 - Build date: May 27 2015).
+PTB-INFO: Support status on this operating system release: Windows version 6.1 supported.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: Will disable DWM because a regular fullscreen onscreen window is opened -> We want best timing and performance.
+
+
+PTB-INFO: OpenGL-Renderer is Intel :: Intel(R) HD Graphics 2000 :: 3.1.0 - Build 9.17.10.4229
+PTB-INFO: VBL startline = 900 , VBL Endline = -1
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback: Timestamps returned by Screen('Flip') will be less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 0.000000 ms [1.#INF00 Hz]. (0 valid samples taken, stddev=0.000000 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-WARNING: ==============================================================================================================
+PTB-WARNING: WINDOWS SYSTEM IS RUNNING IN MULTI-DISPLAY MODE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE LIKELY UNRELIABLE!
+PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED!
+PTB-WARNING: DO NOT USE MULTI-DISPLAY MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
+PTB-WARNING: ==============================================================================================================
+PTB-INFO: All display tests and calibrations disabled. Assuming a refresh interval of 60.000000 Hz. Timing will be inaccurate!
+PTB-INFO: Support for fast OffscreenWindows enabled.

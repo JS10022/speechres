@@ -17,6 +17,9 @@ expt_config		= read_parse_expt_config(exptConfigFN);
 % end
 %}
 
+
+Audapter(1,1,1);
+
 if expt_config.TRIGGER_BY_MRI_SCANNER && expt_config.SHOW_KIDS_ANIM
 	error('TRIGGER_BY_MRI_SCANNER == 1 and SHOW_KIDS_ANIM == 1 are not compatible');
 end
@@ -276,8 +279,8 @@ if bNew																% set up new experiment
 		Audapter('deviceName', 'MOTU MicroBook');
 	elseif isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
 				%--- Settings for AudioBox---%
-		cfgUltraLite.downFact	= 4;
-		cfgUltraLite.sr			= 12000;
+		cfgUltraLite.downFact	= 3;
+		cfgUltraLite.sr			= 48000;
 		cfgUltraLite.frameLen	= 64;
 		
 		fprintf(1, 'INFO: Using AudioBox settings. \n');

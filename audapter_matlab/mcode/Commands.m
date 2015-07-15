@@ -8,7 +8,7 @@
 	addpath c:/speechres/commonmcode
 	cds('audapter_matlab');
 
-
+% 	which Audapter
 
 %%%%%%%	Tests and Demos	%%%%%%%
 	
@@ -35,16 +35,21 @@
 	
 %%%%%%%	Run Experiment %%%%%%%
 	
-% 	Audapter;
+% 	Audapter('reset');
 % 	Audapter('info');
-% 	Audapter('start');
+%	Audapter('start');
+
+% 	feedback(5)
+% 	audioGate(2, false);
+% 	audioGate(2, true);
+% 	audioGate();
 	
 % 	runExperiment expt_config_fmt.txt twoScreens
-	runExperiment expt_config_fmt.vowels.txt
+% 	runExperiment expt_config_fmt.vowels.txt
 % 	catExperiment expt_config_fmt.vowels.txt
 % 	catExperiment expt_config_fmt.caterpillar.txt
 	
-
+% Audapter(2);
 	
 	
 	

@@ -1,11 +1,11 @@
-function p = getAudapterDefaultParams(sex,varargin)
+function p = getAudapterDefaultParams(sex, varargin)
 switch sex
     case 'male'       
         p.nLPC          = 17;
         p.fn1           = 591;
         p.fn2           = 1314;
     case 'female'
-        p.nLPC          = 15;	%SC-Mod(2008/02/08)         Used to be 9
+        p.nLPC          = 15;		% SC-Mod(2008/02/08)         Used to be 9
         p.fn1           = 675;
         p.fn2           = 1392;
     otherwise,
@@ -21,7 +21,7 @@ p.gFact         = 1;
 p.downFact      = 3;        % was 4 last year???
 
 % Buffer length (frame size)  (was 96)
-p.frameLen      = 64 / p.downFact;% must be a valid DMA Buffer size (64 128 256 ..)
+p.frameLen      = 64 / p.downFact; % must be a valid DMA Buffer size (64 128 256 ..)
 
 if ~isempty(fsic(varargin, 'downFact'))
     p.downfact = varargin{fsic(varargin, 'downFact') + 1};

@@ -231,7 +231,7 @@ switch(action)
         return;
 
     case 'getData',
-        nout						= nargout;
+        nout						= nargout;					% Number of function output arguments.
         [signalMat, dataMat]		= Audapter(4);        
         data						= [];
 

@@ -9,11 +9,11 @@ RtAudio *audio = NULL;
 
 audioIO::audioIO()
 {
-	input_dev = new DeviceParams;
-	output_dev = new DeviceParams;
-	input_dev->set = 0;
-	output_dev->set = 0;
-	params_set = 0;
+	input_dev 		= new DeviceParams;
+	output_dev 		= new DeviceParams;
+	input_dev->set 	= 0;
+	output_dev->set	= 0;
+	params_set 		= 0;
 	//int a = 1;
 	//a = 2;
 

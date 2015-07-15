@@ -1,0 +1,914 @@
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 2).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+
+Have the subject read the Caterpillar script
+
+	Press ENTER to continue
+
+
+ans =
+
+   4.2877e+05
+
+
+ans =
+
+   4.2878e+05
+
+
+ans =
+
+   4.2879e+05
+
+
+ans =
+
+   4.2880e+05
+
+
+ans =
+
+   4.2880e+05
+
+
+ans =
+
+   4.2881e+05
+
+
+ans =
+
+   4.2882e+05
+
+
+ans =
+
+   4.2883e+05
+
+
+ans =
+
+   4.2884e+05
+
+
+ans =
+
+   4.2885e+05
+
+
+ans =
+
+   4.2886e+05
+
+
+ans =
+
+   4.2887e+05
+
+
+ans =
+
+   4.2888e+05
+
+
+ans =
+
+   4.2889e+05
+
+
+ans =
+
+   4.2890e+05
+
+
+ans =
+
+   4.2891e+05
+
+
+ans =
+
+   4.2892e+05
+
+
+ans =
+
+   4.2893e+05
+
+
+ans =
+
+   4.2894e+05
+
+
+ans =
+
+   4.2894e+05
+
+
+ans =
+
+   4.2895e+05
+
+
+ans =
+
+   4.2896e+05
+
+
+ans =
+
+   4.2897e+05
+
+
+ans =
+
+   4.2898e+05
+
+
+ans =
+
+   4.2899e+05
+
+
+ans =
+
+   4.2900e+05
+
+
+ans =
+
+   4.2901e+05
+
+
+ans =
+
+   4.2902e+05
+
+
+ans =
+
+   4.2903e+05
+
+
+ans =
+
+   4.2904e+05
+
+
+ans =
+
+   4.2905e+05
+
+
+ans =
+
+   4.2906e+05
+
+
+ans =
+
+   4.2907e+05
+
+
+ans =
+
+   4.2908e+05
+
+
+ans =
+
+   4.2909e+05
+
+
+ans =
+
+   4.2910e+05
+
+
+	Press ENTER to continue
+
+
+	Press ENTER to continue
+
+
+	Press ENTER to continue
+
+
+ans =
+
+   4.2948e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2949e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2950e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2951e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2952e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2953e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2954e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2955e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2956e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2957e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2958e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2959e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2960e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2960e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2961e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2962e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2963e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2964e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2965e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2966e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2967e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2968e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2969e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2970e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2971e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2972e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2973e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2974e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2974e+05
+
+Action Start:  1
+Action End:  2
+
+ans =
+
+   4.2975e+05
+
+Action Start:  1
+Action End:  2
+
+	Press ENTER to continue
+
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+
+	Press ENTER to begin Learning Phase
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofbaseline
+
+Did the phase successfully complete? y or n 
+n
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofbaseline
+
+Did the phase successfully complete? y or n 
+{Operation terminated by user during Learning (line 55)
+
+
+In runPTB (line 86)
+input(wait);
+
+In run (line 63)
+evalin('caller', [script ';']);
+} 
+run runPTB.m
+
+
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 31 times out of a total of 105 flips during this session.
+
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 2).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+
+Found speechres dir under c:
+Set deviceName to: AudioBox
+Set parameter srate to: 12000
+Set parameter downfact to: 4
+Set parameter framelen to: 256
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.12 - Build date: May 27 2015).
+PTB-INFO: Support status on this operating system release: Windows version 6.1 supported.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: Will disable DWM because a regular fullscreen onscreen window is opened -> We want best timing and performance.
+PTB-WARNING: Attaching our thread input to Matlab thread input failed. Expect GetChar() and Show/HideCursor() trouble.
+
+
+PTB-INFO: OpenGL-Renderer is Intel :: Intel(R) HD Graphics 2000 :: 3.1.0 - Build 9.17.10.4229
+PTB-INFO: VBL startline = 900 , VBL Endline = -1
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback: Timestamps returned by Screen('Flip') will be less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 0.000000 ms [1.#INF00 Hz]. (0 valid samples taken, stddev=0.000000 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-WARNING: ==============================================================================================================
+PTB-WARNING: WINDOWS SYSTEM IS RUNNING IN MULTI-DISPLAY MODE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE LIKELY UNRELIABLE!
+PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED!
+PTB-WARNING: DO NOT USE MULTI-DISPLAY MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
+PTB-WARNING: ==============================================================================================================
+PTB-INFO: All display tests and calibrations disabled. Assuming a refresh interval of 60.000000 Hz. Timing will be inaccurate!
+PTB-INFO: Support for fast OffscreenWindows enabled.
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofbaseline
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End oflearning
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofsustained_5
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+
+	Press ENTER to continue
+
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofsustained_10
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofproficiency
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofbaseline
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End oflearning
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofsustained_5
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofsustained_10
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+End ofproficiency
+
+Did the phase successfully complete? y or n 
+y
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+
+	Press ENTER to continue
+
+     7
+
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+Action Start:  1
+Action End:  2
+
+	Press ENTER to continue
+
+
+	Press ENTER to continue
+
+     7
+
+     7
+
+
+
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 21 times out of a total of 235 flips during this session.
+
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 2).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+

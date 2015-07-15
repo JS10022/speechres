@@ -4,11 +4,11 @@
 
 struct AudioDeviceInfo {
   std::string name;      /*!< Character string device identifier. */
-  bool probed;          /*!< true if the device capabilities were successfully probed. */
-  int outputChannels;   /*!< Maximum output channels supported by device. */
-  int inputChannels;    /*!< Maximum input channels supported by device. */
-  int duplexChannels;   /*!< Maximum simultaneous input/output channels supported by device. */
-  bool isDefault;       /*!< true if this is the default output or input device. */
+  bool	probed;          /*!< true if the device capabilities were successfully probed. */
+  int	outputChannels;   /*!< Maximum output channels supported by device. */
+  int	inputChannels;    /*!< Maximum input channels supported by device. */
+  int	duplexChannels;   /*!< Maximum simultaneous input/output channels supported by device. */
+  bool	isDefault;       /*!< true if this is the default output or input device. */
   std::vector<int> sampleRates; /*!< Supported sample rates (queried from list of standard rates). */
 
   // Default constructor.
@@ -18,10 +18,10 @@ struct AudioDeviceInfo {
 };
 
 struct DeviceParams{
-	int num;
-	int chans;
-	int fs;
-	bool set;
+	int		num;
+	int		chans;
+	int		fs;
+	bool	set;
 };
 
 class audioIO{

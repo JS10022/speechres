@@ -5,15 +5,15 @@ bUltraLite		= 0;
 % bAudioBox		= 1;
 
 if bUltraLite
-    sRate		= 12000;
-    downFact	= 4;
-    frameLen	= 64;
-    scaleFactor = 5.0;
+	sRate		= 12000;
+	downFact	= 4;
+	frameLen	= 64;
+	scaleFactor = 5.0;
 else
-    sRate		= 16000;
-    downFact	= 3;
-    frameLen	= 32;
-    scaleFactor = 0.05;
+	sRate		= 16000;
+	downFact	= 3;
+	frameLen	= 32;
+	scaleFactor = 0.05;
 end
 
 %{
@@ -49,16 +49,16 @@ Audapter(3, 'bpitchshift', 1);
 
 %% For ultralite
 if bUltraLite
-    Audapter('deviceName', 'MOTU Audio');
-    Audapter(3, 'srate', sRate);
-    Audapter(3, 'downfact', downFact);
-    Audapter(3, 'framelen', frameLen);
+	Audapter('deviceName', 'MOTU Audio');
+	Audapter(3, 'srate', sRate);
+	Audapter(3, 'downfact', downFact);
+	Audapter(3, 'framelen', frameLen);
 else
-%     Audapter('deviceName', 'MOTU MicroBook');
-    Audapter('deviceName', 'AudioBox');
-    Audapter(3, 'srate', sRate);
-    Audapter(3, 'downfact', downFact);
-    Audapter(3, 'framelen', frameLen);
+%	 Audapter('deviceName', 'MOTU MicroBook');
+	Audapter('deviceName', 'AudioBox');
+	Audapter(3, 'srate', sRate);
+	Audapter(3, 'downfact', downFact);
+	Audapter(3, 'framelen', frameLen);
 end
 
 % Audapter playTone;
@@ -76,13 +76,13 @@ sigInCell	= makecell(sigIn, frameLen * downFact);
 Audapter(6);
 %%
 if bOffline
-    for n = 1 : length(sigInCell)
-        Audapter(5, sigInCell{n});
-    end
+	for n = 1 : length(sigInCell)
+		Audapter(5, sigInCell{n});
+	end
 else
-    Audapter(1);
-    pause(4);
-    Audapter(2);
+	Audapter(1);
+	pause(4);
+	Audapter(2);
 end
 
 %%

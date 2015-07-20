@@ -18,15 +18,14 @@ if mask
 	pause(0.25);
 end
 
+fprintf ('\t');
 Audapter(1);
 pause(seconds);
+fprintf ('\t');
 Audapter(2);
 
 if mask
 	stop(player);
 end
-
-
-
 end
 

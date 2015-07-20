@@ -22,27 +22,27 @@ set_onset	= [];
 set_term	= [];
 
 for i1 = 1 : numel(listItems)
-    t_item = listItems{i1};
-    if uiConfig.trialStartWithAnim == 1
-        if ~isempty(strfind(t_item, 'with anim'))
-            set_onset(end + 1) = i1;
-        end
-    else
-        if ~isempty(strfind(t_item, 'after anim'))
-            set_onset(end + 1) = i1;
-        end
-    end
-    
-    if uiConfig.trialPresetDur == 1
-        if ~isempty(strfind(t_item, 'preset dur'))
-            set_term(end + 1) = i1;
-        end
-    else
-        if ~isempty(strfind(t_item, 'manual term'))
-            set_term(end + 1) = i1;
-        end
-    end
-    
+	t_item = listItems{i1};
+	if uiConfig.trialStartWithAnim == 1
+		if ~isempty(strfind(t_item, 'with anim'))
+			set_onset(end + 1) = i1;
+		end
+	else
+		if ~isempty(strfind(t_item, 'after anim'))
+			set_onset(end + 1) = i1;
+		end
+	end
+	
+	if uiConfig.trialPresetDur == 1
+		if ~isempty(strfind(t_item, 'preset dur'))
+			set_term(end + 1) = i1;
+		end
+	else
+		if ~isempty(strfind(t_item, 'manual term'))
+			set_term(end + 1) = i1;
+		end
+	end
+	
 end
 idx = intersect(set_onset, set_term);
 set(hgui.pm_timingMode, 'Value', idx);
@@ -50,11 +50,11 @@ set(hgui.pm_timingMode, 'Value', idx);
 % The prompt mode popup menu
 listItems = get(hgui.pm_promptMode, 'String');
 if isequal(uiConfig.promptMode, 'v')
-    idx = fsic(listItems, 'Visual only');
+	idx = fsic(listItems, 'Visual only');
 elseif isequal(uiConfig.promptMode, 'a')
-    idx = fsic(listItems, 'Auditory only');
+	idx = fsic(listItems, 'Auditory only');
 elseif isequal(uiConfig.promptMode, 'av')
-    idx = fsic(listItems, 'Auditory + visual');
+	idx = fsic(listItems, 'Auditory + visual');
 end
 set(hgui.pm_promptMode, 'Value', idx);
 

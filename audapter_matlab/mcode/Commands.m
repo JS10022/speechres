@@ -5,17 +5,17 @@
 
 %%%%%%%	Startup and Initialization	%%%%%%%
 
-	addpath c:/speechres/commonmcode
-	cds('audapter_matlab');
+% 	addpath c:/speechres/commonmcode
+% 	cds('audapter_matlab');
 
 % 	which Audapter
 
 %%%%%%%	Tests and Demos	%%%%%%%
 	
-% 	test_audapter('formant',  '--play'    );
-% 	test_audapter('pitch',    '--play'    );
-% 	test_audapter('timeWarp', '--play'    );
-% 	audapterDemo_triphthong(  '--play'    );
+% 	test_audapter('formant',  '--play'	);
+% 	test_audapter('pitch',	'--play'	);
+% 	test_audapter('timeWarp', '--play'	);
+% 	audapterDemo_triphthong(  '--play'	);
 	
 % 	audapterDemo_online('persistentFormantShift', 'male');
 	
@@ -45,7 +45,7 @@
 % 	audioGate();
 	
 % 	runExperiment expt_config_fmt.txt twoScreens
-% 	runExperiment expt_config_fmt.vowels.txt
+	runExperiment expt_config_fmt.vowels.txt
 % 	catExperiment expt_config_fmt.vowels.txt
 % 	catExperiment expt_config_fmt.caterpillar.txt
 	

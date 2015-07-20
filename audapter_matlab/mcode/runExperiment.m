@@ -18,7 +18,7 @@ expt_config		= read_parse_expt_config(exptConfigFN);
 %}
 
 
-Audapter(1,1,1);
+% Audapter(1,1,1);					% === Added for testing?  I don't remember... ===
 
 if expt_config.TRIGGER_BY_MRI_SCANNER && expt_config.SHOW_KIDS_ANIM
 	error('TRIGGER_BY_MRI_SCANNER == 1 and SHOW_KIDS_ANIM == 1 are not compatible');
@@ -98,9 +98,10 @@ end
 
 subject.pcrKnob	= 0;
 
-%%
+
 bNew			= true;												% === Creates new experiment ===
 
+%% Sets up file directory
 dirname			= fullfile(subject.dataDir, num2str(subject.name));
 
 if (~isempty(findStringInCell(varargin, 'dirname')))
@@ -137,7 +138,8 @@ if isdir(dirname)
 	end
 end
 
-if bNew																% set up new experiment
+%% Sets up a new experiment
+if bNew																
 	if isdir(dirname)
 		rmdir(dirname, 's');
 	end
@@ -159,7 +161,7 @@ if bNew																% set up new experiment
 	
 	expt.stimUtter	= expt_config.STIM_UTTER;						% === Stim_utter ===
 	
-	expt.trialTypes			= [1];
+	expt.trialTypes			= 1;									% === Was [1] ===
 	expt.trialOrderRandReps = 1;									% How many reps are randomized together
 	expt.script.pre.nReps	= expt_config.PRE_REPS;					% SC Numbers of repetitions in the stages	% !!1!!	
 	expt.script.pract1.nReps= expt_config.PRACT1_REPS;
@@ -258,8 +260,10 @@ if bNew																% set up new experiment
 		'pvocHop',			expt_config.PVOC_HOP);
 	p.rmsThresh =			expt_config.INTENSITY_THRESH;
 	
+	
+	% === Configure ASIO Device ===
 	if isequal(expt_config.DEVICE_NAME, 'UltraLite')
-		%--- Settings for MOTU UlraLite---%
+		%--- Settings for MOTU UlraLite ---%
 		cfgUltraLite.downFact	= 4;
 		cfgUltraLite.sr			= 12000;
 		cfgUltraLite.frameLen	= 64;
@@ -278,7 +282,7 @@ if bNew																% set up new experiment
 	elseif isequal(expt_config.DEVICE_NAME, 'MicroBook')
 		Audapter('deviceName', 'MOTU MicroBook');
 	elseif isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
-				%--- Settings for AudioBox---%
+				%--- Settings for AudioBox ---%
 		cfgUltraLite.downFact	= 3;
 		cfgUltraLite.sr			= 48000;
 		cfgUltraLite.frameLen	= 64;
@@ -303,6 +307,8 @@ if bNew																% set up new experiment
 		error('Unrecognized DEVICE_NAME: %s', expt_config.DEVICE_NAME);
 	end
 	
+	
+	% === Audio Stereo Output Mode ===
 	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% === Current setting ===
 		p.stereoMode = 1;
 	elseif isequal(expt_config.STEREO_MODE, 'L_AUDIO')
@@ -832,8 +838,8 @@ for n = startPhase : length(allPhases)
 	set(0, 'CurrentFigure', hgui.UIRecorder);
 % 	xs = get(gca, 'XLim');
 % 	ys = get(gca, 'YLim');
-% 	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));		% ===== JS - Displays messages =====
-	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
+	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));		% ===== JS - Displays messages =====
+% 	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
 	
 	%{
 %	 htxt = text(xs(1) + 0.05 * range(xs), ys(1) + 0.95 * range(ys), getMsgStr(thisphase), ...

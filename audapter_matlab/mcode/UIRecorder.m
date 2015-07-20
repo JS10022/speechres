@@ -1,23 +1,23 @@
 function varargout = UIRecorder(varargin)
 %{
 % UIRECORDER M-file for uirecorder.fig
-%      UIRECORDER, by itself, creates a new UIRECORDER or raises the existing
-%      singleton*.
+%	  UIRECORDER, by itself, creates a new UIRECORDER or raises the existing
+%	  singleton*.
 %
-%      H = UIRECORDER returns the handle to a new UIRECORDER or the handle to
-%      the existing singleton*.
+%	  H = UIRECORDER returns the handle to a new UIRECORDER or the handle to
+%	  the existing singleton*.
 %
-%      UIRECORDER('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in UIRECORDER.M with the given input arguments.
+%	  UIRECORDER('CALLBACK',hObject,eventData,handles,...) calls the local
+%	  function named CALLBACK in UIRECORDER.M with the given input arguments.
 %
-%      UIRECORDER('Property','Value',...) creates a new UIRECORDER or raises the
-%      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before UIRecorder_OpeningFunction gets called.  An
-%      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to UIRecorder_OpeningFcn via varargin.
+%	  UIRECORDER('Property','Value',...) creates a new UIRECORDER or raises the
+%	  existing singleton*.  Starting from the left, property value pairs are
+%	  applied to the GUI before UIRecorder_OpeningFunction gets called.  An
+%	  unrecognized property name or invalid value makes property application
+%	  stop.  All inputs are passed to UIRecorder_OpeningFcn via varargin.
 %
-%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
-%      instance to run (singleton)".
+%	  *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%	  instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
@@ -28,46 +28,46 @@ function varargout = UIRecorder(varargin)
 
 %% Begin initialization code - DO NOT EDIT
 gui_Singleton	= 1;
-gui_State	= struct('gui_Name',      mfilename, ...
+gui_State	= struct('gui_Name',	  mfilename, ...
 					 'gui_Singleton',  gui_Singleton, ...
 					 'gui_OpeningFcn', @UIRecorder_OpeningFcn, ...
 					 'gui_OutputFcn',  @UIRecorder_OutputFcn, ...
 					 'gui_LayoutFcn',  [] , ...
 					 'gui_Callback',   []);
 if nargin && ischar(varargin{1})
-    gui_State.gui_Callback = str2func(varargin{1});
+	gui_State.gui_Callback = str2func(varargin{1});
 end
 
 if nargout
-    [varargout{1 : nargout}] = gui_mainfcn(gui_State, varargin{:});
+	[varargout{1 : nargout}] = gui_mainfcn(gui_State, varargin{:});
 else
-    gui_mainfcn(gui_State, varargin{:});
+	gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
 
 %{
 % SCai: data displaying function
 % if (~isempty(findStringInCell(varargin,'figIdDat'))) 
-%     figIdDat=varargin{findStringInCell(varargin,'figIdDat')+1};
+%	 figIdDat=varargin{findStringInCell(varargin,'figIdDat')+1};
 % end
 % 
 % if ~isempty(fsic(varargin, 'dirname'))
-%     dirname = varargin{fsic(varargin, 'dirname') + 1};
+%	 dirname = varargin{fsic(varargin, 'dirname') + 1};
 % end
 %}
 
 %% --- Executes just before uirecorder is made visible.
 function UIRecorder_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
-% hObject    handle to figure
+% hObject	handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 % varargin   unrecognized PropertyName/PropertyValue pairs from the
-%            command line (see VARARGIN)
+%			command line (see VARARGIN)
 if (length(varargin) >= 2)
-    figIdDat	= varargin{2};
+	figIdDat	= varargin{2};
 else
-    figIdDat	= [];
+	figIdDat	= [];
 end
 
 if (~isempty(findStringInCell(varargin, 'trad')))
@@ -77,7 +77,7 @@ else
 end
 
 if ~isempty(fsic(varargin, 'dirname'))
-    dirname		= varargin{fsic(varargin, 'dirname') + 1};
+	dirname		= varargin{fsic(varargin, 'dirname') + 1};
 end
 
 handles.trigByScanner	= 0;
@@ -93,7 +93,7 @@ handles.bShowCorrAnim	= 1;
 handles.debug_pitchShiftLogF = 0;
 
 handles.showKidsAnim	= 0;
-              
+			  
 handles.timeCreated		= clock;
 
 % handles.promptGain = 0.2;
@@ -135,16 +135,16 @@ set(handles.UIRecorder, 'interruptible', 'on', 'busyaction', 'queue')
 % color2=vumeter(53,:,:);
 % color3=vumeter(90,:,:);
 % for n=1:100
-%     if n<=30
-%         vumeter(n,:,:)=color1;
-%     elseif n<=70
-%         vumeter(n,:,:)=color2;
-%     else
-%         vumeter(n,:,:)=color3;
-%     end
+%	 if n<=30
+%		 vumeter(n,:,:)=color1;
+%	 elseif n<=70
+%		 vumeter(n,:,:)=color2;
+%	 else
+%		 vumeter(n,:,:)=color3;
+%	 end
 % end
 % vumeter2=vumeter;
-% vumeter(10:10:90,:)=0;    %SC-Commented(12/11/2007)
+% vumeter(10:10:90,:)=0;	%SC-Commented(12/11/2007)
 % vumeter0=nan(size(vumeter,2),size(vumeter,1),size(vumeter,3));
 % vumeter0(:,:,1)=transpose(vumeter(:,:,1));
 % vumeter0(:,:,2)=transpose(vumeter(:,:,2));
@@ -164,28 +164,28 @@ set(handles.UIRecorder, 'interruptible', 'on', 'busyaction', 'queue')
 %SC ~Construct the progress indicator template
 %--------------------------------------------------------------------------
 % if (handles.vumeterMode==1)
-%     handles.rms_imgh = image(vumeter,'parent',handles.rms_axes);
-%     handles.speed_imgh=image(vumeter,'parent',handles.speed_axes);
-%     set(handles.rms_imgh,'CData',zeros(size(vumeter)));
-%     set(handles.speed_imgh,'CData',zeros(size(vumeter)));
+%	 handles.rms_imgh = image(vumeter,'parent',handles.rms_axes);
+%	 handles.speed_imgh=image(vumeter,'parent',handles.speed_axes);
+%	 set(handles.rms_imgh,'CData',zeros(size(vumeter)));
+%	 set(handles.speed_imgh,'CData',zeros(size(vumeter)));
 % else
-%     handles.rms_imgh = image(vumeter,'parent',handles.rms_axes);
-%     handles.speed_imgh=image(vumeter,'parent',handles.speed_axes);
-%     set(handles.rms_imgh,'CData',zeros(size(vumeter2)));
-%     set(handles.speed_imgh,'CData',zeros(size(vumeter2))); 
+%	 handles.rms_imgh = image(vumeter,'parent',handles.rms_axes);
+%	 handles.speed_imgh=image(vumeter,'parent',handles.speed_axes);
+%	 set(handles.rms_imgh,'CData',zeros(size(vumeter2)));
+%	 set(handles.speed_imgh,'CData',zeros(size(vumeter2))); 
 % end
 %}
 
 progressmeter			= 1 * ones(1, 100, 3);
 
-if (~isempty(findStringInCell(varargin, 'showVuMeter')))    
-    set(handles.rms_imgh, 'CData', vumeter0);
+if (~isempty(findStringInCell(varargin, 'showVuMeter')))	
+	set(handles.rms_imgh, 'CData', vumeter0);
 end
 
 
 %{
 % if (~isempty(findStringInCell(varargin,'showVuMeter')))
-%     set(handles.speed_imgh,'CData',vumeter0);
+%	 set(handles.speed_imgh,'CData',vumeter0);
 % end
 
 % set(handles.phrase_axes,'Box','off');
@@ -244,7 +244,7 @@ skin.bird_nFrames		= numel(dir(fullfile(pwd,	  'images', 'cartoon-bird-flying-1-
 skin.birdFrames			= cell(1, skin.bird_nFrames);
 
 for i1 = 1 : skin.bird_nFrames
-    skin.birdFrames{i1} = double(imread(fullfile(pwd, 'images', sprintf('cartoon-bird-flying-1-%.3d.jpg', i1)))) / 255.;
+	skin.birdFrames{i1} = double(imread(fullfile(pwd, 'images', sprintf('cartoon-bird-flying-1-%.3d.jpg', i1)))) / 255.;
 end
 
 skin.tick				= double(imread(fullfile(pwd, 'images', 'cartoon-tickmark-1.jpg')))		/ 255.;
@@ -261,16 +261,16 @@ handles.skin			= skin;
 % Create subplot slots for images and animations						% === JS Creates the participant window === [1280, 0, 1280, 1024]
 
 % hkf						= figure('Position', [1760, 390, 760, 600], 'Color', 'w', ...
-hkf						= figure('Position', [1280, 0, 1280, 1024], 'Color', 'w', ...
+hkf						= figure('Position', [10, 0, 1280, 1024], 'Color', 'w', ...
 								 'Name', 'Participant window', 'NumberTitle', 'off', ...
 								 'Toolbar', 'none', 'Menubar', 'none');
 handles.hkf				= hkf;
 
 handles.msgTxt			= uicontrol('Parent', handles.hkf, 'Style', 'text', ...
-								    'Unit', 'normalized', ...
-								    'Position', [0.05, 0.05, 0.9, 0.9], ...
-							        'String', {'Hello', 'world'}, ...
-								    'FontName', 'Helvetica', 'FontSize', 30, 'FontWeight', 'normal', 'ForegroundColor', [0, 0, 1], ...
+									'Unit', 'normalized', ...
+									'Position', [0.05, 0.05, 0.9, 0.9], ...
+									'String', {'Hello', 'world'}, ...
+									'FontName', 'Helvetica', 'FontSize', 30, 'FontWeight', 'normal', 'ForegroundColor', [0, 0, 1], ...
 									'HorizontalAlignment', 'left', ...
 									'visible', 'off');
 
@@ -291,9 +291,9 @@ hsp						= nan(1, nMainPanels);
 for i1 = 1 : nMainPanels
 % 	hsp(i1)	= subplot('Position', [leftMargin, 0.375, panelWidth, panelHeight]);
 % 								  [0.075	  + (i1 - 1) * (panelWidth + 0.025		 )
-    hsp(i1)	= subplot('Position', [leftMargin + (i1 - 1) * (panelWidth + panelSpacing), 0.375, panelWidth, panelHeight]);
-    set(gca, 'XTick', [], 'YTick', []);
-    set(gca, 'XColor', 'w', 'YColor', 'w');
+	hsp(i1)	= subplot('Position', [leftMargin + (i1 - 1) * (panelWidth + panelSpacing), 0.375, panelWidth, panelHeight]);
+	set(gca, 'XTick', [], 'YTick', []);
+	set(gca, 'XColor', 'w', 'YColor', 'w');
 end
 
 %{
@@ -338,9 +338,9 @@ set(gca, 'XTick', [], 'YTick', []);
 set(gca, 'XColor', 'w', 'YColor', 'w');
 
 if handles.showKidsAnim
-    htxt_corrCnt		= text(0, 0, 'You have made 0 correct responses!', 'Color', 'b', 'FontSize', 12);
+	htxt_corrCnt		= text(0, 0, 'You have made 0 correct responses!', 'Color', 'b', 'FontSize', 12);
 else
-    htxt_corrCnt		= NaN;
+	htxt_corrCnt		= NaN;
 end
 
 handles.hsp_corrCnt		= hsp_corrCnt;
@@ -349,8 +349,8 @@ handles.corrCnt			= 0;
 handles.dirname			= dirname;
 
 if ~isfile(fullfile(handles.dirname, 'corr_count.mat'))
-    corr_count			= 0;
-    save(fullfile(handles.dirname, 'corr_count.mat'), 'corr_count');
+	corr_count			= 0;
+	save(fullfile(handles.dirname, 'corr_count.mat'), 'corr_count');
 end
 
 set(0, 'CurrentFigure', handles.UIRecorder);
@@ -366,27 +366,27 @@ handles.promptVol		= -6;							% dB [-30, 3]
 
 handles.uiConfigFN = fullfile(handles.dirname, 'uiConfig.mat');
 if ~isfile(handles.uiConfigFN)
-    uiConfig = struct('showWordHint',		handles.showWordHint, ...
-                      'showWarningHint',	handles.showWarningHint, ...
-                      'showInfoOnlyErr',	handles.showInfoOnlyErr, ...
-                      'showCorrCount',		handles.showCorrCount, ...
-                      'bShowCorrAnim',		handles.bShowCorrAnim, ...
-                      'trialStartWithAnim', handles.trialStartWithAnim, ...
-                      'trialPresetDur',		handles.trialPresetDur, ...
-                      'promptMode',			handles.promptMode, ...
-                      'promptVol',			handles.promptVol);
-    save(handles.uiConfigFN, 'uiConfig');
+	uiConfig = struct('showWordHint',		handles.showWordHint, ...
+					  'showWarningHint',	handles.showWarningHint, ...
+					  'showInfoOnlyErr',	handles.showInfoOnlyErr, ...
+					  'showCorrCount',		handles.showCorrCount, ...
+					  'bShowCorrAnim',		handles.bShowCorrAnim, ...
+					  'trialStartWithAnim', handles.trialStartWithAnim, ...
+					  'trialPresetDur',		handles.trialPresetDur, ...
+					  'promptMode',			handles.promptMode, ...
+					  'promptVol',			handles.promptVol);
+	save(handles.uiConfigFN, 'uiConfig');
 else
-    load(handles.uiConfigFN);									% gives uiConfig
-    handles.showWordHint		= uiConfig.showWordHint;
-    handles.showWarningHint		= uiConfig.showWarningHint;
-    handles.showInfoOnlyErr		= uiConfig.showInfoOnlyErr;
-    handles.showCorrCount		= uiConfig.showCorrCount;
-    handles.bShowCorrAnim		= uiConfig.bShowCorrAnim;
-    handles.trialStartWithAnim	= uiConfig.trialStartWithAnim;
-    handles.trialPresetDur		= uiConfig.trialPresetDur;
-    handles.promptMode			= uiConfig.promptMode;
-    handles.promptVol			= uiConfig.promptVol;
+	load(handles.uiConfigFN);									% gives uiConfig
+	handles.showWordHint		= uiConfig.showWordHint;
+	handles.showWarningHint		= uiConfig.showWarningHint;
+	handles.showInfoOnlyErr		= uiConfig.showInfoOnlyErr;
+	handles.showCorrCount		= uiConfig.showCorrCount;
+	handles.bShowCorrAnim		= uiConfig.bShowCorrAnim;
+	handles.trialStartWithAnim	= uiConfig.trialStartWithAnim;
+	handles.trialPresetDur		= uiConfig.trialPresetDur;
+	handles.promptMode			= uiConfig.promptMode;
+	handles.promptVol			= uiConfig.promptVol;
 end
 
 %{
@@ -456,9 +456,9 @@ guidata(hObject, handles);
 %% --- Outputs from this function are returned to the command line.
 function varargout = UIRecorder_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
+% hObject	handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
 %varargout{1} = handles.output;
@@ -466,9 +466,9 @@ varargout{1}		= handles;
 
 %% --- Executes on button press in play.
 function play_Callback(hObject, eventdata, handles)
-% hObject    handle to play (see GCBO)
+% hObject	handle to play (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of play
 
@@ -481,20 +481,20 @@ function play_Callback(hObject, eventdata, handles)
 %}
 
 if(get(handles.play, 'userdata') == 0)								% currently in pause mode
-    set(handles.play, 'cdata', handles.skin.pause, 'userdata', 1);	% now in play mode
-    set(handles.msgh, 'string', '');
+	set(handles.play, 'cdata', handles.skin.pause, 'userdata', 1);	% now in play mode
+	set(handles.msgh, 'string', '');
 	handles.trialType	= -1;
 	handles.word 		= 'Ready...';	
 
-    singleTrial(handles.play, [], handles)							% SC
+	singleTrial(handles.play, [], handles)							% SC
 else																% currently in play mode
-    set(handles.play, 'cdata', handles.skin.play, 'userdata', 0);	% now in pause mode
-    if handles.bAlwaysOn == 1
-%         Audapter(3, 'scale', 0);
-    else
-        Audapter(2)													% SC stop Audapter
-    end
-    set(handles.msgh, 'string', 'Press play to continue...');
+	set(handles.play, 'cdata', handles.skin.play, 'userdata', 0);	% now in pause mode
+	if handles.bAlwaysOn == 1
+%		 Audapter(3, 'scale', 0);
+	else
+		Audapter(2)													% SC stop Audapter
+	end
+	set(handles.msgh, 'string', 'Press play to continue...');
 end
 
 function key_Callback(src, evnt)
@@ -504,7 +504,7 @@ eTime					= etime(timeNow, hgui.timeCreated);
 
 if (isequal(evnt.Key, hgui.trigKey) || isequal(evnt.Key, 'a'))
 % 	set(hgui.uirecorder, 'UserData', 'go');
-    disp(['--> Trigger at ', num2str(eTime), ' sec <--']);
+	disp(['--> Trigger at ', num2str(eTime), ' sec <--']);
 	uiresume(hgui.UIRecorder);
 else
 % 	set(hgui.uirecorder,'UserData','nogo');
@@ -515,9 +515,9 @@ return
 %{
 % %% --- Executes on button press in prev.
 % function prev_Callback(hObject, eventdata, handles)
-% % hObject    handle to prev (see GCBO)
+% % hObject	handle to prev (see GCBO)
 % % eventdata  reserved - to be defined in a future version of MATLAB
-% % handles    structure with handles and user data (see GUIDATA)
+% % handles	structure with handles and user data (see GUIDATA)
 % 
 % singleTrial(handles.prev,[],handles);
 %}
@@ -525,16 +525,16 @@ return
 %{
 %% --- Executes on button press in next.
 % function next_Callback(hObject, eventdata, handles)
-% hObject    handle to next (see GCBO)
+% hObject	handle to next (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 %}
 
 %% --- Single trial callback function.
 function singleTrial(hObject, eventdata, handles, varargin)
-% hObject    handle to next (see GCBO)
+% hObject	handle to next (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % set(handles.next,'enable','off','visible','off')
 % set(handles.prev,'enable','off','visible','off')
@@ -567,29 +567,29 @@ if ~isempty(data)
 	t2				= k2 * data.params.frameLen;
 
 	vocaLenNow		= k2 - k1 + 1;							% SC Mod(2008/04/06)
-    
-    if ~(isnan(k1) || isnan(k2) || k1 == 0 || k2 == 0 || k2 <= k1) && k2 - k1 >= 60
-        tSig	= data.signalIn((k1 + 1) * data.params.frameLen : (k2 - 1) * data.params.frameLen);
-        if data.params.nLPC < 12
-            sex = 'female';
-        else
-            sex = 'male';
-        end
-        dataOut.f0s			= getPitch(tSig, data.params.sr, sex);
-        dataOut.medianF0	= nanmedian(dataOut.f0s(dataOut.f0s > 0));
-    else
-        dataOut.f0s			= [];
-        dataOut.medianF0	= NaN;
-    end
+	
+	if ~(isnan(k1) || isnan(k2) || k1 == 0 || k2 == 0 || k2 <= k1) && k2 - k1 >= 60
+		tSig	= data.signalIn((k1 + 1) * data.params.frameLen : (k2 - 1) * data.params.frameLen);
+		if data.params.nLPC < 12
+			sex = 'female';
+		else
+			sex = 'male';
+		end
+		dataOut.f0s			= getPitch(tSig, data.params.sr, sex);
+		dataOut.medianF0	= nanmedian(dataOut.f0s(dataOut.f0s > 0));
+	else
+		dataOut.f0s			= [];
+		dataOut.medianF0	= NaN;
+	end
 
 	% SC Mod(2008/04/06): Look at the rms during the transition, instead of
-	%    during the entire vocal part.
+	%	during the entire vocal part.
 	if (isnan(t1) || isnan(t2) || isempty(t1) || isempty(t2) || t1 >= t2)
 		rmsTrans	= 0;
 		rmsBGNoise	= 0;
-        if ~isempty(data.signalIn)
-            rmsBGNoise = calcAWeightedRMS(data.signalIn(1 : round(0.2 * data.params.sr)), data.params.sr);
-        end
+		if ~isempty(data.signalIn)
+			rmsBGNoise = calcAWeightedRMS(data.signalIn(1 : round(0.2 * data.params.sr)), data.params.sr);
+		end
 	else
 % 		rmsTrans = sqrt(mean(data.signalIn(t1 : t2).^2));
 % 		rmsBGNoise = sqrt(mean(data.signalIn(1 : round(0.2 * data.params.sr)).^2));
@@ -599,17 +599,17 @@ if ~isempty(data)
 
 	rmsval   = round(100 / dBrange * max(0, min(dBrange, dBrange / 2 + 10 * log10(rmsTrans / rmsTransTarg))));   % SC Mod(2007/12/29)
 	speedval = round(100 / lenRange * max(0, min(lenRange, lenRange / 2 + (vocaLen - vocaLenNow) / 2)));
-    
-    fprintf('vocaLen = %d; vocaLenNow = %d; speedval = %d\n', vocaLen, vocaLenNow, speedval);
+	
+	fprintf('vocaLen = %d; vocaLenNow = %d; speedval = %d\n', vocaLen, vocaLenNow, speedval);
 end
 
 %{
 %--------------------------------------------------------------------------
 %SC Set the volume/speed indicator
 % if (handles.vumeterMode==1)
-%     vumeter=handles.skin.vumeter;
+%	 vumeter=handles.skin.vumeter;
 % elseif (handles.vumeterMode==2);
-%     vumeter=handles.skin.vumeter2;
+%	 vumeter=handles.skin.vumeter2;
 % end
 % vumeter0=vumeter*0.5;
 % vubounds=handles.skin.vubounds; %SC(12/11/2007)
@@ -631,23 +631,23 @@ end
 % if (handles.trialType == 3 || handles.trialType == 4 || handles.trialType == 5)
 % 	rmsval1 = 40 + rand * 10;
 % 	if (rmsval1 > 45) 
-%         rmsval1 = 50;
+%		 rmsval1 = 50;
 % 	else rmsval1 = 40;
 % 	end
 % end
 
 % if (handles.vumeterMode==1)
-%     mask(:,rmsval1+1:rmsval1+10,:) = 1;   %SC-Commented(12/11/2007)
-%     mask0=1-mask;
+%	 mask(:,rmsval1+1:rmsval1+10,:) = 1;   %SC-Commented(12/11/2007)
+%	 mask0=1-mask;
 % elseif (handles.vumeterMode==2)
-%     if (rmsval1<30)
-%         mask(:,1:30,:) = 1;
-%     elseif (rmsval1>=30 && rmsval1<70)
-%         mask(:,31:70,:) = 1;
-%     else
-%         mask(:,70:100,:) = 1;                
-%     end
-%     mask0=1-mask;    
+%	 if (rmsval1<30)
+%		 mask(:,1:30,:) = 1;
+%	 elseif (rmsval1>=30 && rmsval1<70)
+%		 mask(:,31:70,:) = 1;
+%	 else
+%		 mask(:,70:100,:) = 1;				
+%	 end
+%	 mask0=1-mask;	
 % end
 
 % set(handles.rms_imgh,'Cdata',vumeter.*mask+vumeter0.*mask0);
@@ -673,26 +673,26 @@ end
 % 	end	
 % end
 % if isempty(fsic({'HEAD','SAID','SET','BET','BECK','BED','DECK','TECH','TED','MET','PEP','PET'},upper(handles.word)))
-%     speedval1=50;
+%	 speedval1=50;
 % end
 
 % if (handles.vumeterMode==1)
-%     mask(:,speedval1+1:speedval1+10,:) = 1;         %SC(2008/01/05)
-%     mask0=1-mask;
+%	 mask(:,speedval1+1:speedval1+10,:) = 1;		 %SC(2008/01/05)
+%	 mask0=1-mask;
 % elseif (handles.vumeterMode==2)
-%     if (speedval1<30)
-%         mask(:,1:30,:) = 1;
-%     elseif (speedval1>=30 && speedval1<70)
-%         mask(:,31:70,:) = 1;
-%     else
-%         mask(:,70:100,:) = 1;          
-%     end
-%     mask0=1-mask;
+%	 if (speedval1<30)
+%		 mask(:,1:30,:) = 1;
+%	 elseif (speedval1>=30 && speedval1<70)
+%		 mask(:,31:70,:) = 1;
+%	 else
+%		 mask(:,70:100,:) = 1;		  
+%	 end
+%	 mask0=1-mask;
 % end
 
 % if (handles.trialType==1 | handles.trialType==2)
 % set(handles.speed_imgh,'Cdata',vumeter.*mask+vumeter0.*mask0);
-    
+	
 % end
 %SC ~Set the volume/speed indicator
 %}
@@ -700,25 +700,25 @@ end
 %--------------------------------------------------------------------------
 drawnow
 
-msg1	= '';    msg2 = '';
+msg1	= '';	msg2 = '';
 instr1	= '';  instr2 = '';
 if (rmsval < 70 && rmsval > 30)
 	rmsRes = 0;
 else
 	if (rmsval >= 70)									% SC (2008/01/05)
-        rmsRes	= 1;
+		rmsRes	= 1;
 		msg1	= 'Softer';
 		instr2	= 'Loud';
-        if rmsval > 90
-            rmsRes = 2;
-        end
+		if rmsval > 90
+			rmsRes = 2;
+		end
 	else												% Then rmsval <= 30
-        rmsRes = -1;
+		rmsRes = -1;
 		msg1   = 'Louder';
 		instr2 = 'Soft';
-        if rmsval < 10
-            rmsRes = -2;
-        end
+		if rmsval < 10
+			rmsRes = -2;
+		end
 	end
 end
 
@@ -727,19 +727,19 @@ if (speedval < 70 && speedval > 30)						% SC Mod(2008/01/05) Used to be speedva
 else
 % 	bSpeedGood=0;
 	if (speedval >= 70)									% SC (2008/01/05): too fast, or to short
-        speedRes	= 1;
+		speedRes	= 1;
 		msg2		= 'Slower';
 		instr1		= 'Fast';
-        if speedval > 90
-            speedRes = 2;
-        end
+		if speedval > 90
+			speedRes = 2;
+		end
 	else												% too slow, or two long
-        speedRes	= -1;
+		speedRes	= -1;
 		msg2		= 'Faster';
 		instr1		= 'Slow';
-        if speedval < 10
-            speedRes = -2;
-        end
+		if speedval < 10
+			speedRes = -2;
+		end
 	end
 end
 
@@ -748,18 +748,18 @@ if isequal(handles.trialType, 3) || isequal(handles.trialType, 4) || isequal(han
 	bSpeedGood		= 1;
 end
 if isempty(fsic({'HEAD', 'SAID', 'SET', 'BET', 'BECK', 'BED', 'DECK', 'TECH', 'TED', 'MET', 'PEP', 'PET'}, upper(handles.word)))
-    bSpeedGood		= 1;
+	bSpeedGood		= 1;
 end
 
 %{
 %SC(2008/01/05)
 % if (~bRmsGood || ~bSpeedGood)
 % 	if (~bRmsGood && ~bSpeedGood)
-% %         msgc=['Please speak ',msg1,' and ',msg2,'.'];
+% %		 msgc=['Please speak ',msg1,' and ',msg2,'.'];
 % 		msgc=[msg1,' and ',lower(msg2),' please!'];
 % 	elseif (~bRmsGood)
-% %         msgc=['Please speak ',msg1,'.'];
-% 		msgc=[msg1,' please!'];        
+% %		 msgc=['Please speak ',msg1,'.'];
+% 		msgc=[msg1,' please!'];		
 % 	elseif (~bSpeedGood)
 % 		msgc=['Please speak ',msg2,'.'];
 % 		msgc=[msg2,' please!'];
@@ -774,15 +774,15 @@ end
 
 
 dataOut.params.dScale = handles.dScale;
-%         load calibMic;  % gets micGain: wav rms/ Pa rms (Pa^-1)
+%		 load calibMic;  % gets micGain: wav rms/ Pa rms (Pa^-1)
 load('micRMS_100dBA.mat');
 dataOut.vowelLevel = 100 + 20 * log10((rmsTrans / micRMS_100dBA));
 
 %{
-%         load calibOutput;   
+%		 load calibOutput;   
 % gives 'freq' and 'voltGains', measured at 'shanqing' M-audio configuration 
 % and -1.65 Phone volume knob.
-%         mvg=mean(voltGains) * sqrt(2);    % mean voltage gain (V_rms / wavAmp_rms)
+%		 mvg=mean(voltGains) * sqrt(2);	% mean voltage gain (V_rms / wavAmp_rms)
 %}
 
 
@@ -796,18 +796,18 @@ if (handles.trigByScanner == 1)
 	timeToPause = handles.ITI - etime(handles.time2, handles.time1) - 0.1;		% 0.1 is the safety margin
 	if (timeToPause > 0)
 		pause(timeToPause);
-    end
+	end
 else
-    pause(0.25);
+	pause(0.25);
 end
 
 set(handles.msgh, 'string', '');
 
 %{
 % if (handles.vumeterMode==1)
-%     vumeter=handles.skin.vumeter;
+%	 vumeter=handles.skin.vumeter;
 % elseif (handles.vumeterMode==2)
-%     vumeter=handles.skin.vumeter2;
+%	 vumeter=handles.skin.vumeter2;
 % end
 % mask=0.5*ones(size(vumeter));
 % set(handles.rms_imgh,'Cdata',vumeter.*mask);
@@ -849,7 +849,7 @@ fprintf('stopRec\n')
 
 %{
 % if(strcmp(get(handles.rec_timer,'Running'),'on'))
-%     stop(handles.rec_timer)
+%	 stop(handles.rec_timer)
 % end
 %}
 
@@ -864,7 +864,7 @@ guidata(handles.UIRecorder, handles);
 % set(handles.next,'visible','on')
 % set(handles.prev,'visible','on')
 % if(get(handles.auto_btn,'Value')==get(handles.auto_btn,'Max'))
-%     next_Callback(handles.uirecorder,[],handles)
+%	 next_Callback(handles.uirecorder,[],handles)
 % end
 %}
 
@@ -872,13 +872,13 @@ guidata(handles.UIRecorder, handles);
 function soundDevice(obj,event,handles,action)
 % interface to teh external sounddevice
 switch(action)
-    case 'init'
-        Audapter(0)
-    case 'start'
-        Audapter(1)
-    case 'stop'
-        Audapter(2)
-    otherwise,
+	case 'init'
+		Audapter(0)
+	case 'start'
+		Audapter(1)
+	case 'stop'
+		Audapter(2)
+	otherwise,
 end
 
 %% --------------------------------------------------------------------------
@@ -889,9 +889,9 @@ dataOut = AudapterIO('getData');
 %% --- Executes on button press in auto_btn.
 %{
 % function auto_btn_Callback(hObject, eventdata, handles)
-% hObject    handle to auto_btn (see GCBO)
+% hObject	handle to auto_btn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of auto_btn
 %}
@@ -901,517 +901,517 @@ function record(handles)
 % tWords={'BECK','BET','DECK','DEBT','PECK','PEP','PET','TECH'};
 
 if (handles.trigByScanner == 1)
-    set(handles.play, 'userdata', 1);
-    uiwait(handles.UIRecorder);
+	set(handles.play, 'userdata', 1);
+	uiwait(handles.UIRecorder);
 else
-    waitfor(handles.play, 'userdata', 1);
+	waitfor(handles.play, 'userdata', 1);
 end
 
 if isequal(get(handles.msgTxt, 'visible'), 'on')
-    set(handles.msgTxt, 'visible', 'off');
+	set(handles.msgTxt, 'visible', 'off');
 end
 
 if (handles.debug == 0)
-    
-    go = get(handles.UIRecorder, 'userdata');
-    if isequal(go, 'nogo')
-        return
-    end
+	
+	go = get(handles.UIRecorder, 'userdata');
+	if isequal(go, 'nogo')
+		return
+	end
 
-    handles.dataOut = [];
-    guidata(handles.UIRecorder, handles);
+	handles.dataOut = [];
+	guidata(handles.UIRecorder, handles);
 
-    set(handles.strh, 'visible', 'off');
-    set(handles.msgh, 'visible', 'off');
+	set(handles.strh, 'visible', 'off');
+	set(handles.msgh, 'visible', 'off');
 
-    handles.time1 = clock;
+	handles.time1 = clock;
 
-    if (handles.trigByScanner == 1)
-        if (~isequal(handles.phase, 'pract1') && ~isequal(handles.phase, 'pract2'))
-            pause(handles.TA);
-        else
-            pause(0.25);
-        end
-    else
-        pause(0.25);
-    end
+	if (handles.trigByScanner == 1)
+		if (~isequal(handles.phase, 'pract1') && ~isequal(handles.phase, 'pract2'))
+			pause(handles.TA);
+		else
+			pause(0.25);
+		end
+	else
+		pause(0.25);
+	end
 
-    if (isequal(handles.word, 'Ready...') || isequal(handles.trialType, -1))
-        return
-    end
+	if (isequal(handles.word, 'Ready...') || isequal(handles.trialType, -1))
+		return
+	end
 
-    if isequal(handles.trialType, 1) || length(handles.trialType) > 1
-        if handles.fb3Gain == 0;
-            Audapter(3, 'fb', 1);
-        else
-            Audapter(3, 'fb', 3);
-            Audapter(3, 'fb3gain', handles.fb3Gain);
-        end
-    elseif isequal(handles.trialType, 2)
-        Audapter(3, 'fb', 4);
-        Audapter(3, 'rmsff_fb', ...
-                 [handles.smnFF0, handles.smnFF1, handles.smnOnRamp, handles.smnOffRamp], 0);
-        Audapter(3, 'fb4gaindb', handles.smnGain, 0);
-    elseif isequal(handles.trialType, 3)
-        Audapter(3, 'fb', 2);
-    elseif isequal(handles.trialType, 4)
-        Audapter(3, 'fb', 1);
-    elseif isequala(handles.trialType, 5)
-        Audapter(3, 'fb', 1);
-    else
-        error('Unrecognized trialType: %d', handles.trialType);
-    end
-    
+	if isequal(handles.trialType, 1) || length(handles.trialType) > 1
+		if handles.fb3Gain == 0;
+			Audapter(3, 'fb', 1);
+		else
+			Audapter(3, 'fb', 3);
+			Audapter(3, 'fb3gain', handles.fb3Gain);
+		end
+	elseif isequal(handles.trialType, 2)
+		Audapter(3, 'fb', 4);
+		Audapter(3, 'rmsff_fb', ...
+				 [handles.smnFF0, handles.smnFF1, handles.smnOnRamp, handles.smnOffRamp], 0);
+		Audapter(3, 'fb4gaindb', handles.smnGain, 0);
+	elseif isequal(handles.trialType, 3)
+		Audapter(3, 'fb', 2);
+	elseif isequal(handles.trialType, 4)
+		Audapter(3, 'fb', 1);
+	elseif isequala(handles.trialType, 5)
+		Audapter(3, 'fb', 1);
+	else
+		error('Unrecognized trialType: %d', handles.trialType);
+	end
+	
 	load(handles.uiConfigFN);									% gives uiConfig
-    
-    if isequal(handles.trialType, 1) || isequal(handles.trialType, 2) || length(handles.trialType) > 1
-        for i1 = 1 : numel(handles.hsp)            
-            set(0, 'CurrentFigure', handles.hkf);
-            
-            set(gcf, 'CurrentAxes', handles.hsp_vol);
-            cla;
-%             set(gcf, 'CurrentAxes', handles.hsp_dur);
-%             cla;
-            
-            set(gcf, 'CurrentAxes', handles.hsp(i1));
-            cla;
-%             t_hsp = subplot('Position', [handles.leftMargin + (i1 - 1) * (handles.panelWidth + handles.panelSpacing), 0.375, handles.panelWidth, handles.panelHeight]);
-            
-            if i1 == 1
-                im_trg = handles.skin.bed;
-                t_word = 'bed';
-            elseif i1 == 2
-                if uiConfig.bShowCorrAnim == 1
-                    im_trg = handles.skin.head;
-                else
-                    im_trg = handles.skin.head0;
-                end
-                t_word = 'head';
-            elseif i1 == 3
-                im_trg = handles.skin.Ted;
-                t_word = 'Ted';
-            end
-            
-            if handles.showKidsAnim
-                imh = image(im_trg);
-            end
-            
-            axis square;
-            box off;
-            set(gca, 'XTick', [], 'YTick', []);
-            set(gca, 'XColor', 'w', 'YColor', 'w');
-            hold on;
-            
-                        
-        end
-        
-        if handles.showKidsAnim
-            a_words = {'bed', 'head', 'ted'};
-            idx = fsic(a_words, lower(handles.word));
-            set(gcf, 'CurrentAxes', handles.hsp(idx));
-            
-            xPrg = 0;
-            if isequal(lower(handles.word), 'bed')
-                yPrg = -120;
-            else
-                yPrg = -80;
-            end
-        else
-            set(gcf, 'CurrentAxes', handles.hsp(ceil(length(handles.hsp) / 2)));
-        end
-%         cla;
-          
-        load(handles.uiConfigFN);
-        handles.showWordHint = uiConfig.showWordHint;						% ======== JS Show Word Hint =========
-        if handles.showWordHint || ~handles.showKidsAnim
-            xs = get(gca, 'XLim');
-            ys = get(gca, 'YLim');
-            
-            if handles.trigByScanner && length(handles.phase) >= 4 && isequal(handles.phase(1 : 4), 'rand')
-                htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.3 * range(ys), handles.word, ...
-                            'FontName', 'Courier New', 'FontSize', 36, 'FontWeight', 'bold', 'Color', 'b');
-            else
-                htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.92 * range(ys), handles.word, ...
-                            'FontName', 'Courier New', 'FontSize', 36, 'FontWeight', 'bold', 'Color', 'b');
-            end
-        end
-
-        if uiConfig.trialStartWithAnim == 1 || ~handles.showKidsAnim
-            if isequal(handles.phase, 'rand')					% DEBUG
-                f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');                
-                fprintf(f, 'Starting trial: setting trialLen... %s\n', handles.trialType);
-                fclose(f);
-            end
-            
-            if uiConfig.trialPresetDur == 1
-                Audapter(3, 'triallen', handles.trialLen);
-            else
-                Audapter(3, 'triallen', handles.trialLenMax);
-            end
-            
-            if isequal(handles.phase, 'rand')					% DEBUG
-                f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');
-                fprintf(f, 'Starting trial: setting trialLen done. %s\n', handles.trialType);
-                fprintf(f, 'Starting trial: reseting... %s\n', handles.trialType);
-                
-                fclose(f);
-            end
-            
-            AudapterIO('reset');
-            if isequal(handles.phase, 'rand')					% DEBUG
-                f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');
-                fprintf(f, 'Starting trial: reset done. %s\n', handles.trialType);
-                
-                fclose(f);
+	
+	if isequal(handles.trialType, 1) || isequal(handles.trialType, 2) || length(handles.trialType) > 1
+		for i1 = 1 : numel(handles.hsp)			
+			set(0, 'CurrentFigure', handles.hkf);
+			
+			set(gcf, 'CurrentAxes', handles.hsp_vol);
+			cla;
+%			 set(gcf, 'CurrentAxes', handles.hsp_dur);
+%			 cla;
+			
+			set(gcf, 'CurrentAxes', handles.hsp(i1));
+			cla;
+%			 t_hsp = subplot('Position', [handles.leftMargin + (i1 - 1) * (handles.panelWidth + handles.panelSpacing), 0.375, handles.panelWidth, handles.panelHeight]);
+			
+			if i1 == 1
+				im_trg = handles.skin.bed;
+				t_word = 'bed';
+			elseif i1 == 2
+				if uiConfig.bShowCorrAnim == 1
+					im_trg = handles.skin.head;
+				else
+					im_trg = handles.skin.head0;
+				end
+				t_word = 'head';
+			elseif i1 == 3
+				im_trg = handles.skin.Ted;
+				t_word = 'Ted';
 			end
-           
+			
+			if handles.showKidsAnim
+				imh = image(im_trg);
+			end
+			
+			axis square;
+			box off;
+			set(gca, 'XTick', [], 'YTick', []);
+			set(gca, 'XColor', 'w', 'YColor', 'w');
+			hold on;
+			
+						
+		end
+		
+		if handles.showKidsAnim
+			a_words = {'bed', 'head', 'ted'};
+			idx = fsic(a_words, lower(handles.word));
+			set(gcf, 'CurrentAxes', handles.hsp(idx));
+			
+			xPrg = 0;
+			if isequal(lower(handles.word), 'bed')
+				yPrg = -120;
+			else
+				yPrg = -80;
+			end
+		else
+			set(gcf, 'CurrentAxes', handles.hsp(ceil(length(handles.hsp) / 2)));
+		end
+%		 cla;
+		  
+		load(handles.uiConfigFN);
+		handles.showWordHint = uiConfig.showWordHint;						% ======== JS Show Word Hint =========
+		if handles.showWordHint || ~handles.showKidsAnim
+			xs = get(gca, 'XLim');
+			ys = get(gca, 'YLim');
+			
+			if handles.trigByScanner && length(handles.phase) >= 4 && isequal(handles.phase(1 : 4), 'rand')
+				htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.3 * range(ys), handles.word, ...
+							'FontName', 'Courier New', 'FontSize', 36, 'FontWeight', 'bold', 'Color', 'b');
+			else
+				htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.92 * range(ys), handles.word, ...
+							'FontName', 'Courier New', 'FontSize', 36, 'FontWeight', 'bold', 'Color', 'b');
+			end
+		end
+
+		if uiConfig.trialStartWithAnim == 1 || ~handles.showKidsAnim
+			if isequal(handles.phase, 'rand')					% DEBUG
+				f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');				
+				fprintf(f, 'Starting trial: setting trialLen... %s\n', handles.trialType);
+				fclose(f);
+			end
+			
+			if uiConfig.trialPresetDur == 1
+				Audapter(3, 'triallen', handles.trialLen);
+			else
+				Audapter(3, 'triallen', handles.trialLenMax);
+			end
+			
+			if isequal(handles.phase, 'rand')					% DEBUG
+				f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');
+				fprintf(f, 'Starting trial: setting trialLen done. %s\n', handles.trialType);
+				fprintf(f, 'Starting trial: reseting... %s\n', handles.trialType);
+				
+				fclose(f);
+			end
+			
+			AudapterIO('reset');
+			if isequal(handles.phase, 'rand')					% DEBUG
+				f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');
+				fprintf(f, 'Starting trial: reset done. %s\n', handles.trialType);
+				
+				fclose(f);
+			end
+		   
 %{
-%             fprintf(1, 'handles.debug_pitchShiftLogF = %d\n', ...
-%                     handles.debug_pitchShiftLogF);
-%             if handles.debug_pitchShiftLogF > 0
-%                 fprintf(handles.debug_pitchShiftLogF, 'Starting trial\n');
-%             end
+%			 fprintf(1, 'handles.debug_pitchShiftLogF = %d\n', ...
+%					 handles.debug_pitchShiftLogF);
+%			 if handles.debug_pitchShiftLogF > 0
+%				 fprintf(handles.debug_pitchShiftLogF, 'Starting trial\n');
+%			 end
 %}
 			
-            if ~handles.bAlwaysOn
-                Audapter(1);
-            end
-        end
-        
-        if handles.showKidsAnim
-            tic; 
-            frmCnt		= 1;
-            totFrames	= 12;
-            for i0 = 1 : totFrames
-                imh  = image(handles.skin.birdFrames{frmCnt}, 'XData', [10, 140] + xPrg, 'YData', [60, 160] + yPrg);
-                xPrg = xPrg + 8;
-                yPrg = yPrg + 2;
-                hold on;
-                axis square;
-                box off;
-                alphaImg = 0. * ones(size(handles.skin.birdFrames{frmCnt}(:, :, 1)));
-                alphaImg(handles.skin.birdFrames{frmCnt}(:, :, 1) < 0.9) = 1.;
-                set(imh, 'AlphaData', alphaImg);
-            %     set(imh, 'AlphaData', 0.75);
-                set(gca, 'XTick', [], 'XColor', 'w');
-                set(gca, 'YTick', [], 'YColor', 'w');
-                drawnow;
+			if ~handles.bAlwaysOn
+				Audapter(1);
+			end
+		end
+		
+		if handles.showKidsAnim
+			tic; 
+			frmCnt		= 1;
+			totFrames	= 12;
+			for i0 = 1 : totFrames
+				imh  = image(handles.skin.birdFrames{frmCnt}, 'XData', [10, 140] + xPrg, 'YData', [60, 160] + yPrg);
+				xPrg = xPrg + 8;
+				yPrg = yPrg + 2;
+				hold on;
+				axis square;
+				box off;
+				alphaImg = 0. * ones(size(handles.skin.birdFrames{frmCnt}(:, :, 1)));
+				alphaImg(handles.skin.birdFrames{frmCnt}(:, :, 1) < 0.9) = 1.;
+				set(imh, 'AlphaData', alphaImg);
+			%	 set(imh, 'AlphaData', 0.75);
+				set(gca, 'XTick', [], 'XColor', 'w');
+				set(gca, 'YTick', [], 'YColor', 'w');
+				drawnow;
 
-                frmCnt = frmCnt + 1;
-                if (frmCnt > numel(handles.skin.birdFrames))
-                    frmCnt = 1;
-                end
+				frmCnt = frmCnt + 1;
+				if (frmCnt > numel(handles.skin.birdFrames))
+					frmCnt = 1;
+				end
 
-                pause(0.05);
-                if ~(i0 == totFrames)
-                    delete(imh);
-                end
-            %     end
-            end
-            animDur = toc;
-        else
-            animDur = 0.0;
-        end
-                
-        if uiConfig.trialPresetDur == 1 || handles.showKidsAnim
-            waitTime = handles.trialLen - animDur;
-            if waitTime >= 0
-                pause(waitTime);
-                
-                if ~handles.bAlwaysOn
-                    Audapter(2);
-                end
-            end
-        else
-            if uiConfig.trialStartWithAnim == 1
-                set(handles.button_endCurTrial, 'Enable', 'on');
-                waitfor(handles.button_endCurTrial, 'Enable', 'off');
-            end
-        end
-        if isequal(handles.phase, 'rand')					% DEBUG
-            f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');
-            fprintf(f, 'Ended trial: %s\n', handles.trialType);
-            fclose(f);
-        end
-           
-    end
-    
-    if handles.bSim == 1
-        % Determine the sim data file name
-        dir1 = dir(fullfile(handles.simDataDir, handles.phase, ...
-                            ['rep', num2str(handles.repNum)], ...
-                            ['trial-', num2str(handles.trialNum), '*.wav']));
-        if length(dir1) ~= 1
-            error('Not exactly one wav file was found.');
-        end
-        
-        [wx, fs] = audioread(fullfile(handles.simDataDir, handles.phase, ...
-                            ['rep', num2str(handles.repNum)], ...
-                            dir1(1).name));
-        if fs ~= 48000											% Resample
-            wx = resample(wx, 48000, fs);
-        end
-        
-        AudapterIO('reset');
-        wxInCell = makecell(wx, 64);
-        for n = 1 : length(wxInCell)
-%             tic;
-            Audapter(5, wxInCell{n});
-        end
-        
-    else        
-%         tic;
-        if uiConfig.trialStartWithAnim == 0
-            if handles.bAlwaysOn == 1
-                AudapterIO('reset');
-%                 Audapter(3, 'scale', handles.dScale);
-            else            
-                AudapterIO('reset');
-                if uiConfig.trialPresetDur == 1
-                    Audapter(3, 'triallen', handles.trialLen);
-                else
-                    Audapter(3, 'triallen', handles.trialLenMax);
-                end
-                
-                if ~bAlwaysOn
-                    Audapter(1);
-                end
-                
-                if uiConfig.trialPresetDur == 1
-                    pause(handles.trialLen);					% Changed 2008/06/18 to make the pause longer +1.5 --> +2.0
-                else            
-                    set(handles.button_endCurTrial, 'Enable', 'on');            
-                end
-            end
-        end
-%         startupTime = toc;
-%         fprintf('Start-up time = %.3f sec\n',startupTime);
-        
-    end
+				pause(0.05);
+				if ~(i0 == totFrames)
+					delete(imh);
+				end
+			%	 end
+			end
+			animDur = toc;
+		else
+			animDur = 0.0;
+		end
+				
+		if uiConfig.trialPresetDur == 1 || handles.showKidsAnim
+			waitTime = handles.trialLen - animDur;
+			if waitTime >= 0
+				pause(waitTime);
+				
+				if ~handles.bAlwaysOn
+					Audapter(2);
+				end
+			end
+		else
+			if uiConfig.trialStartWithAnim == 1
+				set(handles.button_endCurTrial, 'Enable', 'on');
+				waitfor(handles.button_endCurTrial, 'Enable', 'off');
+			end
+		end
+		if isequal(handles.phase, 'rand')					% DEBUG
+			f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');
+			fprintf(f, 'Ended trial: %s\n', handles.trialType);
+			fclose(f);
+		end
+		   
+	end
+	
+	if handles.bSim == 1
+		% Determine the sim data file name
+		dir1 = dir(fullfile(handles.simDataDir, handles.phase, ...
+							['rep', num2str(handles.repNum)], ...
+							['trial-', num2str(handles.trialNum), '*.wav']));
+		if length(dir1) ~= 1
+			error('Not exactly one wav file was found.');
+		end
+		
+		[wx, fs] = audioread(fullfile(handles.simDataDir, handles.phase, ...
+							['rep', num2str(handles.repNum)], ...
+							dir1(1).name));
+		if fs ~= 48000											% Resample
+			wx = resample(wx, 48000, fs);
+		end
+		
+		AudapterIO('reset');
+		wxInCell = makecell(wx, 64);
+		for n = 1 : length(wxInCell)
+%			 tic;
+			Audapter(5, wxInCell{n});
+		end
+		
+	else		
+%		 tic;
+		if uiConfig.trialStartWithAnim == 0
+			if handles.bAlwaysOn == 1
+				AudapterIO('reset');
+%				 Audapter(3, 'scale', handles.dScale);
+			else			
+				AudapterIO('reset');
+				if uiConfig.trialPresetDur == 1
+					Audapter(3, 'triallen', handles.trialLen);
+				else
+					Audapter(3, 'triallen', handles.trialLenMax);
+				end
+				
+				if ~bAlwaysOn
+					Audapter(1);
+				end
+				
+				if uiConfig.trialPresetDur == 1
+					pause(handles.trialLen);					% Changed 2008/06/18 to make the pause longer +1.5 --> +2.0
+				else			
+					set(handles.button_endCurTrial, 'Enable', 'on');			
+				end
+			end
+		end
+%		 startupTime = toc;
+%		 fprintf('Start-up time = %.3f sec\n',startupTime);
+		
+	end
 
-    
-    if get(handles.play, 'userdata') == 0						% in pause mode
-        record(handles);										% re-do recording
-    end
-    
-    if handles.showKidsAnim
-        delete(imh);
-    else
-        delete(htxt);
-    end
+	
+	if get(handles.play, 'userdata') == 0						% in pause mode
+		record(handles);										% re-do recording
+	end
+	
+	if handles.showKidsAnim
+		delete(imh);
+	else
+		delete(htxt);
+	end
 
-    if uiConfig.trialStartWithAnim == 0
-        if uiConfig.trialPresetDur == 1
-            if handles.bSim == 0
-                if handles.bAlwaysOn == 1
-%                     Audapter(3, 'scale', 0);
-                else
-                    if ~bAlwaysOn
-                        Audapter(2);
-                    end
-                end
-            end
-        else
-            waitfor(handles.button_endCurTrial, 'Enable', 'off');
-        end
-    end
+	if uiConfig.trialStartWithAnim == 0
+		if uiConfig.trialPresetDur == 1
+			if handles.bSim == 0
+				if handles.bAlwaysOn == 1
+%					 Audapter(3, 'scale', 0);
+				else
+					if ~bAlwaysOn
+						Audapter(2);
+					end
+				end
+			end
+		else
+			waitfor(handles.button_endCurTrial, 'Enable', 'off');
+		end
+	end
 
-    [dataOut, rmsRes, durRes] = checkData(getData, handles);
-    tmp_data_fn = fullfile(handles.dirname, 'tmp_dataOut.mat');
-    save(tmp_data_fn, 'dataOut');
+	[dataOut, rmsRes, durRes] = checkData(getData, handles);
+	tmp_data_fn = fullfile(handles.dirname, 'tmp_dataOut.mat');
+	save(tmp_data_fn, 'dataOut');
 															% TODO: Revise checkData
-    
-                        
-    if handles.showKidsAnim
-        % -- Experimenter response re. correctness of the subject's production --    
-        button_correct = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
-                                'Unit', 'normalized', ...
-                                'Position', [0.25, 0.17, 0.24, 0.05], ...
-                                'String', 'Word correct', 'FontSize', 9, 'ForegroundColor', [0, 0.5, 0]);
-        button_incorrect = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
-                                'Unit', 'normalized', ...
-                                'Position', [0.50, 0.17, 0.24, 0.05], ...
-                                'String', 'Word incorrect', 'FontSize', 9, 'ForegroundColor', [1, 0, 0]);
-        button_forcerep = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
-                                'Unit', 'normalized', ...
-                                'Position', [0.75, 0.17, 0.24, 0.05], ...
-                                'String', 'Force repeat', 'FontSize', 9, 'ForegroundColor', [1, 0, 1]);
+	
+						
+	if handles.showKidsAnim
+		% -- Experimenter response re. correctness of the subject's production --	
+		button_correct = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
+								'Unit', 'normalized', ...
+								'Position', [0.25, 0.17, 0.24, 0.05], ...
+								'String', 'Word correct', 'FontSize', 9, 'ForegroundColor', [0, 0.5, 0]);
+		button_incorrect = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
+								'Unit', 'normalized', ...
+								'Position', [0.50, 0.17, 0.24, 0.05], ...
+								'String', 'Word incorrect', 'FontSize', 9, 'ForegroundColor', [1, 0, 0]);
+		button_forcerep = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
+								'Unit', 'normalized', ...
+								'Position', [0.75, 0.17, 0.24, 0.05], ...
+								'String', 'Force repeat', 'FontSize', 9, 'ForegroundColor', [1, 0, 1]);
 
-        handles.button_correct	 = button_correct;
-        handles.button_incorrect = button_incorrect;
-        handles.button_forcerep  = button_forcerep;
-        set(button_correct,	  'Callback', {@button_correct_callback, handles});
-        set(button_incorrect, 'Callback', {@button_incorrect_callback, handles});
-        set(button_forcerep,  'Callback', {@button_forcerep_callback, handles});
+		handles.button_correct	 = button_correct;
+		handles.button_incorrect = button_incorrect;
+		handles.button_forcerep  = button_forcerep;
+		set(button_correct,	  'Callback', {@button_correct_callback, handles});
+		set(button_incorrect, 'Callback', {@button_incorrect_callback, handles});
+		set(button_forcerep,  'Callback', {@button_forcerep_callback, handles});
 
-        set(handles.button_reproc, 'enable', 'on');
-        %     set(handles.button_reproc, 'Callback', {@button_reproc_Callback});
-        waitfor(button_correct);
-    end
-    
-    clear('dataOut');
-    load(tmp_data_fn);
-    [dataOut, rmsRes, durRes] = checkData(dataOut, handles);
-    
-    if handles.showKidsAnim
-        load(fullfile(handles.dirname, 'resp_correct.mat')); % gives resp_correct
-        dataOut.resp_correct = resp_correct;
-        load(fullfile(handles.dirname, 'corr_count.mat'));   % gives corr_count
-        if isequal(handles.phase, 'pre')
-            corr_count = corr_count + max([resp_correct, 0]);
-        elseif isequal(handles.phase, 'pract1')
-            if rmsRes == 0
-                corr_count = corr_count + max([resp_correct, 0]);
-            end
-        else
-            if rmsRes == 0 && durRes == 0
-                corr_count = corr_count + max([resp_correct, 0]);
-            end
-        end
-        save(fullfile(handles.dirname, 'corr_count.mat'), 'corr_count');
-        handles.corrCnt = corr_count;
-        guidata(handles.UIRecorder, handles);
-    
-        respCorrAnim(resp_correct, handles);
-        
-    else
-        dataOut.resp_correct = NaN;
-    end
-    
-    % DEBUG
-%     rmsRes = -1;     % 0 - good; -1 - too soft; +1 - too loud
-%     durRes = 1;   % 0 - good; -1 - too shoft; +1 - too long
+		set(handles.button_reproc, 'enable', 'on');
+		%	 set(handles.button_reproc, 'Callback', {@button_reproc_Callback});
+		waitfor(button_correct);
+	end
+	
+	clear('dataOut');
+	load(tmp_data_fn);
+	[dataOut, rmsRes, durRes] = checkData(dataOut, handles);
+	
+	if handles.showKidsAnim
+		load(fullfile(handles.dirname, 'resp_correct.mat')); % gives resp_correct
+		dataOut.resp_correct = resp_correct;
+		load(fullfile(handles.dirname, 'corr_count.mat'));   % gives corr_count
+		if isequal(handles.phase, 'pre')
+			corr_count = corr_count + max([resp_correct, 0]);
+		elseif isequal(handles.phase, 'pract1')
+			if rmsRes == 0
+				corr_count = corr_count + max([resp_correct, 0]);
+			end
+		else
+			if rmsRes == 0 && durRes == 0
+				corr_count = corr_count + max([resp_correct, 0]);
+			end
+		end
+		save(fullfile(handles.dirname, 'corr_count.mat'), 'corr_count');
+		handles.corrCnt = corr_count;
+		guidata(handles.UIRecorder, handles);
+	
+		respCorrAnim(resp_correct, handles);
+		
+	else
+		dataOut.resp_correct = NaN;
+	end
+	
+	% DEBUG
+%	 rmsRes = -1;	 % 0 - good; -1 - too soft; +1 - too loud
+%	 durRes = 1;   % 0 - good; -1 - too shoft; +1 - too long
 
-    bRmsGood	= (rmsRes == 0);
-    bSpeedGood	= (durRes == 0);
-    
-    % Show intensity animation
-    if handles.showRmsPrompt == 1
-        if ~isempty(strfind(uiConfig.promptMode, 'v'))		% Visual prompt
-            if rmsRes == 0
-                if uiConfig.showInfoOnlyErr == 0
-                    volDurOK_anim(handles, 'vol');
-                end
-            elseif rmsRes >= 1
-                volErr_anim(handles, 'loud');
-            else
-                volErr_anim(handles, 'soft');
-            end
-        end
-        if ~isempty(strfind(uiConfig.promptMode, 'a'))		% Auditory prompt
-            if rmsRes ~= 0
-                if rmsRes == 2
-                    msg = 'softer';
-                elseif rmsRes == 1
-                    msg = 'a little softer';
-                elseif rmsRes == -2
-                    msg = 'louder';
-                else
-                    msg = 'a little louder';
-                end
-                play_prompt(msg, 'audio', 10^(uiConfig.promptVol / 20));
-            end
-        end
-    end
-    
-    if handles.showSpeedPrompt == 1
-        if ~isempty(strfind(uiConfig.promptMode, 'v'))		% Visual prompt
-            if durRes == 0
-                if uiConfig.showInfoOnlyErr == 0
-                    volDurOK_anim(handles, 'dur');
-                end
-            elseif durRes >= 1
-                durErr_anim(handles, 'short');
-            else
-                durErr_anim(handles, 'long');
-            end
-        end
-        if ~isempty(strfind(uiConfig.promptMode, 'a'))		% Auditory prompt
-            if durRes ~= 0
-                if durRes == 2
-                    msg = 'longer';
-                elseif durRes == 1
-                    msg = 'a little longer';
-                elseif durRes == -2
-                    msg = 'shorter';
-                else
-                    msg = 'a little shorter';
-                end
-                play_prompt(msg, 'audio', 10^(uiConfig.promptVol / 20));
-            end
-        end
-    end
-    
-    if handles.showKidsAnim
-        if resp_correct == 1
-            if isequal(handles.phase, 'pre')
-                if uiConfig.bShowCorrAnim
-                    show_corr_anim(handles);
-                end
-            elseif isequal(handles.phase, 'pract1')
-                if rmsRes == 0
-                    if uiConfig.bShowCorrAnim
-                        show_corr_anim(handles);
-                    end
-                end
-            else
-                if rmsRes == 0 && durRes == 0
-                    if uiConfig.bShowCorrAnim
-                        show_corr_anim(handles);
-                    end
-                end
-            end        
-        end
-    end
+	bRmsGood	= (rmsRes == 0);
+	bSpeedGood	= (durRes == 0);
+	
+	% Show intensity animation
+	if handles.showRmsPrompt == 1
+		if ~isempty(strfind(uiConfig.promptMode, 'v'))		% Visual prompt
+			if rmsRes == 0
+				if uiConfig.showInfoOnlyErr == 0
+					volDurOK_anim(handles, 'vol');
+				end
+			elseif rmsRes >= 1
+				volErr_anim(handles, 'loud');
+			else
+				volErr_anim(handles, 'soft');
+			end
+		end
+		if ~isempty(strfind(uiConfig.promptMode, 'a'))		% Auditory prompt
+			if rmsRes ~= 0
+				if rmsRes == 2
+					msg = 'softer';
+				elseif rmsRes == 1
+					msg = 'a little softer';
+				elseif rmsRes == -2
+					msg = 'louder';
+				else
+					msg = 'a little louder';
+				end
+				play_prompt(msg, 'audio', 10^(uiConfig.promptVol / 20));
+			end
+		end
+	end
+	
+	if handles.showSpeedPrompt == 1
+		if ~isempty(strfind(uiConfig.promptMode, 'v'))		% Visual prompt
+			if durRes == 0
+				if uiConfig.showInfoOnlyErr == 0
+					volDurOK_anim(handles, 'dur');
+				end
+			elseif durRes >= 1
+				durErr_anim(handles, 'short');
+			else
+				durErr_anim(handles, 'long');
+			end
+		end
+		if ~isempty(strfind(uiConfig.promptMode, 'a'))		% Auditory prompt
+			if durRes ~= 0
+				if durRes == 2
+					msg = 'longer';
+				elseif durRes == 1
+					msg = 'a little longer';
+				elseif durRes == -2
+					msg = 'shorter';
+				else
+					msg = 'a little shorter';
+				end
+				play_prompt(msg, 'audio', 10^(uiConfig.promptVol / 20));
+			end
+		end
+	end
+	
+	if handles.showKidsAnim
+		if resp_correct == 1
+			if isequal(handles.phase, 'pre')
+				if uiConfig.bShowCorrAnim
+					show_corr_anim(handles);
+				end
+			elseif isequal(handles.phase, 'pract1')
+				if rmsRes == 0
+					if uiConfig.bShowCorrAnim
+						show_corr_anim(handles);
+					end
+				end
+			else
+				if rmsRes == 0 && durRes == 0
+					if uiConfig.bShowCorrAnim
+						show_corr_anim(handles);
+					end
+				end
+			end		
+		end
+	end
 
-    bRmsRepeat		= handles.bRmsRepeat;
-    bSpeedRepeat	= handles.bSpeedRepeat;
-    if isequal(handles.trialType, 3) || isequal(handles.trialType, 4)
-        if (bRmsRepeat == 1)
-            bRmsRepeat = 0;
-        end
-        if (bSpeedRepeat == 1)
-            bSpeedRepeat = 0;
-        end
-    end
+	bRmsRepeat		= handles.bRmsRepeat;
+	bSpeedRepeat	= handles.bSpeedRepeat;
+	if isequal(handles.trialType, 3) || isequal(handles.trialType, 4)
+		if (bRmsRepeat == 1)
+			bRmsRepeat = 0;
+		end
+		if (bSpeedRepeat == 1)
+			bSpeedRepeat = 0;
+		end
+	end
 
-    if ((~bRmsGood && bRmsRepeat) || (~bSpeedGood && bSpeedRepeat))
-        % Repeat until the volume and/or speed criteria are met.
-        if handles.showKidsAnim
-            button_repeat = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
-                                'Unit', 'normalized', ...
-                                'Position', [0.25, 0.1, 0.24, 0.05], ...
-                                'String', 'Repeat', 'FontSize', 9, 'FontWeight', 'Bold', ...
-                                'ForegroundColor', [0, 0, 0]);
-            handles.button_repeat = button_repeat;
-            set(button_repeat, 'Callback', {@button_repeat_callback, handles});
+	if ((~bRmsGood && bRmsRepeat) || (~bSpeedGood && bSpeedRepeat))
+		% Repeat until the volume and/or speed criteria are met.
+		if handles.showKidsAnim
+			button_repeat = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
+								'Unit', 'normalized', ...
+								'Position', [0.25, 0.1, 0.24, 0.05], ...
+								'String', 'Repeat', 'FontSize', 9, 'FontWeight', 'Bold', ...
+								'ForegroundColor', [0, 0, 0]);
+			handles.button_repeat = button_repeat;
+			set(button_repeat, 'Callback', {@button_repeat_callback, handles});
 
-            set(button_repeat, 'enable', 'on');
-        
-            waitfor(button_repeat);
-        end
-        
-        record(handles);
-    elseif handles.showKidsAnim && resp_correct == -1
-        record(handles);
-    else
-        % data is saved as UserData in the fig handle (wicht is the signal for
-        % the host function to launch the next single trial
-        dataOut.uiConfig = uiConfig;
-        set(handles.UIRecorder, 'UserData', dataOut);
-    end
+			set(button_repeat, 'enable', 'on');
+		
+			waitfor(button_repeat);
+		end
+		
+		record(handles);
+	elseif handles.showKidsAnim && resp_correct == -1
+		record(handles);
+	else
+		% data is saved as UserData in the fig handle (wicht is the signal for
+		% the host function to launch the next single trial
+		dataOut.uiConfig = uiConfig;
+		set(handles.UIRecorder, 'UserData', dataOut);
+	end
 % end
-%     if (handles.trigByScanner == 0)
-%         pause(0.25);
-%     end
-    set(handles.strh, 'visible', 'off');
+%	 if (handles.trigByScanner == 0)
+%		 pause(0.25);
+%	 end
+	set(handles.strh, 'visible', 'off');
 % set(handles.pic_imgh,'cdata',handles.skin.fixation);
 % set(handles.pic_imgh,'visible','off');
 else
-    dataOut			 = struct;
-    dataOut.signalIn = []; dataOut.signalOut = [];
-    dataOut.rms		 = [];
-    set(handles.UIRecorder, 'UserData', dataOut);
+	dataOut			 = struct;
+	dataOut.signalIn = []; dataOut.signalOut = [];
+	dataOut.rms		 = [];
+	set(handles.UIRecorder, 'UserData', dataOut);
 end
 return
 
@@ -1420,12 +1420,12 @@ function volDurOK_anim(handles, opt)
 set(0, 'CurrentFigure', handles.hkf);
 
 if isequal(opt, 'vol')
-    im1 = handles.skin.speaker_base;
-    set(gcf, 'CurrentAxes', handles.hsp_vol);
+	im1 = handles.skin.speaker_base;
+	set(gcf, 'CurrentAxes', handles.hsp_vol);
 elseif isequal(opt, 'dur')
-    im1 = handles.skin.pencil_ruler;
-%     set(gcf, 'CurrentAxes', handles.hsp_dur);
-    subplot('Position', [0.6, 0.05, 0.15, 0.25]);
+	im1 = handles.skin.pencil_ruler;
+%	 set(gcf, 'CurrentAxes', handles.hsp_dur);
+	subplot('Position', [0.6, 0.05, 0.15, 0.25]);
 end
 cla;
 
@@ -1440,25 +1440,25 @@ im_tick_0 = handles.skin.tick;
 
 totFrames = 10;
 for i1 = 1 : totFrames
-    t_ratio = i1 / totFrames;
-    im_tick = im_tick_0;
-    im_tick = im_tick(:, 1 : round(t_ratio * size(im_tick_0, 2)), :);
-    
-    alphaImg = 0. * ones(size(im_tick(:, :, 1)));
-    alphaImg(im_tick(:, :, 3) < 0.9) = 1.;
+	t_ratio = i1 / totFrames;
+	im_tick = im_tick_0;
+	im_tick = im_tick(:, 1 : round(t_ratio * size(im_tick_0, 2)), :);
+	
+	alphaImg = 0. * ones(size(im_tick(:, :, 1)));
+	alphaImg(im_tick(:, :, 3) < 0.9) = 1.;
 
-    if isequal(opt, 'vol')
-        imh_tick = image(im_tick, 'XData', [0, 200 * t_ratio], 'YData', [0, 200]);
-    elseif isequal(opt, 'dur')
-        imh_tick = image(im_tick, 'XData', [0, 440 * t_ratio], 'YData', [0, 200]);
-    end
-    set(imh_tick, 'AlphaData', alphaImg);
-    
-    pause(0.02);
-    
-    if ~(i1 == totFrames)
-        delete(imh_tick);
-    end
+	if isequal(opt, 'vol')
+		imh_tick = image(im_tick, 'XData', [0, 200 * t_ratio], 'YData', [0, 200]);
+	elseif isequal(opt, 'dur')
+		imh_tick = image(im_tick, 'XData', [0, 440 * t_ratio], 'YData', [0, 200]);
+	end
+	set(imh_tick, 'AlphaData', alphaImg);
+	
+	pause(0.02);
+	
+	if ~(i1 == totFrames)
+		delete(imh_tick);
+	end
 end
 
 % pause(1);
@@ -1470,19 +1470,19 @@ function volErr_anim(handles, opt)
 set(0, 'CurrentFigure', handles.hkf);
 im_lsp = handles.skin.speaker_base;
 if isequal(opt, 'loud')
-    im_lsp_alt = handles.skin.speaker_loud_1;
+	im_lsp_alt = handles.skin.speaker_loud_1;
 else
-    im_lsp_alt = handles.skin.speaker_soft_1;
+	im_lsp_alt = handles.skin.speaker_soft_1;
 end
 
 set(gcf, 'CurrentAxes', handles.hsp_vol);
 basePos = get(gca, 'Position');
-if isequal(opt, 'loud')    
-    set(gca, 'Position', [0.3, 0.05, 0.15 * 1.25, 0.25 * 1.25]); % base value: [0.3, 0.05, 0.15, 0.25]
-    warning_msg = 'Softer, please!';
-elseif isequal(opt, 'soft')    
-    set(gca, 'Position', [0.3, 0.05, 0.15 * 0.75, 0.25 * 0.75]);
-    warning_msg = 'Louder, please!';
+if isequal(opt, 'loud')	
+	set(gca, 'Position', [0.3, 0.05, 0.15 * 1.25, 0.25 * 1.25]); % base value: [0.3, 0.05, 0.15, 0.25]
+	warning_msg = 'Softer, please!';
+elseif isequal(opt, 'soft')	
+	set(gca, 'Position', [0.3, 0.05, 0.15 * 0.75, 0.25 * 0.75]);
+	warning_msg = 'Louder, please!';
 end
 cla;
 % set(gca, 'XTick', [], 'XColor', 'w');
@@ -1496,43 +1496,43 @@ totFrames = 10;
 for i1 = 1 : totFrames
 
 %{
-%     t_ratio = i1 / totFrames;
-%     im_tick = im_tick_0;
-%     im_tick = im_tick(:, 1 : round(t_ratio * size(im_tick_0, 2)), :);
-    
-%     alphaImg = 0. * ones(size(im_tick(:, :, 1)));
-%     alphaImg(im_tick(:, :, 3) < 0.9) = 1.;
+%	 t_ratio = i1 / totFrames;
+%	 im_tick = im_tick_0;
+%	 im_tick = im_tick(:, 1 : round(t_ratio * size(im_tick_0, 2)), :);
+	
+%	 alphaImg = 0. * ones(size(im_tick(:, :, 1)));
+%	 alphaImg(im_tick(:, :, 3) < 0.9) = 1.;
 %}
 	
-    if mod(i1, 2) == 1
-        imh_lsp = image(im_lsp);
-    else
-        imh_lsp = image(im_lsp_alt);
-    end
-    hold on;
-    axis square;
-    box  off;
-    set(gca, 'XTick', [], 'XColor', 'w');
-    set(gca, 'YTick', [], 'YColor', 'w');
+	if mod(i1, 2) == 1
+		imh_lsp = image(im_lsp);
+	else
+		imh_lsp = image(im_lsp_alt);
+	end
+	hold on;
+	axis square;
+	box  off;
+	set(gca, 'XTick', [], 'XColor', 'w');
+	set(gca, 'YTick', [], 'YColor', 'w');
 
-    if handles.showWarningHint
-        xs = get(gca, 'XLim');
-        ys = get(gca, 'YLim');
-        htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.92 * range(ys), ...
-                    warning_msg, ...
-                    'FontSize', 18, 'FontWeight', 'bold', 'Color', 'k');
-    end
-    
-    drawnow;
-    pause(0.15);
-    if ~(i1 == totFrames)
-        delete(imh_lsp);
-        if handles.showWarningHint
-            delete(htxt);
-        end
-    end
-    
-    
+	if handles.showWarningHint
+		xs = get(gca, 'XLim');
+		ys = get(gca, 'YLim');
+		htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.92 * range(ys), ...
+					warning_msg, ...
+					'FontSize', 18, 'FontWeight', 'bold', 'Color', 'k');
+	end
+	
+	drawnow;
+	pause(0.15);
+	if ~(i1 == totFrames)
+		delete(imh_lsp);
+		if handles.showWarningHint
+			delete(htxt);
+		end
+	end
+	
+	
 
 end
 set(gca, 'Position', basePos);
@@ -1548,11 +1548,11 @@ return
 function durErr_anim(handles, opt)
 set(0, 'CurrentFigure', handles.hkf);
 if isequal(opt, 'short')
-    im_pencil_0 = handles.skin.pencil_short_1;
-    warning_msg = 'Longer, please!';
+	im_pencil_0 = handles.skin.pencil_short_1;
+	warning_msg = 'Longer, please!';
 elseif isequal(opt, 'long')
-    im_pencil_0 = handles.skin.pencil_long_1;
-    warning_msg = 'Shorter, please!';
+	im_pencil_0 = handles.skin.pencil_long_1;
+	warning_msg = 'Shorter, please!';
 end
 
 im_ruler = handles.skin.ruler;
@@ -1562,7 +1562,7 @@ im_ruler = handles.skin.ruler;
 
 % imh_lsp = image(im_pencil);
 % hold on;											% JS - Moved down 10 lines
-% axis square;    
+% axis square;	
 % box off;
 % set(gca, 'XTick', [], 'XColor', 'w');
 % set(gca, 'YTick', [], 'YColor', 'w');
@@ -1582,7 +1582,7 @@ hsp_vol = subplot('Position', [basePos(1), 0.10, basePos(3), basePos(4) * 0.4]);
 cla;
 imh_lsp = image(im_ruler);
 hold on;
-% axis square;    
+% axis square;	
 box off;
 set(gca, 'XTick', [], 'XColor', 'w');
 set(gca, 'YTick', [], 'YColor', 'w');
@@ -1590,7 +1590,7 @@ set(gca, 'YTick', [], 'YColor', 'w');
 % hsp_vol = subplot('Position', [0.7, 0.15, 0.15, 0.15]);
 % imh_lsp = image(im_pencil);
 hold on;
-% axis square;    
+% axis square;	
 box off;
 set(gca, 'XTick', [], 'XColor', 'w');
 set(gca, 'YTick', [], 'YColor', 'w');
@@ -1605,49 +1605,49 @@ handles.showWarningHint = uiConfig.showWarningHint;
 totFrames = 10;
 
 if isequal(opt, 'short')
-    hsp_pen = subplot('Position', [basePos(1), 0.20, basePos(3) * 0.5, basePos(4) * 0.6]);
+	hsp_pen = subplot('Position', [basePos(1), 0.20, basePos(3) * 0.5, basePos(4) * 0.6]);
 elseif isequal(opt, 'long')
-    hsp_pen = subplot('Position', [basePos(1), 0.20, basePos(3) * 2, basePos(4) * 0.6]);
+	hsp_pen = subplot('Position', [basePos(1), 0.20, basePos(3) * 2, basePos(4) * 0.6]);
 end
 im_pencil_bg = ones(size(im_pencil_0));
 image(im_pencil_bg);
 hold on;
 
 for i1 = 1 : totFrames
-    t_ratio	  = i1 / totFrames;
-    im_pencil = im_pencil_0;
-    im_pencil = im_pencil(:, 1 : round(t_ratio * size(im_pencil_0, 2)), :);
-    
-    alphaImg = 0. * ones(size(im_pencil(:, :, 1)));
-    alphaImg(im_pencil(:, :, 3) < 0.9) = 1.;
+	t_ratio	  = i1 / totFrames;
+	im_pencil = im_pencil_0;
+	im_pencil = im_pencil(:, 1 : round(t_ratio * size(im_pencil_0, 2)), :);
+	
+	alphaImg = 0. * ones(size(im_pencil(:, :, 1)));
+	alphaImg(im_pencil(:, :, 3) < 0.9) = 1.;
 
-    if isequal(opt, 'long')
-        imh_pencil = image(im_pencil, 'XData', [0, 550 * t_ratio], 'YData', [0, 100]);
-    elseif isequal(opt, 'short')
-        imh_pencil = image(im_pencil, 'XData', [0, 180 * t_ratio], 'YData', [0, 100]);
-    end
-    set(imh_pencil, 'AlphaData', alphaImg);
-    box off;
-    set(gca, 'XTick', [], 'XColor', 'w');
-    set(gca, 'YTick', [], 'YColor', 'w');
-    
-    if handles.showWarningHint
-        xs = get(gca, 'XLim');
-        ys = get(gca, 'YLim');
-        htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.92 * range(ys), ...
-                    warning_msg, ...
-                    'FontSize', 18, 'FontWeight', 'bold', 'Color', 'k');
-    end
-    
-    drawnow;
-    pause(0.02);
-    
-    if ~(i1 == totFrames)
-        delete(imh_pencil);
-        if handles.showWarningHint
-            delete(htxt);
-        end
-    end
+	if isequal(opt, 'long')
+		imh_pencil = image(im_pencil, 'XData', [0, 550 * t_ratio], 'YData', [0, 100]);
+	elseif isequal(opt, 'short')
+		imh_pencil = image(im_pencil, 'XData', [0, 180 * t_ratio], 'YData', [0, 100]);
+	end
+	set(imh_pencil, 'AlphaData', alphaImg);
+	box off;
+	set(gca, 'XTick', [], 'XColor', 'w');
+	set(gca, 'YTick', [], 'YColor', 'w');
+	
+	if handles.showWarningHint
+		xs = get(gca, 'XLim');
+		ys = get(gca, 'YLim');
+		htxt = text(xs(1) + 0.3 * range(xs), ys(1) + 0.92 * range(ys), ...
+					warning_msg, ...
+					'FontSize', 18, 'FontWeight', 'bold', 'Color', 'k');
+	end
+	
+	drawnow;
+	pause(0.02);
+	
+	if ~(i1 == totFrames)
+		delete(imh_pencil);
+		if handles.showWarningHint
+			delete(htxt);
+		end
+	end
 end
 
 pause(1);
@@ -1663,11 +1663,11 @@ return
 %{
 % --- Executes on button press in button_next.
 % function button_next_Callback(hObject, eventdata, handles)
-% % hObject    handle to button_next (see GCBO)
+% % hObject	handle to button_next (see GCBO)
 % % eventdata  reserved - to be defined in a future version of MATLAB
-% % handles    structure with handles and user data (see GUIDATA)
+% % handles	structure with handles and user data (see GUIDATA)
 % if (isfield(handles,'nextMessage'))
-%     set(handles.msgh_imgh,'CData',handles.nextMessage,'visible','on');
+%	 set(handles.msgh_imgh,'CData',handles.nextMessage,'visible','on');
 % end
 % set(handles.button_next,'visible','off');
 % 
@@ -1675,19 +1675,19 @@ return
 %}
 
 function dFaces = getDFaces(fileMask)
-    dFaces			= struct;
-    dFaces.d		= dir(fileMask);
-    dFaces.sex		= cell(1, length(dFaces.d));
-    dFaces.subjID	= nan(1, length(dFaces.d));
-    
-    for n = 1 : length(dFaces.d)
-        fn					= dFaces.d(n).name;
-        idx					= strfind(fn, '.bmp');
-        dFaces.sex{n}		= dFaces.d(n).name(idx - 1);
-        idx1				= strfind(fn, '-s');
-        idx2				= strfind(fn, ['-', dFaces.sex{n}]);
-        dFaces.subjID(n)	= str2num(dFaces.d(n).name(idx1 + 2 : idx2 - 1));
-    end
+	dFaces			= struct;
+	dFaces.d		= dir(fileMask);
+	dFaces.sex		= cell(1, length(dFaces.d));
+	dFaces.subjID	= nan(1, length(dFaces.d));
+	
+	for n = 1 : length(dFaces.d)
+		fn					= dFaces.d(n).name;
+		idx					= strfind(fn, '.bmp');
+		dFaces.sex{n}		= dFaces.d(n).name(idx - 1);
+		idx1				= strfind(fn, '-s');
+		idx2				= strfind(fn, ['-', dFaces.sex{n}]);
+		dFaces.subjID(n)	= str2num(dFaces.d(n).name(idx1 + 2 : idx2 - 1));
+	end
 return
 
 function button_correct_callback(hObject, eventdata, handles)
@@ -1723,35 +1723,35 @@ set(0, 'CurrentFigure', handles.hkf);
 set(gcf, 'CurrentAxes', handles.hsp_resp);
 cla;
 if resp_correct == 1
-    for i1 = 1 : 3
-        htxt = text(0, 0, 'Correct', 'FontSize', 24, 'Color', [0, 0.5, 0]);
-        pause(0.2);
-        delete(htxt);
-        pause(0.2);
-    end
+	for i1 = 1 : 3
+		htxt = text(0, 0, 'Correct', 'FontSize', 24, 'Color', [0, 0.5, 0]);
+		pause(0.2);
+		delete(htxt);
+		pause(0.2);
+	end
 elseif resp_correct == 0
-    for i1 = 1 : 3
-        htxt = text(0, 0, 'Incorrect', 'FontSize', 24, 'Color', [1, 0, 0]);
-        pause(0.2);
-        delete(htxt);
-        pause(0.2);
-    end
+	for i1 = 1 : 3
+		htxt = text(0, 0, 'Incorrect', 'FontSize', 24, 'Color', [1, 0, 0]);
+		pause(0.2);
+		delete(htxt);
+		pause(0.2);
+	end
 end
 
 load(handles.uiConfigFN);										% gives uiConfig
 handles.showCorrCount = uiConfig.showCorrCount;
 if handles.showKidsAnim
-    if handles.showCorrCount
-        oldTxt = get(handles.htxt_corrCnt, 'String');
-        if handles.corrCnt <= 1
-            newTxt = sprintf('You have made %d correct response!', handles.corrCnt);
-        else
-            newTxt = sprintf('You have made %d correct responses!', handles.corrCnt);
-        end
-        set(handles.htxt_corrCnt, 'String', newTxt);
-    else
-        set(handles.htxt_corrCnt, 'String', '');
-    end
+	if handles.showCorrCount
+		oldTxt = get(handles.htxt_corrCnt, 'String');
+		if handles.corrCnt <= 1
+			newTxt = sprintf('You have made %d correct response!', handles.corrCnt);
+		else
+			newTxt = sprintf('You have made %d correct responses!', handles.corrCnt);
+		end
+		set(handles.htxt_corrCnt, 'String', newTxt);
+	else
+		set(handles.htxt_corrCnt, 'String', '');
+	end
 end
 
 return
@@ -1759,147 +1759,147 @@ return
 
 
 function edit_param_rmsThresh_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_rmsThresh (see GCBO)
+% hObject	handle to edit_param_rmsThresh (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_rmsThresh as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_rmsThresh as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_rmsThresh as a double
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_rmsThresh_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_rmsThresh (see GCBO)
+% hObject	handle to edit_param_rmsThresh (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
+	set(hObject,'BackgroundColor','white');
 end
 
 
 
 
 function edit_param_fn1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_fn1 (see GCBO)
+% hObject	handle to edit_param_fn1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_fn1 as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_fn1 as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_fn1 as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_fn1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_fn1 (see GCBO)
+% hObject	handle to edit_param_fn1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 
 function edit_param_fn2_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_fn2 (see GCBO)
+% hObject	handle to edit_param_fn2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_fn2 as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_fn2 as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_fn2 as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_fn2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_fn2 (see GCBO)
+% hObject	handle to edit_param_fn2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 
 function edit_param_aFact_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_aFact (see GCBO)
+% hObject	handle to edit_param_aFact (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_aFact as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_aFact as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_aFact as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_aFact_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_aFact (see GCBO)
+% hObject	handle to edit_param_aFact (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 
 function edit_param_bFact_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_bFact (see GCBO)
+% hObject	handle to edit_param_bFact (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_bFact as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_bFact as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_bFact as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_bFact_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_bFact (see GCBO)
+% hObject	handle to edit_param_bFact (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 
 function edit_param_gFact_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_gFact (see GCBO)
+% hObject	handle to edit_param_gFact (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_gFact as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_gFact as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_gFact as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_gFact_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_gFact (see GCBO)
+% hObject	handle to edit_param_gFact (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 % --- Executes on button press in rb_showWordHint.
 function rb_showWordHint_Callback(hObject, eventdata, handles)
-% hObject    handle to rb_showWordHint (see GCBO)
+% hObject	handle to rb_showWordHint (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rb_showWordHint
 val = get(handles.rb_showWordHint, 'Value');
@@ -1914,9 +1914,9 @@ return
 
 % --- Executes on button press in rb_showWarningHint.
 function rb_showWarningHint_Callback(hObject, eventdata, handles)
-% hObject    handle to rb_showWarningHint (see GCBO)
+% hObject	handle to rb_showWarningHint (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rb_showWarningHint
 val = get(handles.rb_showWarningHint, 'Value');
@@ -1927,9 +1927,9 @@ return
 
 % --- Executes on button press in rb_showCorrCount.
 function rb_showCorrCount_Callback(hObject, eventdata, handles)
-% hObject    handle to rb_showCorrCount (see GCBO)
+% hObject	handle to rb_showCorrCount (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rb_showCorrCount
 val = get(handles.rb_showCorrCount, 'Value');
@@ -1940,9 +1940,9 @@ return
 
 % --- Executes on button press in button_reproc.
 function button_reproc_Callback(hObject, eventdata, handles)
-% hObject    handle to button_reproc (see GCBO)
+% hObject	handle to button_reproc (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 relTol = 1e-4;
 
 tmp_data_fn = fullfile(handles.dirname, 'tmp_dataOut.mat');
@@ -1950,32 +1950,32 @@ load(tmp_data_fn, 'dataOut');							% gives dataOut
 
 % Compare the parameters to see if there is any change
 paramList	= {'rmsThresh', 'nLPC', 'fn1', 'fn2', ...
-             'aFact', 'bFact', 'gFact', ...
-             'bCepsLift', 'cepsWinWidth'};
+			 'aFact', 'bFact', 'gFact', ...
+			 'bCepsLift', 'cepsWinWidth'};
 reprocCmd	= 'dataOut = reprocData(dataOut, ';
 chgList		= {};
 chgVals		= [];
 for i1 = 1 : numel(paramList)
-    t_item	= paramList{i1};
-    old_val = dataOut.params.(t_item);
-    fld_name = ['edit_param_', t_item];
-    new_val = str2num(get(handles.(fld_name), 'String'));
-    if isempty(new_val) ||  isnan(new_val)
-        continue;
-    end
-    
-    if abs((new_val - old_val) / old_val) > relTol
-        chgList{end + 1} = t_item;
-        chgVals{end + 1} = new_val;
-        reprocCmd = [reprocCmd, '''', t_item, '''', ', ', num2str(new_val), ', '];
-    end
-    
+	t_item	= paramList{i1};
+	old_val = dataOut.params.(t_item);
+	fld_name = ['edit_param_', t_item];
+	new_val = str2num(get(handles.(fld_name), 'String'));
+	if isempty(new_val) ||  isnan(new_val)
+		continue;
+	end
+	
+	if abs((new_val - old_val) / old_val) > relTol
+		chgList{end + 1} = t_item;
+		chgVals{end + 1} = new_val;
+		reprocCmd = [reprocCmd, '''', t_item, '''', ', ', num2str(new_val), ', '];
+	end
+	
 end
 
 
 if ~isempty(chgList)
-    reprocCmd = [reprocCmd(1 : end - 2), ');'];
-    eval(reprocCmd);
+	reprocCmd = [reprocCmd(1 : end - 2), ');'];
+	eval(reprocCmd);
 end
 % dataOut.paramChgList = chgList;
 % dataOut.paramChgVals = chgVals;
@@ -1987,78 +1987,78 @@ updateDataMonitor(dataOut, handles);
 return
 
 function edit_param_nLPC_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_nLPC (see GCBO)
+% hObject	handle to edit_param_nLPC (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_nLPC as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_nLPC as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_nLPC as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_nLPC_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_nLPC (see GCBO)
+% hObject	handle to edit_param_nLPC (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 
 function edit_param_bCepsLift_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_bCepsLift (see GCBO)
+% hObject	handle to edit_param_bCepsLift (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_bCepsLift as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_bCepsLift as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_bCepsLift as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_bCepsLift_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_bCepsLift (see GCBO)
+% hObject	handle to edit_param_bCepsLift (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 
 function edit_param_cepsWinWidth_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_param_cepsWinWidth (see GCBO)
+% hObject	handle to edit_param_cepsWinWidth (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'String') returns contents of edit_param_cepsWinWidth as text
-%        str2double(get(hObject,'String')) returns contents of edit_param_cepsWinWidth as a double
+%		str2double(get(hObject,'String')) returns contents of edit_param_cepsWinWidth as a double
 
 
 % --- Executes during object creation, after setting all properties.
 function edit_param_cepsWinWidth_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_param_cepsWinWidth (see GCBO)
+% hObject	handle to edit_param_cepsWinWidth (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 % --- Executes on button press in rb_showInfoOnlyErr.
 function rb_showInfoOnlyErr_Callback(hObject, eventdata, handles)
-% hObject    handle to rb_showInfoOnlyErr (see GCBO)
+% hObject	handle to rb_showInfoOnlyErr (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rb_showInfoOnlyErr
 val = get(handles.rb_showInfoOnlyErr, 'Value');
@@ -2071,9 +2071,9 @@ return
 
 % --- Executes on button press in rb_showCorrAnim.
 function rb_showCorrAnim_Callback(hObject, eventdata, handles)
-% hObject    handle to rb_showCorrAnim (see GCBO)
+% hObject	handle to rb_showCorrAnim (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rb_showCorrAnim
 val = get(handles.rb_showCorrAnim, 'Value');
@@ -2087,12 +2087,12 @@ return
 
 % --- Executes on selection change in pm_timingMode.
 function pm_timingMode_Callback(hObject, eventdata, handles)
-% hObject    handle to pm_timingMode (see GCBO)
+% hObject	handle to pm_timingMode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns pm_timingMode contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from pm_timingMode
+%		contents{get(hObject,'Value')} returns selected item from pm_timingMode
 val			= get(handles.pm_timingMode, 'Value');
 load(handles.uiConfigFN);								% gives uiConfig
 
@@ -2100,15 +2100,15 @@ listItems	= get(handles.pm_timingMode, 'String');
 t_item		= listItems{val};
 
 if ~isempty(strfind(t_item, 'with anim'))
-    uiConfig.trialStartWithAnim = 1;
+	uiConfig.trialStartWithAnim = 1;
 else
-    uiConfig.trialStartWithAnim = 0;
+	uiConfig.trialStartWithAnim = 0;
 end
 
 if ~isempty(strfind(t_item, 'preset dur'))
-    uiConfig.trialPresetDur = 1;
+	uiConfig.trialPresetDur = 1;
 else
-    uiConfig.trialPresetDur = 0;
+	uiConfig.trialPresetDur = 0;
 end
 save(handles.uiConfigFN, 'uiConfig');
 
@@ -2116,22 +2116,22 @@ return
 
 % --- Executes during object creation, after setting all properties.
 function pm_timingMode_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to pm_timingMode (see GCBO)
+% hObject	handle to pm_timingMode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 % --- Executes on button press in button_endCurTrial.
 function button_endCurTrial_Callback(hObject, eventdata, handles)
-% hObject    handle to button_endCurTrial (see GCBO)
+% hObject	handle to button_endCurTrial (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 Audapter(2);
 set(handles.button_endCurTrial, 'Enable', 'off');
 return
@@ -2139,12 +2139,12 @@ return
 
 % --- Executes on selection change in pm_promptMode.
 function pm_promptMode_Callback(hObject, eventdata, handles)
-% hObject    handle to pm_promptMode (see GCBO)
+% hObject	handle to pm_promptMode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns pm_promptMode contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from pm_promptMode
+%		contents{get(hObject,'Value')} returns selected item from pm_promptMode
 val			= get(handles.pm_promptMode, 'Value');
 load(handles.uiConfigFN);									% gives uiConfig
 
@@ -2152,11 +2152,11 @@ listItems	= get(handles.pm_promptMode, 'String');
 t_item		= listItems{val};
 
 if isequal(lower(t_item), 'visual only')
-    uiConfig.promptMode = 'v';
+	uiConfig.promptMode = 'v';
 elseif isequal(lower(t_item), 'auditory only')
-    uiConfig.promptMode = 'a';
+	uiConfig.promptMode = 'a';
 elseif isequal(lower(t_item), 'auditory + visual')
-    uiConfig.promptMode = 'av';
+	uiConfig.promptMode = 'av';
 end
 
 save(handles.uiConfigFN, 'uiConfig');
@@ -2164,25 +2164,25 @@ return
 
 % --- Executes during object creation, after setting all properties.
 function pm_promptMode_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to pm_promptMode (see GCBO)
+% hObject	handle to pm_promptMode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
+%	   See ISPC and COMPUTER.
 if ispc && isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', 'white');
+	set(hObject, 'BackgroundColor', 'white');
 end
 
 
 % --- Executes on slider movement.
 function sld_promptVol_Callback(hObject, eventdata, handles)
-% hObject    handle to sld_promptVol (see GCBO)
+% hObject	handle to sld_promptVol (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles	structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+%		get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 val = get(handles.sld_promptVol, 'Value');
 load(handles.uiConfigFN);								% gives uiConfig
 
@@ -2195,11 +2195,11 @@ return
 
 % --- Executes during object creation, after setting all properties.
 function sld_promptVol_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to sld_promptVol (see GCBO)
+% hObject	handle to sld_promptVol (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles	empty - handles not created until after all CreateFcns called
 
 % Hint: slider controls usually have a light gray background.
 if isequal(get(hObject, 'BackgroundColor'), get(0, 'defaultUicontrolBackgroundColor'))
-    set(hObject, 'BackgroundColor', [.9 .9 .9]);
+	set(hObject, 'BackgroundColor', [.9 .9 .9]);
 end

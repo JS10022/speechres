@@ -1,5 +1,5 @@
 function [k1,k2] = detectVowel(f1, f2, i1, i2, varargin)
-     
+	 
 %{
 % fitlen=35;
 
@@ -24,25 +24,25 @@ function [k1,k2] = detectVowel(f1, f2, i1, i2, varargin)
 % idx2=find(rms1(1:end-1)>=threshRMS & rms1(2:end)<threshRMS);
 % 
 % if (isempty(idx1) | isempty(idx2))
-%     k1=0;
-%     k2=0;
-%     return
+%	 k1=0;
+%	 k2=0;
+%	 return
 % end
 % 
 % % k1=idx1(1);
 % % k2=idx2(end);
-% if (idx2(1)<idx1(1))    % This means that the threshold is already crossed at the beginning
-%     idx1=[1,idx1];
+% if (idx2(1)<idx1(1))	% This means that the threshold is already crossed at the beginning
+%	 idx1=[1,idx1];
 % end
-% if (idx1(end)>idx2(end))    % This means that the rms doesn't come below the threshold at the end
-%     idx2=[idx2,length(rms1)];
+% if (idx1(end)>idx2(end))	% This means that the rms doesn't come below the threshold at the end
+%	 idx2=[idx2,length(rms1)];
 % end
 % 
 % if (length(idx1)~=length(idx2))
-%     disp('detectVowel: Warning: length(idx1) ~= length(idx2)!!!');
-%     k1=0;
-%     k2=0;
-%     return
+%	 disp('detectVowel: Warning: length(idx1) ~= length(idx2)!!!');
+%	 k1=0;
+%	 k2=0;
+%	 return
 % end
 % lens=idx2-idx1;
 % [jnk,idxmax]=max(lens);

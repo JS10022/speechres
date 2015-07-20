@@ -106,13 +106,13 @@ VOWEL_LEN_RANGE 0.10			% sec: single-sided width
 
 
 % === Number of practice trials === %
-% PRE_REPS		2				% pre:		Initial familiarization
-% PRACT1_REPS		2				% pract1:	Intensity practice
-% PRACT2_REPS		2				% pract2:	Intensity and duration practice
+PRE_REPS		2				% pre:		Initial familiarization
+PRACT1_REPS		2				% pract1:	Intensity practice
+PRACT2_REPS		2				% pract2:	Intensity and duration practice
 
-PRE_REPS		0				% pre:		Initial familiarization
-PRACT1_REPS		0				% pract1:	Intensity practice
-PRACT2_REPS		1				% pract2:	Intensity and duration practice
+% PRE_REPS		0				% pre:		Initial familiarization
+% PRACT1_REPS		0				% pract1:	Intensity practice
+% PRACT2_REPS		1				% pract2:	Intensity and duration practice
 
 
 % === MRI experiment options === %

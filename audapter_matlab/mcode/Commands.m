@@ -12,7 +12,7 @@
 
 %%%%%%%	Tests and Demos	%%%%%%%
 	
-% 	test_audapter('formant',  '--play'	);
+	test_audapter('formant',  '--play'	);
 % 	test_audapter('pitch',	'--play'	);
 % 	test_audapter('timeWarp', '--play'	);
 % 	audapterDemo_triphthong(  '--play'	);
@@ -45,10 +45,10 @@
 % 	audioGate();
 	
 % 	runExperiment expt_config_fmt.txt twoScreens
-	runExperiment expt_config_fmt.vowels.txt
+% 	runExperiment expt_config_fmt.vowels.txt
 % 	catExperiment expt_config_fmt.vowels.txt
 % 	catExperiment expt_config_fmt.caterpillar.txt
-	
+
 % Audapter(2);
 	
 	

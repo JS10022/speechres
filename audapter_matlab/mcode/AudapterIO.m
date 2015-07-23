@@ -232,7 +232,7 @@ switch(action)
 
 	case 'getData',
 		nout						= nargout;					% Number of function output arguments.
-		[signalMat, dataMat]		= Audapter(4);		
+		[signalMat, dataMat]		= Audapter(4);
 		data						= [];
 
 		switch(nout)
@@ -258,7 +258,7 @@ switch(action)
 																%	 "index out of bounds because numel(signalMat)=1"
 
 				data.intervals	  = dataMat(:, 1);
-				data.rms			= dataMat(:, 2 : 4);
+				data.rms			= dataMat(:,2:4);
 				
 				offS				= 5;
 				data.fmts		   = dataMat(:, offS					 : offS + p.nTracks - 1);

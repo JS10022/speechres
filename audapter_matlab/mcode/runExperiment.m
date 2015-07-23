@@ -20,6 +20,7 @@ expt_config		= read_parse_expt_config(exptConfigFN);
 
 % Audapter(1,1,1);					% === Added for testing?  I don't remember... ===
 
+%% +++ For use with MRI machine or kids (NOT BEING USED) +++
 if expt_config.TRIGGER_BY_MRI_SCANNER && expt_config.SHOW_KIDS_ANIM
 	error('TRIGGER_BY_MRI_SCANNER == 1 and SHOW_KIDS_ANIM == 1 are not compatible');
 end
@@ -58,15 +59,15 @@ subject.hostName		= deblank(hostName);
 
 subject.dataDir			= expt_config.DATA_DIR;
 
-subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;
-subject.TA				= expt_config.FMRI_TA;
+subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;		% +++ For use with MRI machine (NOT BEING USED) +++
+subject.TA				= expt_config.FMRI_TA;						% +++ For use with MRI machine (NOT BEING USED) +++
 subject.ITI				= 6;
 
 subject.vumeterMode		= 2;										% 1: 10 ticks; 2: 3 ticks;
 
-if subject.trigByScanner == 1										% === For use with MRI machine (NOT BEING USED) ===
-	subject.showProgress	= 1;
-	subject.showPlayButton  = 0;
+if subject.trigByScanner == 1										% +++ For use with MRI machine (NOT BEING USED) +++
+	subject.showProgress	= 1;									% +++ For use with MRI machine (NOT BEING USED) +++
+	subject.showPlayButton  = 0;									% +++ For use with MRI machine (NOT BEING USED) +++
 else
 	subject.showProgress	= 1;
 	subject.showPlayButton  = 1;
@@ -211,7 +212,7 @@ if bNew
 	t_phases = {'start', 'ramp', 'stay', 'end'};
 	for k1 = 1 : length(t_phases)
 		t_phase = t_phases{k1};
-		expt.script.(t_phase).noiseRepsRatio = expt_config.NOISE_REPS_RATIO;		% SC TO DO
+		expt.script.(t_phase).noiseRepsRatio = expt_config.NOISE_REPS_RATIO;	% SC TO DO
 		
 %{
 %		 expt.script.(t_phase)  = ...
@@ -247,7 +248,7 @@ if bNew
 	end
 	fprintf('Done.\n');
 
-	
+
 	p = getAudapterDefaultParams(subject.sex,			...
 		'closedLoopGain',	expt.subject.closedLoopGain,...
 		'trialLen',			expt.subject.trialLen,		...
@@ -259,29 +260,10 @@ if bNew
 		'pvocFrameLen',		expt_config.PVOC_FRAME_LEN, ...
 		'pvocHop',			expt_config.PVOC_HOP);
 	p.rmsThresh =			expt_config.INTENSITY_THRESH;
-	
-	
+
+
 	% === Configure ASIO Device ===
-	if isequal(expt_config.DEVICE_NAME, 'UltraLite')
-		%--- Settings for MOTU UlraLite ---%
-		cfgUltraLite.downFact	= 4;
-		cfgUltraLite.sr			= 12000;
-		cfgUltraLite.frameLen	= 64;
-		
-		Audapter('deviceName', 'MOTU Audio');
-		
-		p.downFact	= cfgUltraLite.downFact;
-		p.sr		= cfgUltraLite.sr;
-		p.frameLen	= cfgUltraLite.frameLen;
-		
-		fprintf(1, 'INFO: Using MOTU UltraLite settings. \n');
-		fprintf(1, 'INFO: Make sure in MOTU Audio Console, the following parameter values are set:\n');
-		fprintf(1, 'INFO:	sampling rate = %d\n', cfgUltraLite.downFact * cfgUltraLite.sr);		
-		fprintf(1, 'INFO:	buffer size = %d\n', cfgUltraLite.downFact * cfgUltraLite.frameLen);
-		fprintf(1, '\n');
-	elseif isequal(expt_config.DEVICE_NAME, 'MicroBook')
-		Audapter('deviceName', 'MOTU MicroBook');
-	elseif isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
+if isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
 				%--- Settings for AudioBox ---%
 		cfgUltraLite.downFact	= 3;
 		cfgUltraLite.sr			= 48000;
@@ -291,13 +273,13 @@ if bNew
 		fprintf(1, 'INFO: Make sure in AudioBox Console, the following parameter values are set:\n');
 		fprintf(1, 'INFO:	sampling rate = %d\n', cfgUltraLite.downFact * cfgUltraLite.sr);		
 		fprintf(1, 'INFO:	buffer size = %d\n', cfgUltraLite.downFact * cfgUltraLite.frameLen);
-		
+
 		Audapter('deviceName', 'AudioBox');
-		
+
 		p.downFact	= cfgUltraLite.downFact;
 		p.sr		= cfgUltraLite.sr;
 		p.frameLen	= cfgUltraLite.frameLen;
-		
+
 		fprintf(1, 'INFO: Using AudioBox settings. \n');
 		fprintf(1, 'INFO: Make sure in AudioBox Console, the following parameter values are set:\n');
 		fprintf(1, 'INFO:	sampling rate = %d\n', cfgUltraLite.downFact * cfgUltraLite.sr);		
@@ -306,8 +288,8 @@ if bNew
 	else
 		error('Unrecognized DEVICE_NAME: %s', expt_config.DEVICE_NAME);
 	end
-	
-	
+
+
 	% === Audio Stereo Output Mode ===
 	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% === Current setting ===
 		p.stereoMode = 1;
@@ -318,7 +300,7 @@ if bNew
 	else
 		error('Unrecognized value of STEREO_MODE: %s', expt_config.STEREO_MODE);
 	end
-  
+
 %{
 %	 if isequal(expt_config.PERT_MODE, 'PITCH')
 %		 p.bBypassFmt = 1;
@@ -336,14 +318,14 @@ else																% load expt
 	load(fullfile(dirname, 'state.mat'));
 	load(fullfile(dirname, 'expt.mat'));			
 	p = state.params;
-	
+
 %{
 %	 nPeaks=length(expt.trainWords);
 %	 if state.phase>1
 %	 rmsPeaks=ones(length(expt.trainWords),1)*p.rmsMeanPeak;	%SC ***Bug!!***
 %	 end
 %}
-	
+
 	subject = expt.subject;
 end
 
@@ -375,7 +357,7 @@ end
 %% Load the multi-talker babble noise
 [mbw, fs_mtb] = audioread('mtbabble48k.wav');
 
-% Normalize the amplitude of the mtb noise
+%% Normalize the amplitude of the mtb noise
 mbw		= mbw - mean(mbw);
 mb_rms  = rms(mbw);
 mbw		= mbw / mb_rms;
@@ -397,13 +379,13 @@ recPhases = expt.recPhases;
 % nWords = length(wordList);
 
 hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);
-set(hgui.UIRecorder, 'Position', [1300, 290, 440, 700]);			% === Position of "Control" window ===
+set(hgui.UIRecorder, 'Position', [600, 100, 440, 700]);			% === Position of "Control" window ===
 % winontop(hgui.UIRecorder, 1);
 
 
 if ~isempty(fsic(varargin, 'twoScreens'))
 	subjFigPos		= get(hgui.hkf, 'Position');					% === Added semi-colon at end of line ===
-	set(hgui.hkf, 'Position', [1800, 100, subjFigPos(3), subjFigPos(4)]);
+	set(hgui.hkf, 'Position', [800, 100, subjFigPos(3), subjFigPos(4)]);
 end
 
 %{
@@ -530,7 +512,7 @@ if (subject.showProgress)
 	progress_mask	= zeros(1, 100, 3);
 	set(hgui.progress_imgh, 'Cdata', progress_meter .* progress_mask);
 	set(hgui.progress_axes, 'YTick', [], 'YColor', [0, 0, 0]);
-	set(hgui.progress_axes, 'XTick', [0 : 25 : 100]);
+	set(hgui.progress_axes, 'XTick', 0 : 25 : 100);
 else
 	set(hgui.progress_axes, 'visible', 'off');
 	set(hgui.progress_imgh, 'visible', 'off');

@@ -4,7 +4,7 @@ function [f1_mean, f2_mean] = getVowelMeanF1F2(dataDir, varargin)
 %SC   varargin(2) = params
 %SC   varargin(3) = doPlot
 
-toPlot=0;
+toPlot = 0;
 if (~isempty(findStringInCell(varargin, 'plot')))
 	toPlot = 1;
 end
@@ -26,6 +26,8 @@ thisPhase = 'pract2';									% SC This routine is always immmediately after the
 % colors={'b','r','k'};
 
 load(fullfile(dataDir, 'expt.mat'));					% gives expt
+														% === Which is the Experiment
+														% paramiters and setup ===
 
 %{
 % if (~isfield(expt,'trainWords')) 

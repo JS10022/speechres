@@ -265,9 +265,9 @@ if bNew
 	% === Configure ASIO Device ===
 if isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
 				%--- Settings for AudioBox ---%
-		cfgUltraLite.downFact	= 3;
+		cfgUltraLite.downFact	= 4;
 		cfgUltraLite.sr			= 48000;
-		cfgUltraLite.frameLen	= 64;
+		cfgUltraLite.frameLen	= 256;
 		
 		fprintf(1, 'INFO: Using AudioBox settings. \n');
 		fprintf(1, 'INFO: Make sure in AudioBox Console, the following parameter values are set:\n');

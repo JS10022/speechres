@@ -18,7 +18,7 @@ expt_config		= read_parse_expt_config(exptConfigFN);
 %}
 
 
-% Audapter(1,1,1);					% === Added for testing?  I don't remember... ===
+% Audapter(1,1,1);					% === Added for testing?  I don't remember... === %
 
 %% +++ For use with MRI machine or kids (NOT BEING USED) +++
 if expt_config.TRIGGER_BY_MRI_SCANNER && expt_config.SHOW_KIDS_ANIM
@@ -59,15 +59,15 @@ subject.hostName		= deblank(hostName);
 
 subject.dataDir			= expt_config.DATA_DIR;
 
-subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;		% +++ For use with MRI machine (NOT BEING USED) +++
-subject.TA				= expt_config.FMRI_TA;						% +++ For use with MRI machine (NOT BEING USED) +++
+subject.trigByScanner	= expt_config.TRIGGER_BY_MRI_SCANNER;		% +++ For use with MRI machine (NOT BEING USED) +++ %
+subject.TA				= expt_config.FMRI_TA;						% +++ For use with MRI machine (NOT BEING USED) +++ %
 subject.ITI				= 6;
 
 subject.vumeterMode		= 2;										% 1: 10 ticks; 2: 3 ticks;
 
-if subject.trigByScanner == 1										% +++ For use with MRI machine (NOT BEING USED) +++
-	subject.showProgress	= 1;									% +++ For use with MRI machine (NOT BEING USED) +++
-	subject.showPlayButton  = 0;									% +++ For use with MRI machine (NOT BEING USED) +++
+if subject.trigByScanner == 1										% +++ For use with MRI machine (NOT BEING USED) +++ %
+	subject.showProgress	= 1;									% +++ For use with MRI machine (NOT BEING USED) +++ %
+	subject.showPlayButton  = 0;									% +++ For use with MRI machine (NOT BEING USED) +++ %
 else
 	subject.showProgress	= 1;
 	subject.showPlayButton  = 1;
@@ -75,7 +75,7 @@ end
 
 subject.designNum			= 2;
 
-subject.lvNoise	= 75;												% dBA SPL. The level of noise for completely masking ...
+subject.lvNoise				= 75;									% dBA SPL. The level of noise for completely masking ...
 																	% speech (mode trialType = 2 or 3).
 
 bAlwaysOn		= expt_config.ALWAYS_ON;
@@ -100,7 +100,7 @@ end
 subject.pcrKnob	= 0;
 
 
-bNew			= true;												% === Creates new experiment ===
+bNew			= true;												% === Creates new experiment === %
 
 %% Sets up file directory
 dirname			= fullfile(subject.dataDir, num2str(subject.name));
@@ -149,26 +149,26 @@ if bNew
 	
 	expt.subject	= subject;
 	
-	expt.allPhases	= {'pre', 'pract1', 'pract2'};					% === Phases ===
+	expt.allPhases	= {'pre', 'pract1', 'pract2'};					% === Phases === %
 	expt.recPhases	= {'pre', 'pract1', 'pract2'};					% SC The phases during which the data are recorded
 
-	for i1 = 1 : expt_config.N_RAND_RUNS							% === Random ===
+	for i1 = 1 : expt_config.N_RAND_RUNS							% === Random === %
 		expt.allPhases{end + 1} = sprintf('rand%d', i1);
 		expt.recPhases{end + 1} = sprintf('rand%d', i1);
 	end
 	
-	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end'}];	% === ??? Something to do with phases ??? ===
+	expt.allPhases	= [expt.allPhases, {'start', 'ramp', 'stay', 'end'}];	% === ??? Something to do with phases ??? === %
 	expt.recPhases	= [expt.recPhases, {'start', 'ramp', 'stay', 'end'}];
 	
 	expt.stimUtter	= expt_config.STIM_UTTER;						% === Stim_utter ===
 	
-	expt.trialTypes			= 1;									% === Was [1] ===
+	expt.trialTypes			= 1;									% === Was [1] === %
 	expt.trialOrderRandReps = 1;									% How many reps are randomized together
 	expt.script.pre.nReps	= expt_config.PRE_REPS;					% SC Numbers of repetitions in the stages	% !!1!!	
 	expt.script.pract1.nReps= expt_config.PRACT1_REPS;
 	expt.script.pract2.nReps= expt_config.PRACT2_REPS;
 	
-	expt.sustWords			= expt_config.STIM_UTTER;				% === Get stimulus words ===
+	expt.sustWords			= expt_config.STIM_UTTER;				% === Get stimulus words === %
 	expt.script.start.nReps = expt_config.SUST_START_REPS;
 	expt.script.ramp.nReps	= expt_config.SUST_RAMP_REPS;
 	expt.script.stay.nReps	= expt_config.SUST_STAY_REPS;
@@ -181,7 +181,7 @@ if bNew
 	expt.trialTypeDesc{4}	= 'Rest (no speech) in silence';
 	expt.trialTypeDesc{5}	= 'Non-speech bracket task in silence';
 	
-	fprintf(1, 'Generating script for the practice phases...\n');	% ==== Creates practice scripts ====
+	fprintf(1, 'Generating script for the practice phases...\n');	% === Creates practice scripts === %
 	
 	expt.script.pre		= genPhaseScript('pre',		expt.script.pre.nReps,		expt.stimUtter);
 	expt.script.pract1	= genPhaseScript('pract1',	expt.script.pract1.nReps,	expt.stimUtter);
@@ -226,7 +226,7 @@ if bNew
 			[expt.script.(t_phase), expt.pertDes] = ...
 				genRandScript(	t_phase, ...	
 								expt.script.(t_phase).nReps,			...
-								expt_config.SUST_TRIALS_PER_BLOCK,		...		% === trialsPerBlock ===
+								expt_config.SUST_TRIALS_PER_BLOCK,		...		% === trialsPerBlock === %
 								{},										...
 								{}, 									...
 								expt_config.SUST_ONSET_DELAY_MS,		...
@@ -238,7 +238,7 @@ if bNew
 								expt_config.SUST_F2_SHIFTS_RATIO,		...
 								expt_config.SUST_SHIFT_DURS_MS,			...
 								expt_config.SUST_STIM_UTTER,			...
-								'');											% === fullSchedFn ===
+								'');											% === fullSchedFn === %
 		else
 			info_log(sprintf('Sust phase %s will not be included due to nReps == 0', t_phase));
 			idxKeep			= setxor(1 : length(expt.allPhases), fsic(expt.allPhases, t_phase));
@@ -262,36 +262,31 @@ if bNew
 	p.rmsThresh =			expt_config.INTENSITY_THRESH;
 
 
-	% === Configure ASIO Device ===
-if isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox ===
-				%--- Settings for AudioBox ---%
-		cfgUltraLite.downFact	= 4;
-		cfgUltraLite.sr			= 48000;
-		cfgUltraLite.frameLen	= 256;
+	% === Configure ASIO Device === %
+if isequal(expt_config.DEVICE_NAME, 'AudioBox')				% === AudioBox === %
+				% --- Settings for AudioBox --- %
+		cfgAudioBox.downFact	= 4;
+		cfgAudioBox.sr			= 11025;					% === Sample Rate AFTER downscaling === %
+		cfgAudioBox.frameLen	= 128;						% === Frame Length AFTER downscaling === %
 		
-		fprintf(1, 'INFO: Using AudioBox settings. \n');
-		fprintf(1, 'INFO: Make sure in AudioBox Console, the following parameter values are set:\n');
-		fprintf(1, 'INFO:	sampling rate = %d\n', cfgUltraLite.downFact * cfgUltraLite.sr);		
-		fprintf(1, 'INFO:	buffer size = %d\n', cfgUltraLite.downFact * cfgUltraLite.frameLen);
-
 		Audapter('deviceName', 'AudioBox');
 
-		p.downFact	= cfgUltraLite.downFact;
-		p.sr		= cfgUltraLite.sr;
-		p.frameLen	= cfgUltraLite.frameLen;
+		p.downFact	= cfgAudioBox.downFact;
+		p.sr		= cfgAudioBox.sr;
+		p.frameLen	= cfgAudioBox.frameLen;
 
 		fprintf(1, 'INFO: Using AudioBox settings. \n');
 		fprintf(1, 'INFO: Make sure in AudioBox Console, the following parameter values are set:\n');
-		fprintf(1, 'INFO:	sampling rate = %d\n', cfgUltraLite.downFact * cfgUltraLite.sr);		
-		fprintf(1, 'INFO:	buffer size = %d\n', cfgUltraLite.downFact * cfgUltraLite.frameLen);
+		fprintf(1, 'INFO:	sampling rate = %d\n', cfgAudioBox.downFact * cfgAudioBox.sr);		
+		fprintf(1, 'INFO:	buffer size   = %d\n', cfgAudioBox.downFact * cfgAudioBox.frameLen);
 		fprintf(1, '\n');
 	else
 		error('Unrecognized DEVICE_NAME: %s', expt_config.DEVICE_NAME);
 	end
 
 
-	% === Audio Stereo Output Mode ===
-	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% === Current setting ===
+	% === Audio Stereo Output Mode === %
+	if isequal(expt_config.STEREO_MODE, 'LR_AUDIO')					% === Current setting === %
 		p.stereoMode = 1;
 	elseif isequal(expt_config.STEREO_MODE, 'L_AUDIO')
 		p.stereoMode = 0;
@@ -344,13 +339,13 @@ else
 																	%	 and serves as an initialization.
 
 	fprintf('\nSettings : \n')
-	fprintf('DMA Buffer	= %i samples \n', p.frameLen)				% SC Buffer length after downsampling
-	fprintf('Samplerate	= %4.2f kHz  \n', p.sr / 1000)				% SC sampling rate after downsampling
-	fprintf('Analysis win  = %4.2f msec \n', p.bufLen / p.sr * 1000)
-	fprintf('LPC  window   = %4.2f msec \n', p.anaLen / p.sr * 1000)
+	fprintf('DMA Buffer	\t= %i \t samples \n', p.frameLen)			% SC Buffer length after downsampling
+	fprintf('Samplerate	\t= %4.2f  kHz  \n', p.sr / 1000)			% SC sampling rate after downsampling
+	fprintf('Analysis win\t= %4.2f  msec \n', p.bufLen / p.sr * 1000)
+	fprintf('LPC  window\t\t= %4.2f  msec \n', p.anaLen / p.sr * 1000)
 
-	fprintf('Process delay = %4.2f msec \n', p.nDelay * p.frameLen / p.sr * 1000)
-	fprintf('Process/sec   = %4.2f \n', p.sr / p.frameShift)
+	fprintf('Process delay\t= %4.2f msec \n', p.nDelay * p.frameLen / p.sr * 1000)
+	fprintf('Process/sec\t\t= %4.2f \n', p.sr / p.frameShift)
 
 end
 
@@ -370,21 +365,21 @@ end
 Audapter(3, 'datapb', mbw, 0);
 
 %% expt
-figIdDat = makeFigDataMon;
+figIdDat	= makeFigDataMon;
 
-% wordList = expt.words;
+% wordList	= expt.words;
 
-allPhases = expt.allPhases;
-recPhases = expt.recPhases;
-% nWords = length(wordList);
+allPhases	= expt.allPhases;
+recPhases	= expt.recPhases;
+% nWords	= length(wordList);
 
-hgui = UIRecorder('figIdDat', figIdDat, 'dirname', dirname);
-set(hgui.UIRecorder, 'Position', [600, 100, 440, 700]);			% === Position of "Control" window ===
+hgui		= UIRecorder('figIdDat', figIdDat, 'dirname', dirname);
+set(hgui.UIRecorder, 'Position', [600, 100, 440, 700]);			% === Position of "Control" window === %
 % winontop(hgui.UIRecorder, 1);
 
 
 if ~isempty(fsic(varargin, 'twoScreens'))
-	subjFigPos		= get(hgui.hkf, 'Position');					% === Added semi-colon at end of line ===
+	subjFigPos		= get(hgui.hkf, 'Position');				% === Added semi-colon at end of line === %
 	set(hgui.hkf, 'Position', [800, 100, subjFigPos(3), subjFigPos(4)]);
 end
 
@@ -395,7 +390,7 @@ end
 % end
 %}
 
-hgui.showKidsAnim	= expt.subject.expt_config.SHOW_KIDS_ANIM;		% +++ Kids (not used) +++
+hgui.showKidsAnim	= expt.subject.expt_config.SHOW_KIDS_ANIM;		% +++ For use with kids (NOT BEING USED) +++ %
 
 hgui.bSim			= bSim;
 hgui.simDataDir		= simDataDir;
@@ -403,8 +398,8 @@ hgui.dirname		= dirname;
 
 hgui.pcrKnob		= subject.pcrKnob;
 hgui.ITI			= expt.subject.ITI;
-hgui.trigByScanner	= expt.subject.trigByScanner;					% +++ MRI (not used) +++
-hgui.trigKey		= expt_config.MRI_TRIGGER_KEY;					% +++ MRI (not used) +++
+hgui.trigByScanner	= expt.subject.trigByScanner;					% +++ For use with MRI machine (NOT BEING USED) +++ %
+hgui.trigKey		= expt_config.MRI_TRIGGER_KEY;					% +++ For use with MRI machine (NOT BEING USED) +++ %
 hgui.TA				= expt.subject.TA;
 hgui.dBRange		= expt.subject.dBRange1;
 hgui.trialLen		= expt.subject.trialLen;
@@ -431,13 +426,13 @@ hgui.debug_pitchShiftLogF = 0;
 %%
 fprintf('\n');
 disp(['Mouth-microphone distance = ',	num2str(expt.subject.mouthMicDist),	' cm']);
-disp(['hgui.rmsTransTarg_spl = ',		num2str(hgui.rmsTransTarg_spl),		' dBA SPL']);
+disp(['hgui.rmsTransTarg_spl	  = ',		num2str(hgui.rmsTransTarg_spl),		' dBA SPL']);
 fprintf('\n');
 
 hgui.vocaLen	= round(expt_config.VOWEL_LEN_TARG * p.sr / (p.frameLen));			% 300 ms, 225 frames
 hgui.lenRange	= 2.5 * round(expt_config.VOWEL_LEN_RANGE * p.sr / (p.frameLen));	% single-sided tolerance range: ...
 																					% 0.4*250 = 100 ms
-disp(['Vowel duration range: [' , num2str(300 - 0.4 * 250), ',', num2str(300 + 0.4 * 250), '] ms.']);
+disp(['Vowel duration range: [' , num2str(300 - 0.4 * 250), ', ', num2str(300 + 0.4 * 250), '] ms.']);
 
 hgui.debug		= DEBUG;
 
@@ -823,12 +818,11 @@ for n = startPhase : length(allPhases)
 	set(hgui.msgTxt, 'visible', 'on', 'String', getMsgStr(thisphase));		% ===== JS - Displays messages =====
 % 	set(hgui.msgTxt, 'visible', 'on', 'String', getStimStr(thisphase));
 	
-	%{
+%{
 %	 htxt = text(xs(1) + 0.05 * range(xs), ys(1) + 0.95 * range(ys), getMsgStr(thisphase), ...
 %				 'FontName', 'Helvetica', 'FontSize', 20, 'FontWeight', 'normal', 'Color', 'b');
-
 %	 if ~bAlwaysOn
-	%}
+%}
 	
 	if isfile(fullfile(dirname, 'p.mat'))
 		 load(fullfile(dirname, 'p.mat'))						% gives p;			
@@ -1020,7 +1014,8 @@ for n = startPhase : length(allPhases)
 %				 hgui.ps_pitchShiftLogF = pitchShiftLogF;
 %			 end
 %}
-			
+
+%% === Collect Audio Data === %%
 			UIRecorder('singleTrial', hgui.play, 1, hgui);
 			data = get(hgui.UIRecorder, 'UserData');				% SC Retrieve the data
 			

@@ -1,12 +1,12 @@
 % === Subject information === %
-SUBJECT_ID		TS_FMT_20140113_FMT02
+SUBJECT_ID		TS_FMT_20140213_FMT03
 SUBJECT_GENDER	male										% {female | male}
 SUBJECT_DOB		1-JAN-1983      							% Follow the format: DAY-MON-YEAR (e.g., 2-FEB-1990)
 SUBJECT_GROUP	AWS
 
 
 % === Data location === %
-DATA_DIR		C:\DATA\APE
+DATA_DIR		E:\DATA\APE
 
 
 % === Device name === %
@@ -58,7 +58,6 @@ SUST_F1_SHIFTS_RATIO		{sust-[0.2]}					% Unit: ratio
 SUST_F2_SHIFTS_RATIO		{sust-[-0.1]}					% Unit: ratio
 SUST_SHIFT_DURS_MS			{sust-[Inf]}					% Unit: ms.		% To impose perturbation on the entire duration of the vowel, 
 																			% use Inf (only one allowed).
-
 SUST_TRIALS_PER_BLOCK		2
 
 
@@ -66,7 +65,6 @@ SUST_START_REPS	2
 SUST_RAMP_REPS	2
 SUST_STAY_REPS	2
 SUST_END_REPS	2
-% SUST_CAT_REPS	1				% Caterpillar reps ???		% JS Added for Caterpillar script	
 
 
 
@@ -79,8 +77,8 @@ SUST_END_REPS	2
 % SUST_STIM_UTTER
 % CATERPILLAR						% JS Added for Caterpillar script	
 
-STIM_UTTER		UH OH EH UU IH OO AY AH AE		
-SUST_STIM_UTTER	UH OH EH UU IH OO AY AH AE
+STIM_UTTER		UH OH EH % UU IH OO AY AH AE		
+SUST_STIM_UTTER	UH OH EH % UU IH OO AY AH AE
 
 
 
@@ -146,12 +144,11 @@ NOISE_REPS_RATIO 	0.5
 % Noise reps will only be inserted into the start, ramp, stay and end phases.
 
 TRIAL_LEN_MAX		8			% Unit: sec
-% CATER_TRIAL_LEN		80			% Unit: sec		% JS Added for Caterpillar script	
-% CATER_LEN_MAX		180			% Unit: sec		% JS Added for Caterpillar script	
 
-SAMPLING_RATE		48000
-FRAME_SIZE			96
-DOWNSAMP_FACT		3
+SAMPLING_RATE		44100
+FRAME_SIZE			512			% Exceeding 512 seems to cause MATLAB crashes
+% FRAME_SIZE			256
+DOWNSAMP_FACT		4
 
 
 % -- Phase vocoder options -- %

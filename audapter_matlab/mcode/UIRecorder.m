@@ -28,12 +28,12 @@ function varargout = UIRecorder(varargin)
 
 %% Begin initialization code - DO NOT EDIT
 gui_Singleton	= 1;
-gui_State	= struct('gui_Name',	  mfilename, ...
-					 'gui_Singleton',  gui_Singleton, ...
-					 'gui_OpeningFcn', @UIRecorder_OpeningFcn, ...
-					 'gui_OutputFcn',  @UIRecorder_OutputFcn, ...
-					 'gui_LayoutFcn',  [] , ...
-					 'gui_Callback',   []);
+gui_State	= struct('gui_Name',		mfilename,				...
+					 'gui_Singleton',	gui_Singleton,			...
+					 'gui_OpeningFcn',	@UIRecorder_OpeningFcn,	...
+					 'gui_OutputFcn',	@UIRecorder_OutputFcn,	...
+					 'gui_LayoutFcn',	[],						...
+					 'gui_Callback',	[]);
 if nargin && ischar(varargin{1})
 	gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -261,7 +261,7 @@ handles.skin			= skin;
 % Create subplot slots for images and animations						% === JS Creates the participant window === [1280, 0, 1280, 1024]
 
 % hkf						= figure('Position', [1760, 390, 760, 600], 'Color', 'w', ...
-hkf						= figure('Position', [1480, 0, 1280, 1024], 'Color', 'w', ...
+hkf						= figure('Position', [1780, 0, 1280, 1024], 'Color', 'w', ...
 								 'Name', 'Participant window', 'NumberTitle', 'off', ...
 								 'Toolbar', 'none', 'Menubar', 'none');
 handles.hkf				= hkf;
@@ -414,7 +414,7 @@ set(handles.play, 'Value', get(handles.play, 'Min'));
 % axis(handles.progress_axes, 'xy');
 %}
 
-handles.figIdDat		= figIdDat;								% ======= JS Gets the data from the Data Monitor =======
+handles.figIdDat		= figIdDat;								% === Gets the data from the Data Monitor ===
 
 handles.dataOut			= [];
 handles.bRmsRepeat		= 0;
@@ -1022,7 +1022,7 @@ if (handles.debug == 0)
 %		 cla;
 		  
 		load(handles.uiConfigFN);
-		handles.showWordHint = uiConfig.showWordHint;						% ======== JS Show Word Hint =========
+		handles.showWordHint = uiConfig.showWordHint;				% === Show Word Hint === %
 		if handles.showWordHint || ~handles.showKidsAnim
 			xs = get(gca, 'XLim');
 			ys = get(gca, 'YLim');
@@ -1036,7 +1036,7 @@ if (handles.debug == 0)
 			end
 		end
 
-		if uiConfig.trialStartWithAnim == 1 || ~handles.showKidsAnim
+		if uiConfig.trialStartWithAnim == 1 || ~handles.showKidsAnim	% +++ For use with kids (NOT BEING USED) +++ %
 			if isequal(handles.phase, 'rand')					% DEBUG
 				f = fopen(fullfile(handles.dirname, 'tmp.log'), 'at');				
 				fprintf(f, 'Starting trial: setting trialLen... %s\n', handles.trialType);
@@ -1078,7 +1078,7 @@ if (handles.debug == 0)
 			end
 		end
 		
-		if handles.showKidsAnim
+		if handles.showKidsAnim								% +++ For use with kids (NOT BEING USED) +++ %
 			tic; 
 			frmCnt		= 1;
 			totFrames	= 12;
@@ -1194,7 +1194,7 @@ if (handles.debug == 0)
 		record(handles);										% re-do recording
 	end
 	
-	if handles.showKidsAnim
+	if handles.showKidsAnim										% +++ For use with kids (NOT BEING USED) +++ %
 		delete(imh);
 	else
 		delete(htxt);
@@ -1222,7 +1222,7 @@ if (handles.debug == 0)
 															% TODO: Revise checkData
 	
 						
-	if handles.showKidsAnim
+	if handles.showKidsAnim									% +++ For use with kids (NOT BEING USED) +++ %
 		% -- Experimenter response re. correctness of the subject's production --	
 		button_correct = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
 								'Unit', 'normalized', ...
@@ -1342,7 +1342,7 @@ if (handles.debug == 0)
 		end
 	end
 	
-	if handles.showKidsAnim
+	if handles.showKidsAnim									% +++ For use with kids (NOT BEING USED) +++ %
 		if resp_correct == 1
 			if isequal(handles.phase, 'pre')
 				if uiConfig.bShowCorrAnim
@@ -1377,7 +1377,7 @@ if (handles.debug == 0)
 
 	if ((~bRmsGood && bRmsRepeat) || (~bSpeedGood && bSpeedRepeat))
 		% Repeat until the volume and/or speed criteria are met.
-		if handles.showKidsAnim
+		if handles.showKidsAnim									% +++ For use with kids (NOT BEING USED) +++ %
 			button_repeat = uicontrol('Parent', handles.UIRecorder, 'Style', 'pushbutton', ...
 								'Unit', 'normalized', ...
 								'Position', [0.25, 0.1, 0.24, 0.05], ...
@@ -1392,7 +1392,7 @@ if (handles.debug == 0)
 		end
 		
 		record(handles);
-	elseif handles.showKidsAnim && resp_correct == -1
+	elseif handles.showKidsAnim && resp_correct == -1			% +++ For use with kids (NOT BEING USED) +++ %
 		record(handles);
 	else
 		% data is saved as UserData in the fig handle (wicht is the signal for

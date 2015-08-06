@@ -3,7 +3,7 @@ function audapterDemo_online(mode, varargin)
 audioInterfaceName	= 'AudioBox';
 
 sRate			= 48000;			% Hardware sampling rate (before downsampling)
-downFact		= 3;
+downFact		= 4;
 frameLen		= 256;				% Before downsampling
 
 defaultGender	= 'female';

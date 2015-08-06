@@ -1,21 +1,20 @@
 function f0s = getPitch(varargin)
-
 %% Load signal and specify parameters
 if (nargin == 0)
-    [sig,sr] = audioread('site2.wav');						% Site2: Fric.(9338:11400),Vowel:(11700:16380)
+    [sig, sr] = audioread('site2.wav');						% Site2: Fric.(9338:11400),Vowel:(11700:16380)
 else
-%     fileName=varargin{1};
+%     fileName = varargin{1};
 %     load(fileName); % gives data
     sig = varargin{1};
     sr	= varargin{2};
     sex = varargin{3};
 end
 
-nFrame	= 16;
+nFrame	= 16;					% === # of frames? === %
 anaLen	= 31;
 hLen	= (anaLen - 1) / 2;
 nLPC	= 13;
-nFmts	= 4;
+nFmts	= 4;					% === # of formants? === %
 
 % nAC=80; % nAC=nLPC+1, nLPC=nAC-1
 
@@ -23,21 +22,21 @@ nFFT	= 1024;
 nStart	= 1;
 
 %% 
-if (isequal(sex, 'male') | isequal(sex, 'm'))
-    pitchRange	= [30,200];									% Hz
-elseif (isequal(sex, 'female') | isequal(sex, 'f'))
-    pitchRange	= [120,300];								% Hz
+if (isequal(sex, 'male') || isequal(sex, 'm'))
+    pitchRange	= [30, 200];								% Hz
+elseif (isequal(sex, 'female') || isequal(sex, 'f'))
+    pitchRange	= [120, 300];								% Hz
 end
     
-cepsPitchWin	= fliplr(round(sr ./ pitchRange)) + 1;
+cepsPitchWin= fliplr(round(sr ./ pitchRange)) + 1;			% === Cepstrum pitch window === %
 dThresh		= 3;
-
 f0s			= [];
 fmts		= zeros(0,nFmts);
+
 for n0 = nStart + hLen * nFrame : nFrame : length(sig) - (anaLen * nFrame - hLen * nFrame)
     %% Get a window of the signal
 
-    nWin	= [n0 - hLen * nFrame : n0 + (hLen + 1) * nFrame - 1];
+    nWin	= n0 - hLen * nFrame : n0 + (hLen + 1) * nFrame - 1;
     x		= sig(nWin);
 %     figure;plot(x);
 
@@ -46,8 +45,8 @@ for n0 = nStart + hLen * nFrame : nFrame : length(sig) - (anaLen * nFrame - hLen
     x		= x .* hanWin;
 %         figure;plot(x);
     
-    X		= fft(x, nFFT);  % Signal spectrum
-    Xceps	= ifft(log(abs(X))); % Signal cepstrum
+    X		= fft(x, nFFT);					% Signal spectrum
+    Xceps	= ifft(log(abs(X)));			% Signal cepstrum
 
    	pceps	= Xceps(cepsPitchWin(1) : cepsPitchWin(2));
     

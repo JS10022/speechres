@@ -232,7 +232,7 @@ switch(action)
 
 	case 'getData',
 		nout						= nargout;					% Number of function output arguments.
-		[signalMat, dataMat]		= Audapter(4);
+		[signalMat, dataMat]		= Audapter(4);				% === Get data from the last run === %
 		data						= [];
 
 		switch(nout)
@@ -253,31 +253,31 @@ switch(action)
 %				 offS = offS+2*p.nTracks+4;
 %				 data.ai			 = dataMat(:,offS:offS+p.nLPC);
 %}
-				data.signalIn	   = signalMat(:, 1);
-				data.signalOut	  = signalMat(:, 1);			% JS Changed from signalMat(:,2) to correct error: 
+				data.signalIn		= signalMat(:, 1);
+				data.signalOut		= signalMat(:, 1);			% JS Changed from signalMat(:,2) to correct error: 
 																%	 "index out of bounds because numel(signalMat)=1"
 
-				data.intervals	  = dataMat(:, 1);
-				data.rms			= dataMat(:,2:4);
+				data.intervals		= dataMat(:, 1);
+				data.rms			= dataMat(:,2 : 4);
 				
 				offS				= 5;
-				data.fmts		   = dataMat(:, offS					 : offS + p.nTracks - 1);
-				data.rads		   = dataMat(:, offS + p.nTracks		 : offS + 2 * p.nTracks - 1);
-				data.dfmts		  = dataMat(:, offS + 2 * p.nTracks	 : offS + 2 * p.nTracks + 1);
-				data.sfmts		  = dataMat(:, offS + 2 * p.nTracks + 2: offS + 2 * p.nTracks + 3);
+				data.fmts			= dataMat(:, offS					 : offS + p.nTracks - 1);
+				data.rads			= dataMat(:, offS + p.nTracks		 : offS + 2 * p.nTracks - 1);
+				data.dfmts			= dataMat(:, offS + 2 * p.nTracks	 : offS + 2 * p.nTracks + 1);
+				data.sfmts			= dataMat(:, offS + 2 * p.nTracks + 2: offS + 2 * p.nTracks + 3);
 
 				offS				= offS + 2 * p.nTracks + 4;
 				
 				offS				= offS + p.nLPC + 1;
-				data.rms_slope	  = dataMat(:, offS);
+				data.rms_slope		= dataMat(:, offS);
 							  
 				offS				= offS + 1;
-				data.ost_stat	   = dataMat(:, offS);
+				data.ost_stat		= dataMat(:, offS);
 				
 				offS				= offS + 1;
 				data.pitchShiftRatio= dataMat(:, offS);
 								
-				data.params		 = getAudapterParamSet();
+				data.params			= getAudapterParamSet();
 
 				varargout(1)		= {data};
 

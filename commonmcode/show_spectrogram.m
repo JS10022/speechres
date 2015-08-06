@@ -4,7 +4,7 @@ if nargin >= 2
     fs = varargin{2};
 elseif nargin == 1
     wavfn = varargin{1};
-    [w, fs] = wavread(wavfn);
+    [w, fs] = audioread(wavfn);
 else
     fprintf('Wrong number of input arguments\n');
     return

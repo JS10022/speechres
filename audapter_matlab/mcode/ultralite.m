@@ -1,11 +1,13 @@
-Audapter('deviceName', 'AudioBox');   % Was " MOTU Audio "
+Audapter('deviceName', 'AudioBox');		% === Was " MOTU Audio " === %
 Audapter(3, 'srate', 12000);
 Audapter(3, 'downfact', 4);
-Audapter(3, 'framelen', 16);
+Audapter(3, 'framelen', 128);			% === Was 16 === %
 
-% Audapter playTone;
+Audapter playTone;
+
+pause(1);
 Audapter(1);
-pause(2);
+pause(3);
 Audapter(2);
 
 sig = Audapter(4);

@@ -21,7 +21,9 @@ end
 %% Call Audapter 
 fprintf ('\t');
 Audapter(1);
+
 pause(seconds);
+
 fprintf ('\t');
 Audapter(2);
 
